@@ -92,9 +92,11 @@ public class Lector {
 
 	 
 		  } catch (IOException io) {
+			  tipo = "error";
 			System.out.println(io.getMessage());
 		  } catch (JDOMException jdomex) {
-			System.out.println(jdomex.getMessage());
+			 tipo = "error";
+			//System.out.println(jdomex.getMessage());
 		  }
 	}
 	}

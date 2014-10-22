@@ -9,7 +9,6 @@ public class Actor {
 		this.type = type;
 		this.id = id;
 		this.name = name;
-		System.out.println("	Se ha creado un nuevo actor con nombre: " + name + "(id: " + id +  ") " + "de tipo "+ type); 
 	}
 	
 }

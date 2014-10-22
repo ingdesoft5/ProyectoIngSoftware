@@ -12,16 +12,13 @@ import javax.swing.JPanel;
 
 public class Oval extends GroupLayout{
 
-	public Oval(Container host, int y , int y2) {
+	public Oval(Container host, int y , int y2, String nombre) {
 		super(host);
 		Graphics g = host.getGraphics();
 		MiCanvas canvas = new MiCanvas();
 		canvas.paint(g, y);
-		canvas.escribir("hola", g , y2);
+		canvas.escribir(nombre, g , y2);
 		host.add(canvas);
-		//TextArea t = new TextArea();
-		//t.append("hola");
-		//host.add(t);
 		// TODO Auto-generated constructor stub
 	}
 

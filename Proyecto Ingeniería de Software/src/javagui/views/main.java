@@ -89,6 +89,9 @@ import javax.swing.SwingConstants;
 
 import java.awt.Rectangle;
 import java.awt.GridLayout;
+import javax.swing.UIManager;
+import java.awt.Font;
+import javax.swing.ScrollPaneConstants;
 
 public class main extends JFrame {
 	boolean ovalo = false;
@@ -100,10 +103,11 @@ public class main extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
+				try {	
 					main frame = new main();
 					frame.setSize(1000, 750);
 					frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -117,21 +121,39 @@ public class main extends JFrame {
 	 */
 	public main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 499, 591);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnNombre = new JMenu("Nombre");
+		JMenu mnNombre = new JMenu("ISD5");
 		menuBar.add(mnNombre);
 		
-		JMenuItem mntmAcercaDeNombre = new JMenuItem("Acerca de Nombre");
+		JMenuItem mntmAcercaDeNombre = new JMenuItem("Acerca de ISD5");
+		mntmAcercaDeNombre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame acerca = new JFrame();
+				acerca.setSize(500, 80);
+				JPanel jp = new JPanel();
+				JLabel ep = new JLabel();
+				ep.setText("Software para crear diagramas de casos de usos o de clases");
+				jp.add(ep);
+				acerca.add(jp);
+				acerca.setVisible(true);
+				
+			}
+		});
 		mnNombre.add(mntmAcercaDeNombre);
 		
 		Component verticalStrut_2 = Box.createVerticalStrut(7);
 		mnNombre.add(verticalStrut_2);
 		
-		JMenuItem mntmSalirDeNombre = new JMenuItem("Salir de Nombre");
+		JMenuItem mntmSalirDeNombre = new JMenuItem("Salir de ISD5");
+		mntmSalirDeNombre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CloseFrame();
+			}
+		});
 		mnNombre.add(mntmSalirDeNombre);
 		
 		JMenu mnArchivo = new JMenu("Archivo");
@@ -147,6 +169,7 @@ public class main extends JFrame {
 		mnNuevo.add(mntmDiagramaDeClases);
 		
 		JLabel lblEditorXml = DefaultComponentFactory.getInstance().createLabel("Editor XML:");
+		lblEditorXml.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		JTextArea textArea = new JTextArea();
 		JScrollPane scrollBar = new JScrollPane(textArea);
 		
@@ -223,15 +246,6 @@ public class main extends JFrame {
 		
 		JMenuItem mntmCrearCarpetaCon = new JMenuItem("Crear carpeta con ambos archivos");
 		mnGuardarComo.add(mntmCrearCarpetaCon);
-		
-		JMenu mnEditar = new JMenu("Editar");
-		menuBar.add(mnEditar);
-		
-		JMenuItem mntmDeshacer = new JMenuItem("Deshacer");
-		mnEditar.add(mntmDeshacer);
-		
-		JMenuItem mntmRehacer = new JMenuItem("Rehacer");
-		mnEditar.add(mntmRehacer);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(253, 245, 230));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -256,173 +270,265 @@ public class main extends JFrame {
 					if(l.tipo == "UCD"){
 						for(int i = 0; i<l.diagCU.CasosDeUso.size();i++){
 							desktopPane.setSize(600, i*100+200);
-							Oval o = new Oval(desktopPane, 100*(i+1), 120*(i+1));
-							Actor a = new Actor(desktopPane, 100*(i+1), 120*(i+1));
+							Oval o = new Oval(desktopPane, 100*(i+1), 100*(i+1)+50, l.diagCU.CasosDeUso.elementAt(i).name);
 						}
+						int contadorp = 0, contadors = 0;
+						for(int i = 0; i<l.diagCU.Actores.size();i++){
+							
+							if(l.diagCU.Actores.elementAt(i).type.equals("primary")){
+								
+								Actor a = new Actor(desktopPane, 0, contadorp + 20, l.diagCU.Actores.elementAt(i).name );
+								contadorp++;
+							}
+							else{
+								
+								Actor b = new Actor(desktopPane, 550, contadors + 20, l.diagCU.Actores.elementAt(i).name );
+								contadors++;
 
+							}
+							
+							
+						}
+					}
+					else if(l.tipo == "CD"){
+						
+					}
+					else if(l.tipo == "error"){
+						JFrame error = new JFrame();
+						error.setSize(600, 80);
+						JPanel jp2 = new JPanel();
+						JLabel ep2 = new JLabel();
+						ep2.setText("No se puede crear el diagrama, ya que se encontró un error en el XML");
+						jp2.add(ep2);
+						error.add(jp2);
+						error.setVisible(true);
 					}
 					
 					
 				} catch (IOException e1) {
+
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
-		if(ovalo){
 
-		}
 		JScrollPane scrollBar_1 = new JScrollPane(desktopPane);
-		//scrollBar_1.setViewportView(desktopPane);
-
-		/*btnConvertir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String xml = textArea.getText();
-				try{
-					File f = new File("temp.xml");
-					FileWriter fw = new FileWriter(f);
-					fw.write(xml);
-					fw.close();
-					Lector l = new Lector();
-					l.leer(f);
-					Oval o = new Oval(desktopPane);
-					//Canvas canvas = new Canvas();
-					//canvas.setBounds(10, 10, 100, 100);
-					//desktopPane.add(canvas);
-					
-					//URL url = this.getClass().getResource("/javagui/resources/oval.png");
-					//jp.add(canvas);
-					//canvas.setSize(250, 120);
-					//BufferedImage img = ImageIO.read(url);
-					//Graphics g = canvas.getGraphics();
-					//Graphics2D g2 = (Graphics2D)g;
-					//g2.setStroke(new BasicStroke(2));
-					//g2.setColor(Color.black);
-					//g2.drawImage(img, 0,0,null);
-					
-					//jp.setSize(60, 29);
-					//jp.add(b);
-					//desktopPane.add(jp);
-					//paintComponents(getGraphics());
-
-					//BufferedImage bi = new BufferedImage();
-					
-					//Graphics g = mc.getGraphics();
-					//mc.ovalo(g, 10, 10, 80, 20, "nombre");
-				}
-				catch(IOException iox){
-					
-				}
-
-}
-		});*/
 		
-		JPanel panel = new JPanel();
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		
-		JPanel panel_1 = new JPanel();
+		JToolBar toolBar = new JToolBar();
 		//JScrollPane scrollBar_1 = new JScrollPane(mc);
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(scrollBar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-						.addComponent(lblEditorXml, Alignment.LEADING)
-						.addComponent(btnConvertir, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-					.addGap(6)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(28)
-							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
-							.addGap(12))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(scrollBar_1, GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
-							.addContainerGap())))
-		);
-		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addGap(20)
-							.addComponent(lblEditorXml, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(scrollBar, GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-							.addGap(22)
 							.addComponent(btnConvertir))
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(lblEditorXml))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addGap(6)
+								.addComponent(scrollBar, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(127))
+						.addComponent(scrollBar_1, GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(22)
+									.addComponent(lblEditorXml, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(scrollBar_1, GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(scrollBar, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+									.addGap(22)
+									.addComponent(btnConvertir))
+								.addComponent(scrollBar_1, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		
+		JDesktopPane desktopPane_1 = new JDesktopPane();
+		scrollPane.setViewportView(desktopPane_1);
+		
+		JEditorPane editorPane = new JEditorPane();
+		editorPane.setText("  DIAGRAMA");
+		editorPane.setForeground(Color.WHITE);
+		editorPane.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		editorPane.setBackground(UIManager.getColor("Desktop.background"));
+		editorPane.setBounds(1, 25, 61, 11);
+		desktopPane_1.add(editorPane);
+		
+		JEditorPane editorPane_1 = new JEditorPane();
+		editorPane_1.setText("   CASOS DE");
+		editorPane_1.setForeground(Color.WHITE);
+		editorPane_1.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		editorPane_1.setBackground(UIManager.getColor("Desktop.background"));
+		editorPane_1.setBounds(1, 37, 61, 11);
+		desktopPane_1.add(editorPane_1);
+		
+		JEditorPane editorPane_2 = new JEditorPane();
+		editorPane_2.setText("       USO");
+		editorPane_2.setForeground(Color.WHITE);
+		editorPane_2.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		editorPane_2.setBackground(UIManager.getColor("Desktop.background"));
+		editorPane_2.setBounds(1, 49, 62, 11);
+		desktopPane_1.add(editorPane_2);
+		
+		JEditorPane editorPane_3 = new JEditorPane();
+		editorPane_3.setText("___________________");
+		editorPane_3.setForeground(Color.WHITE);
+		editorPane_3.setFont(new Font("Lucida Grande", Font.PLAIN, 5));
+		editorPane_3.setBackground(UIManager.getColor("Desktop.background"));
+		editorPane_3.setBounds(2, 61, 100, 7);
+		desktopPane_1.add(editorPane_3);
+		
+		JButton button_2 = new JButton("");
+		button_2.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/asociacion.png")));
+		button_2.setBounds(32, 72, 30, 32);
+		desktopPane_1.add(button_2);
+		button_2.setToolTipText("Relación con actor");
+		
+		JButton button_4 = new JButton("");
+		button_4.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/herencia.png")));
+		button_4.setBounds(32, 105, 30, 32);
+		desktopPane_1.add(button_4);
+		button_4.setToolTipText("Relación de especialización");
+		
+		JButton button_5 = new JButton("");
+		button_5.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/punteada.png")));
+		button_5.setBounds(1, 72, 30, 32);
+		desktopPane_1.add(button_5);
+		button_5.setToolTipText("Relación de extensión o inclusión");
+		
+		JButton button_6 = new JButton("");
+		button_6.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/Persona.png")));
+		button_6.setBounds(1, 105, 30, 32);
+		desktopPane_1.add(button_6);
+		button_6.setToolTipText("Actor");
+		
+		JButton button_8 = new JButton("");
+		button_8.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/oval.png")));
+		button_8.setBounds(0, 139, 62, 62);
+		desktopPane_1.add(button_8);
+		button_8.setToolTipText("Caso de uso");
+		
+		JEditorPane editorPane_4 = new JEditorPane();
+		editorPane_4.setText("  DIAGRAMA");
+		editorPane_4.setForeground(Color.WHITE);
+		editorPane_4.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		editorPane_4.setBackground(UIManager.getColor("Desktop.background"));
+		editorPane_4.setBounds(1, 244, 61, 11);
+		desktopPane_1.add(editorPane_4);
+		
+		
+		JEditorPane dtrpnDeClases = new JEditorPane();
+		dtrpnDeClases.setText("  DE CLASES");
+		dtrpnDeClases.setForeground(Color.WHITE);
+		dtrpnDeClases.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		dtrpnDeClases.setBackground(UIManager.getColor("Desktop.background"));
+		dtrpnDeClases.setBounds(1, 256, 61, 11);
+		desktopPane_1.add(dtrpnDeClases);
+		
+		JEditorPane editorPane_5 = new JEditorPane();
+		editorPane_5.setText("___________________");
+		editorPane_5.setForeground(Color.WHITE);
+		editorPane_5.setFont(new Font("Lucida Grande", Font.PLAIN, 5));
+		editorPane_5.setBackground(UIManager.getColor("Desktop.background"));
+		editorPane_5.setBounds(2, 267, 100, 7);
+		desktopPane_1.add(editorPane_5);
+		
+		JButton button_9 = new JButton("");
+		button_9.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/agregacion.png")));
+		button_9.setBounds(1, 279, 30, 32);
+		desktopPane_1.add(button_9);
+		button_9.setToolTipText("Relación de agregación");
+		
+		JButton button_10 = new JButton("");
+		button_10.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/asociacion.png")));
+		button_10.setBounds(32, 279, 30, 32);
+		desktopPane_1.add(button_10);
+		button_10.setToolTipText("Relación de asociación");
+		
+		JButton button_11 = new JButton("");
+		button_11.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/composicion.png")));
+		button_11.setBounds(1, 313, 30, 32);
+		desktopPane_1.add(button_11);
+		button_11.setToolTipText("Relación de composición");
+		
+		JButton button_12 = new JButton("");
+		button_12.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/herencia.png")));
+		button_12.setBounds(32, 313, 30, 32);
+		desktopPane_1.add(button_12);
+		button_12.setToolTipText("Relación de herencia");
+		
+		JButton button_13 = new JButton("");
+		button_13.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/punteada.png")));
+		button_13.setBounds(1, 348, 30, 32);
+		desktopPane_1.add(button_13);
+		button_13.setToolTipText("Relación de dependencia");
+		
+		JButton button_14 = new JButton("");
+		button_14.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/caja.png")));
+		button_14.setBounds(0, 381, 62, 62);
+		desktopPane_1.add(button_14);
+		button_14.setToolTipText("Clase");
 	
 		
 		JButton btnTipografa = new JButton("");
-
-		btnTipografa.setIcon(new ImageIcon(main.class.getResource("/com/sun/javafx/scene/web/skin/Bold_16x16_JFX.png")));
+		toolBar.add(btnTipografa);
 		
-		JButton button = new JButton("");
-		button.setIcon(new ImageIcon(main.class.getResource("/com/sun/javafx/scene/web/skin/FontColor_16x16_JFX.png")));
-		
-		JPanel panel_2 = new JPanel();
-		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 61, Short.MAX_VALUE)
-					.addGap(18)
-					.addComponent(btnTipografa)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(button)
-					.addContainerGap())
-		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(6)
-							.addComponent(panel_2, 0, 0, Short.MAX_VALUE))
-						.addComponent(btnTipografa, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(button, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		
+				btnTipografa.setIcon(new ImageIcon(main.class.getResource("/com/sun/javafx/scene/web/skin/Bold_16x16_JFX.png")));
+				
+				JButton button = new JButton("");
+				toolBar.add(button);
+				button.setIcon(new ImageIcon(main.class.getResource("/com/sun/javafx/scene/web/skin/FontColor_16x16_JFX.png")));
+				
+				JButton button_7 = new JButton("");
+				toolBar.add(button_7);
+				button_7.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/basurero.png")));
+				button_7.setToolTipText("Borrar todo");
+				
+				JPanel panel_2 = new JPanel();
+				toolBar.add(panel_2);
+				FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
+				flowLayout.setAlignment(FlowLayout.LEFT);
+				flowLayout.setHgap(0);
+				flowLayout.setVgap(0);
+	
 		Choice choice = new Choice();
 		panel_2.add(choice);
-		panel_1.setLayout(gl_panel_1);
-		
-		JButton btnA = new JButton("");
-
-		btnA.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/man.png")));
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(btnA, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addComponent(btnA)
-					.addContainerGap(162, Short.MAX_VALUE))
-		);
-		panel.setLayout(gl_panel);
+		choice.addItem("Arial");
+		choice.addItem("Calibri");
+		choice.addItem("Cambria");
+		choice.addItem("Tahoma");
+		choice.addItem("Times New Roman");
 		contentPane.setLayout(gl_contentPane);
 		paintComponents(getGraphics());
+	}
+	
+	public void CloseFrame(){
+		super.dispose();		
 	}
 }
 

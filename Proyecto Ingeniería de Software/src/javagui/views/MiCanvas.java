@@ -31,31 +31,15 @@ public void paint(Graphics g, int y){
 	g2.setColor(Color.black);
 	g2.drawOval(150, y, 280, 100);
 
-	/*if(x2 != -1 && x != -1){
-		//g2.drawImage(img, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer)
-		//g2.drawLine(x,y,x2,y2);
-		g2.drawOval(100, 100, 400, 100);
-	}
-	if(nnw){
-		g2.setColor(Color.white);
-		g2.fillRect(-10, -10, 600, 600);
-	}*/
 }
 public void escribir(String text, Graphics g, int y){
 	Graphics2D g2 = (Graphics2D) g;
-	g2.drawString(text, 190, y);
+	g2.drawString(text, 200, y);
 }
 
-public void imagen(String path, Graphics g){
-	URL url = this.getClass().getResource(path);
-	try {
-		BufferedImage img = ImageIO.read(url);
-		Graphics2D g2 = (Graphics2D)g;
-		g2.drawImage(img, 0,0,null);
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+public void imagen(Image im, Graphics g, int x, int y){
+Graphics2D g2 = (Graphics2D)g;
+g2.drawImage(im, x, y, null);
 
 }
 

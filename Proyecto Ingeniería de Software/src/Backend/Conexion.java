@@ -9,7 +9,7 @@ public class Conexion {
 		this.type = type;
 		this.from = from;
 		this.to = to;
-		System.out.println("	Se ha creado una conexión de tipo " + type + " desde la clase " + from + " hacia la clase " + to);
+		//System.out.println("	Se ha creado una conexión de tipo " + type + " desde la clase " + from + " hacia la clase " + to);
 	}
 	
 }

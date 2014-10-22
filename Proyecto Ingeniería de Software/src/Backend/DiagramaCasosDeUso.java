@@ -3,7 +3,6 @@ import java.util.Stack;
 
 
 public class DiagramaCasosDeUso {
-	private String text;
 	public String nombre;
 	public Stack<Actor> Actores = new Stack<Actor>();
 	public Stack<CasoDeUso> CasosDeUso = new Stack<CasoDeUso>();
@@ -11,7 +10,6 @@ public class DiagramaCasosDeUso {
 
 	public DiagramaCasosDeUso(String nombre){
 		this.nombre = nombre;
-		System.out.println("Se ha creado un nuevo diagrama de casos de uso con el nombre " + nombre);
 	}
 	
 	public void AgregarActores(Actor a){
