@@ -14,7 +14,7 @@ public class Actor extends GroupLayout{
 		Graphics g = host.getGraphics();
 		
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		Image im = tk.getImage("\\src\\javagui\\resources\\man.png");
+		Image im = tk.getImage("src\\javagui\\resources\\man.png");
 		
 		MiCanvas canvas = new MiCanvas();
 		canvas.imagen(im, g, y, y2);
