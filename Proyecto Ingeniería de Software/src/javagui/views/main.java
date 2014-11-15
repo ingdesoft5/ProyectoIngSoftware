@@ -117,12 +117,28 @@ import java.beans.PropertyChangeEvent;
 
 import javax.swing.JComboBox;
 
+import java.awt.event.MouseMotionAdapter;
+
 public class main extends JFrame {
 	boolean ovalo = false;
-	boolean agregarNota = false;
 	boolean bold = false;
+	boolean agregarNota = false;
+	boolean agregarActor = false;
+	boolean agregarRelExtension = false;
+	boolean agregarRelActor = false;
+	boolean agregarRelEspecializacion = false;
+	boolean agregarCasoDeUso = false;
+	boolean agregarRelAgregacion = false;
+	boolean agregarRelAsociacion = false;
+	boolean agregarRelComposicion = false;
+	boolean agregarRelHerencia = false;
+	boolean agregarRelDependencia = false;
+	boolean agregarClase = false;
+	boolean borrarElementos = false;
 	
 	private JPanel contentPane;
+	JLayeredPane desktopPane = new JLayeredPane();
+
 	/**
 	 * Launch the application.
 	 */
@@ -299,42 +315,15 @@ public class main extends JFrame {
 			
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
-			
+			JScrollPane scrollBar_1 = new JScrollPane(desktopPane);
 			contentPane = new JPanel();
 			contentPane.setBackground(new Color(253, 245, 230));
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 			setContentPane(contentPane);
-		
-			JDesktopPane desktopPane = new JDesktopPane();
-			desktopPane.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					if(agregarNota){
-						JLayeredPane jlp = new JLayeredPane();
-						ImageIcon ic = new ImageIcon(getClass().getResource("nota2.png"));
-						setSize(ic.getIconWidth(),ic.getIconHeight());
-						Graphics g = jlp.getGraphics();
-						g.drawImage(ic.getImage(),0,0,ic.getIconWidth(),ic.getIconHeight(), null);
-						jlp.paint(g);
-						desktopPane.add(jlp);
-					}
-				}
-
-				@Override
-				public void mousePressed(MouseEvent e) {
-					if(agregarNota){
-						JLayeredPane jlp = new JLayeredPane();
-						ImageIcon ic = new ImageIcon(getClass().getResource("nota2.png"));
-						setSize(ic.getIconWidth(),ic.getIconHeight());
-						Graphics g = jlp.getGraphics();
-						g.drawImage(ic.getImage(),0,0,ic.getIconWidth(),ic.getIconHeight(), null);
-						jlp.paint(g);
-						desktopPane.add(jlp);
-					}
-				}
-			});
+			desktopPane.setFocusable(true);		
+			
 			desktopPane.setVisible(false);
-			desktopPane.setBackground(Color.WHITE);
+			desktopPane.setBackground(Color.white);
 	
 
 			//CREAR DIAGRAMA
@@ -348,7 +337,6 @@ public class main extends JFrame {
 				}
 			});
 
-			JScrollPane scrollBar_1 = new JScrollPane(desktopPane);
 
 			JToolBar toolBar = new JToolBar();
 			//JScrollPane scrollBar_1 = new JScrollPane(mc);
@@ -438,35 +426,57 @@ public class main extends JFrame {
 			editorPane_3.setBounds(2, 61, 100, 7);
 			desktopPane_1.add(editorPane_3);
 			
-			JButton button_2 = new JButton("");
-			button_2.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/asociacion.png")));
-			button_2.setBounds(32, 72, 30, 32);
-			desktopPane_1.add(button_2);
-			button_2.setToolTipText("Relación con actor");
+			JButton bRelActor = new JButton("");
+			bRelActor.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+			});
+			bRelActor.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/asociacion.png")));
+			bRelActor.setBounds(32, 72, 30, 32);
+			desktopPane_1.add(bRelActor);
+			bRelActor.setToolTipText("Relación con actor");
 			
-			JButton button_4 = new JButton("");
-			button_4.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/herencia.png")));
-			button_4.setBounds(32, 105, 30, 32);
-			desktopPane_1.add(button_4);
-			button_4.setToolTipText("Relación de especialización");
+			JButton bRelEspecializacion = new JButton("");
+			bRelEspecializacion.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			bRelEspecializacion.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/herencia.png")));
+			bRelEspecializacion.setBounds(32, 105, 30, 32);
+			desktopPane_1.add(bRelEspecializacion);
+			bRelEspecializacion.setToolTipText("Relación de especialización");
 			
-			JButton button_5 = new JButton("");
-			button_5.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/punteada.png")));
-			button_5.setBounds(1, 72, 30, 32);
-			desktopPane_1.add(button_5);
-			button_5.setToolTipText("Relación de extensión o inclusión");
+			JButton bRelExtension = new JButton("");
+			bRelExtension.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+			});
+			bRelExtension.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/punteada.png")));
+			bRelExtension.setBounds(1, 72, 30, 32);
+			desktopPane_1.add(bRelExtension);
+			bRelExtension.setToolTipText("Relación de extensión o inclusión");
 			
-			JButton button_6 = new JButton("");
-			button_6.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/Persona.png")));
-			button_6.setBounds(1, 105, 30, 32);
-			desktopPane_1.add(button_6);
-			button_6.setToolTipText("Actor");
+			JButton bActor = new JButton("");
+			bActor.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			bActor.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/Persona.png")));
+			bActor.setBounds(1, 105, 30, 32);
+			desktopPane_1.add(bActor);
+			bActor.setToolTipText("Actor");
 			
-			JButton button_8 = new JButton("");
-			button_8.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/oval.png")));
-			button_8.setBounds(0, 139, 62, 62);
-			desktopPane_1.add(button_8);
-			button_8.setToolTipText("Caso de uso");
+			JButton bCasodeUso = new JButton("");
+			bCasodeUso.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			bCasodeUso.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/oval.png")));
+			bCasodeUso.setBounds(0, 139, 62, 62);
+			desktopPane_1.add(bCasodeUso);
+			bCasodeUso.setToolTipText("Caso de uso");
 			
 			JEditorPane editorPane_4 = new JEditorPane();
 			editorPane_4.setText("  DIAGRAMA");
@@ -496,46 +506,66 @@ public class main extends JFrame {
 			editorPane_5.setBounds(2, 236, 100, 7);
 			desktopPane_1.add(editorPane_5);
 			
-			JButton button_9 = new JButton("");
-			button_9.addActionListener(new ActionListener() {
+			JButton bRelAgregacion = new JButton("");
+			bRelAgregacion.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				}
 			});
 			
-			button_9.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/agregacion.png")));
-			button_9.setBounds(1, 248, 30, 32);
-			desktopPane_1.add(button_9);
-			button_9.setToolTipText("Relación de agregación");
+			bRelAgregacion.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/agregacion.png")));
+			bRelAgregacion.setBounds(1, 248, 30, 32);
+			desktopPane_1.add(bRelAgregacion);
+			bRelAgregacion.setToolTipText("Relación de agregación");
 			
-			JButton button_10 = new JButton("");
-			button_10.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/asociacion.png")));
-			button_10.setBounds(32, 248, 30, 32);
-			desktopPane_1.add(button_10);
-			button_10.setToolTipText("Relación de asociación");
+			JButton bRelAsociacion = new JButton("");
+			bRelAsociacion.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			bRelAsociacion.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/asociacion.png")));
+			bRelAsociacion.setBounds(32, 248, 30, 32);
+			desktopPane_1.add(bRelAsociacion);
+			bRelAsociacion.setToolTipText("Relación de asociación");
 			
-			JButton button_11 = new JButton("");
-			button_11.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/composicion.png")));
-			button_11.setBounds(1, 282, 30, 32);
-			desktopPane_1.add(button_11);
-			button_11.setToolTipText("Relación de composición");
+			JButton bRelComposicion = new JButton("");
+			bRelComposicion.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			bRelComposicion.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/composicion.png")));
+			bRelComposicion.setBounds(1, 282, 30, 32);
+			desktopPane_1.add(bRelComposicion);
+			bRelComposicion.setToolTipText("Relación de composición");
 			
-			JButton button_12 = new JButton("");
-			button_12.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/herencia.png")));
-			button_12.setBounds(32, 282, 30, 32);
-			desktopPane_1.add(button_12);
-			button_12.setToolTipText("Relación de herencia");
+			JButton bRelHerencia = new JButton("");
+			bRelHerencia.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			bRelHerencia.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/herencia.png")));
+			bRelHerencia.setBounds(32, 282, 30, 32);
+			desktopPane_1.add(bRelHerencia);
+			bRelHerencia.setToolTipText("Relación de herencia");
 			
-			JButton button_13 = new JButton("");
-			button_13.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/punteada.png")));
-			button_13.setBounds(1, 315, 30, 32);
-			desktopPane_1.add(button_13);
-			button_13.setToolTipText("Relación de dependencia");
+			JButton bRelDependencia = new JButton("");
+			bRelDependencia.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			bRelDependencia.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/punteada.png")));
+			bRelDependencia.setBounds(1, 315, 30, 32);
+			desktopPane_1.add(bRelDependencia);
+			bRelDependencia.setToolTipText("Relación de dependencia");
 			
-			JButton button_14 = new JButton("");
-			button_14.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/caja.png")));
-			button_14.setBounds(0, 347, 62, 62);
-			desktopPane_1.add(button_14);
-			button_14.setToolTipText("Clase");
+			JButton bClase = new JButton("");
+			bClase.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			bClase.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/caja.png")));
+			bClase.setBounds(0, 347, 62, 62);
+			desktopPane_1.add(bClase);
+			bClase.setToolTipText("Clase");
 			
 			JEditorPane dtrpnNotas = new JEditorPane();
 			dtrpnNotas.setText("  NOTAS");
@@ -553,16 +583,209 @@ public class main extends JFrame {
 			editorPane_6.setBounds(2, 434, 100, 7);
 			desktopPane_1.add(editorPane_6);
 			
-			JButton button_1 = new JButton("");
-			button_1.addActionListener(new ActionListener() {
+			JButton bNota = new JButton("");
+			bNota.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					agregarNota = true;
+					agregarRelEspecializacion = false;
+					agregarActor = false;
+					agregarRelExtension = false;
+					agregarRelActor = false;
+					agregarCasoDeUso = false;
+					agregarRelAgregacion = false;
+					agregarRelAsociacion = false;
+					agregarRelComposicion = false;
+					agregarRelHerencia = false;
+					agregarRelDependencia = false;
+					agregarClase = false;
+					bNota.setFocusPainted(true);
 				}
 			});
-			button_1.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/nota2.png")));
-			button_1.setToolTipText("Clase");
-			button_1.setBounds(0, 444, 62, 62);
-			desktopPane_1.add(button_1);
+			bNota.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/nota2.png")));
+			bNota.setToolTipText("Nota");
+			bNota.setBounds(0, 444, 62, 62);
+			desktopPane_1.add(bNota);
+			
+			scrollBar_1.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent e) {
+					if(e.getComponent() != desktopPane){
+						boolean hola = false;
+					}
+					if(agregarNota){
+						JInternalFrame jlp = new JInternalFrame();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/nota2.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						jlp.setFocusable(true);
+						jlp.setVisible(true);
+						jlp.addMouseListener(new MouseAdapter(){
+							@Override
+							public void mousePressed(MouseEvent e){
+								textArea.setText("hola");
+							}
+						});
+						desktopPane.add(jlp);
+						agregarNota = false;
+						bNota.setFocusPainted(false);
+						String text = textArea.getText();
+						textArea.setText(text.concat("\n<Nota content =\"\"/>"));
+
+					}
+
+					else if(agregarActor){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/man.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarActor = false;
+						bActor.setFocusPainted(false);
+					}
+					else if(agregarRelExtension){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/punteada.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarRelExtension = false;
+						bRelExtension.setFocusPainted(false);
+
+						
+					}
+					else if(agregarRelActor){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/asociacion.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarRelActor = false;
+						bRelActor.setFocusPainted(false);
+					}
+					else if(agregarRelEspecializacion){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/herencia.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarRelEspecializacion = false;
+						bRelEspecializacion.setFocusPainted(false);
+					}
+					else if(agregarCasoDeUso){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/oval.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarCasoDeUso = false;
+						bCasodeUso.setFocusPainted(false);
+					}
+					else if(agregarRelAgregacion){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/agregacion.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarRelAgregacion = false;
+						bRelAgregacion.setFocusPainted(false);
+					}
+					else if(agregarRelAsociacion){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/asociacion.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarRelAsociacion = false;
+						bRelAsociacion.setFocusPainted(false);
+					}
+					else if(agregarRelComposicion){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/composicion.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarRelComposicion = false;
+						bRelComposicion.setFocusPainted(false);
+					}
+					else if(agregarRelHerencia){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/herencia.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarRelHerencia = false;
+						bRelHerencia.setFocusPainted(false);
+					}
+					else if(agregarRelDependencia){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/punteada.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarRelDependencia = false;
+						bRelDependencia.setFocusPainted(false);
+					}
+					else if(agregarClase){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/caja2.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarClase = false;
+						bClase.setFocusPainted(false);
+					}
+					else if(borrarElementos){
+						Component[] componentes = desktopPane.getComponents();
+						for(int i = 0; i < componentes.length; i++){
+							//componentes[i].is
+						}
+						
+					}
+					else{
+						boolean hola = desktopPane.isFocusable();
+						//e.getComponent().
+
+					}
+
+				}
+
+			});
+			
 			
 //////////ESTILOS//////////////////////////////////////////////////////////////////////////////////
 			JMenu mnNewMenu = new JMenu("Estilos");
@@ -594,7 +817,9 @@ public class main extends JFrame {
 			JMenuItem mntmProgramador = new JMenuItem("Programador");
 			mntmProgramador.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					textArea.setText(" ");
+					String text = textArea.getText();
+					text = text + " ";
+					textArea.setText(text);
 					textArea.setBackground(Color.black);
 					textArea.setForeground(Color.green);
 					contentPane.setBackground(Color.gray);
@@ -736,7 +961,7 @@ public class main extends JFrame {
 		}
 	}
 	
-	public void ImprimirDiagrama(JTextPane textArea, JDesktopPane desktopPane){
+	public void ImprimirDiagrama(JTextPane textArea, JLayeredPane desktopPane){
 		Lector l = new Lector();
 		String xml = textArea.getText();
 		String comprobar = comprobarLectura(l, xml);
