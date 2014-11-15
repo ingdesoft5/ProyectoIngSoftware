@@ -272,6 +272,13 @@ public class main extends JFrame {
 			});
 			mnGuardarComo.add(mntmPng);
 			
+
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+			
+			JDesktopPane desktopPane_1 = new JDesktopPane();
+			scrollPane.setViewportView(desktopPane_1);
+			
 			//GUARDAR COMO: CARPETA
 			JMenuItem mntmCrearCarpetaCon = new JMenuItem("Crear carpeta con ambos archivos");
 			mntmCrearCarpetaCon.addActionListener(new ActionListener() {
@@ -289,6 +296,7 @@ public class main extends JFrame {
 					}
 			});
 			mnGuardarComo.add(mntmCrearCarpetaCon);
+			
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
 			
@@ -342,9 +350,6 @@ public class main extends JFrame {
 
 			JScrollPane scrollBar_1 = new JScrollPane(desktopPane);
 
-			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			
 			JToolBar toolBar = new JToolBar();
 			//JScrollPane scrollBar_1 = new JScrollPane(mc);
 			
@@ -395,11 +400,11 @@ public class main extends JFrame {
 						.addContainerGap())
 			);
 			
-			JDesktopPane desktopPane_1 = new JDesktopPane();
-			scrollPane.setViewportView(desktopPane_1);
+
 			
 			JEditorPane editorPane = new JEditorPane();
 			editorPane.setText("  DIAGRAMA");
+			editorPane.setEditable(false);
 			editorPane.setForeground(Color.WHITE);
 			editorPane.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 			editorPane.setBackground(UIManager.getColor("Desktop.background"));
@@ -408,6 +413,7 @@ public class main extends JFrame {
 			
 			JEditorPane editorPane_1 = new JEditorPane();
 			editorPane_1.setText("   CASOS DE");
+			editorPane_1.setEditable(false);
 			editorPane_1.setForeground(Color.WHITE);
 			editorPane_1.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 			editorPane_1.setBackground(UIManager.getColor("Desktop.background"));
@@ -416,6 +422,7 @@ public class main extends JFrame {
 			
 			JEditorPane editorPane_2 = new JEditorPane();
 			editorPane_2.setText("       USO");
+			editorPane_2.setEditable(false);
 			editorPane_2.setForeground(Color.WHITE);
 			editorPane_2.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 			editorPane_2.setBackground(UIManager.getColor("Desktop.background"));
@@ -425,6 +432,7 @@ public class main extends JFrame {
 			JEditorPane editorPane_3 = new JEditorPane();
 			editorPane_3.setText("___________________");
 			editorPane_3.setForeground(Color.WHITE);
+			editorPane_3.setEditable(false);
 			editorPane_3.setFont(new Font("Lucida Grande", Font.PLAIN, 5));
 			editorPane_3.setBackground(UIManager.getColor("Desktop.background"));
 			editorPane_3.setBounds(2, 61, 100, 7);
@@ -462,6 +470,7 @@ public class main extends JFrame {
 			
 			JEditorPane editorPane_4 = new JEditorPane();
 			editorPane_4.setText("  DIAGRAMA");
+			editorPane_4.setEditable(false);
 			editorPane_4.setForeground(Color.WHITE);
 			editorPane_4.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 			editorPane_4.setBackground(UIManager.getColor("Desktop.background"));
@@ -471,6 +480,7 @@ public class main extends JFrame {
 			
 			JEditorPane dtrpnDeClases = new JEditorPane();
 			dtrpnDeClases.setText("  DE CLASES");
+			dtrpnDeClases.setEditable(false);
 			dtrpnDeClases.setForeground(Color.WHITE);
 			dtrpnDeClases.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 			dtrpnDeClases.setBackground(UIManager.getColor("Desktop.background"));
@@ -479,6 +489,7 @@ public class main extends JFrame {
 			
 			JEditorPane editorPane_5 = new JEditorPane();
 			editorPane_5.setText("___________________");
+			editorPane_5.setEditable(false);
 			editorPane_5.setForeground(Color.WHITE);
 			editorPane_5.setFont(new Font("Lucida Grande", Font.PLAIN, 5));
 			editorPane_5.setBackground(UIManager.getColor("Desktop.background"));
@@ -552,7 +563,59 @@ public class main extends JFrame {
 			button_1.setToolTipText("Clase");
 			button_1.setBounds(0, 444, 62, 62);
 			desktopPane_1.add(button_1);
-		
+			
+//////////ESTILOS//////////////////////////////////////////////////////////////////////////////////
+			JMenu mnNewMenu = new JMenu("Estilos");
+			menuBar.add(mnNewMenu);
+			
+			JMenuItem mntmNormal = new JMenuItem("Normal");
+			mntmNormal.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					textArea.setBackground(Color.white);
+					textArea.setForeground(Color.black);
+					contentPane.setBackground(new Color(253, 245, 230));
+					desktopPane_1.setBackground(new Color(65,105,170));
+					editorPane.setBackground(UIManager.getColor("Desktop.background"));
+					editorPane_1.setBackground(UIManager.getColor("Desktop.background"));
+					editorPane_2.setBackground(UIManager.getColor("Desktop.background"));
+					editorPane_3.setBackground(UIManager.getColor("Desktop.background"));
+					editorPane_4.setBackground(UIManager.getColor("Desktop.background"));
+					editorPane_5.setBackground(UIManager.getColor("Desktop.background"));
+					editorPane_6.setBackground(UIManager.getColor("Desktop.background"));
+					dtrpnDeClases.setBackground(UIManager.getColor("Desktop.background"));
+					dtrpnNotas.setBackground(UIManager.getColor("Desktop.background"));
+					StyleContext sc = StyleContext.getDefaultStyleContext();
+					AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.black);
+					textPaneDoc.getForeground(aset);
+				}
+			});
+			mnNewMenu.add(mntmNormal);
+			
+			JMenuItem mntmProgramador = new JMenuItem("Programador");
+			mntmProgramador.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					textArea.setText(" ");
+					textArea.setBackground(Color.black);
+					textArea.setForeground(Color.green);
+					contentPane.setBackground(Color.gray);
+					desktopPane_1.setBackground(Color.darkGray);
+					editorPane.setBackground(Color.darkGray);
+					editorPane_1.setBackground(Color.darkGray);
+					editorPane_2.setBackground(Color.darkGray);
+					editorPane_3.setBackground(Color.darkGray);
+					editorPane_4.setBackground(Color.darkGray);
+					editorPane_5.setBackground(Color.darkGray);
+					editorPane_6.setBackground(Color.darkGray);
+					dtrpnDeClases.setBackground(Color.darkGray);
+					dtrpnNotas.setBackground(Color.darkGray);
+					StyleContext sc = StyleContext.getDefaultStyleContext();
+					AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.green);
+					textPaneDoc.getForeground(aset);
+
+				}
+			});
+			mnNewMenu.add(mntmProgramador);
+/////////////////////////////////////////////////////////////////////////////////////////////
 			
 			JButton btnTipografa = new JButton("");
 			toolBar.add(btnTipografa);
@@ -717,52 +780,46 @@ public class main extends JFrame {
 		mp.Abrir();
 		if(mp.l.tipo=="UCD"){
 			String text = "<UseCaseDiagram name= \""+mp.l.diagCU.nombre+"\"> \n   <actors> \n";
-			//textArea.setText("<UseCaseDiagram name= \""+mp.l.diagCU.nombre+"\"> \n   <actors> \n");
-			//textArea.append("   <actors> \n");
 			for(int i=0; i<mp.l.diagCU.Actores.size();i++){
-				//textArea.append("      <actor type = \""+ (mp.l.diagCU.Actores.elementAt(i).type).toString()+"\" id = \""+ (mp.l.diagCU.Actores.elementAt(i).id).toString() +"\" name = \"" + (mp.l.diagCU.Actores.elementAt(i).name).toString()+"\" />"+"\n");
 				text = text + "      <actor type = \""+ (mp.l.diagCU.Actores.elementAt(i).type).toString()+"\" id = \""+ (mp.l.diagCU.Actores.elementAt(i).id).toString() +"\" name = \"" + (mp.l.diagCU.Actores.elementAt(i).name).toString()+"\" />"+"\n";
 			}
-			//textArea.append("   </actors> \n"+"   <usecases>\n");
 			text = text + "   </actors> \n"+"   <usecases>\n";
 			for(int i=0; i<mp.l.diagCU.CasosDeUso.size(); i++){
-				//textArea.append("      <usecase id = \""+(mp.l.diagCU.CasosDeUso.elementAt(i).id).toString()+"\" name = \""+(mp.l.diagCU.CasosDeUso.elementAt(i).name).toString() + "\" />\n");
 				text = text + "      <usecase id = \""+(mp.l.diagCU.CasosDeUso.elementAt(i).id).toString()+"\" name = \""+(mp.l.diagCU.CasosDeUso.elementAt(i).name).toString() + "\" />\n";
 			}
-			//textArea.append("   </usecases>\n"+"   <connections> \n");
 			text = text + "   </usecases>\n"+"   <connections> \n";
 			for(int i=0; i<mp.l.diagCU.Conexiones.size();i++){
-			//	textArea.append("      <connection type = \""+ (mp.l.diagCU.Conexiones.elementAt(i).type).toString()+"\" from = \"" + (mp.l.diagCU.Conexiones.elementAt(i).from).toString() + "\" to = \"" + (mp.l.diagCU.Conexiones.elementAt(i).to).toString() + "\"/>\n");
 				text = text + "      <connection type = \""+ (mp.l.diagCU.Conexiones.elementAt(i).type).toString()+"\" from = \"" + (mp.l.diagCU.Conexiones.elementAt(i).from).toString() + "\" to = \"" + (mp.l.diagCU.Conexiones.elementAt(i).to).toString() + "\"/>\n"; 
 			}
-			
-			//textArea.append("   </connections>\n </UseCaseDiagram>");
 			text = text + "   </connections>\n </UseCaseDiagram>";
 			textArea.setText(text);
 		}
 		else{
-			/*textArea.setText("<ClassDiagram name = \"" + mp.l.diagC.nombre+"\"> \n");
+			String text = "<ClassDiagram name = \"" + mp.l.diagC.nombre+"\"> \n";
+			
 			for(int i = 0; i<mp.l.diagC.Clases.size(); i++){
-				textArea.append("   <class id = \""+(mp.l.diagC.Clases.elementAt(i).id).toString()+"\" name = \""+ (mp.l.diagC.Clases.elementAt(i).nombreClase).toString()+"\"> \n");
-				textArea.append("      <attributes>\n");
+				text = text + "   <class id = \""+(mp.l.diagC.Clases.elementAt(i).id).toString()+"\" name = \""+ (mp.l.diagC.Clases.elementAt(i).nombreClase).toString()+"\"> \n";
+				text = text + "      <attributes>\n";
+				
 				for(int j = 0; j<mp.l.diagC.Clases.elementAt(i).atributos.size(); j++){
-					textArea.append("         <att name = \""+(mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).nombre).toString()+"\" type = \"" + (mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).tipo).toString() + " visibility = \"" + (mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).visibilidad).toString() + "\">\n");
+					text = text + "         <att name = \""+(mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).nombre).toString()+"\" type = \"" + (mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).tipo).toString() + " visibility = \"" + (mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).visibilidad).toString() + "\">\n";
 				}
-				textArea.append("      </attributes>\n");
-				textArea.append("     <methods>\n");
+				
+				text = text + "      </attributes>\n";
+				text = text + "     <methods>\n";				
+				
 				for(int j = 0; j<mp.l.diagC.Clases.elementAt(i).metodos.size(); j++){
-					textArea.append("         <method name = \""+(mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).nombre).toString()+"\" type = \"" + (mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).tipo).toString()+"\">\n");
+					text = text + "         <method name = \""+(mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).nombre).toString()+"\" type = \"" + (mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).tipo).toString()+"\">\n";
 					for(int k = 0; k<mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).parametros.size();k++){
-						textArea.append("            <param name = \""+(mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).parametros.elementAt(k).nombre).toString()+"\" type = \""+(mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).parametros.elementAt(k).tipo).toString()+"\"/>\n");
+						text = text + "            <param name = \""+(mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).parametros.elementAt(k).nombre).toString()+"\" type = \""+(mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).parametros.elementAt(k).tipo).toString()+"\"/>\n";
 					}
-					textArea.append("         </method>\n");
+					text = text + "         </method>\n";	
 				}
-				textArea.append("      </methods>\n");
-				textArea.append("   </class>\n");
+				text = text + "      </methods>\n";
+				text = text + "   </class>\n";
 			}
-			textArea.append("</ClassDiagram\n");
-		
-		*/
+			text = text + "</ClassDiagram\n";
+			textArea.setText(text);
 		}
 	}
 	
@@ -808,28 +865,12 @@ public class main extends JFrame {
 	}
 	
 	public void NuevoUML(JTextPane textArea){
-		/*textArea.setText("<UseCaseDiagram name= \"nombre \"> \n");
-		textArea.append("   <actors> \n");
-		textArea.append("   </actors> \n"+"   <usecases>\n");
-		textArea.append("   </usecases>\n"+"   <connections> \n");
-		textArea.append("   </connections>\n </UseCaseDiagram>");*/
 		String text = "<UseCaseDiagram name= \"nombre \"> \n   <actors> \n   </actors> \n"+"   <usecases>\n   </usecases>\n"+"   <connections> \n   </connections>\n </UseCaseDiagram>";
 		textArea.setText(text);
 	}
 	
 	public void NuevoDiagramaClases(JTextPane textArea){
-	/*	textArea.setText("<ClassDiagram name = \"nombre\"> \n");
-		textArea.append("   <class id = \"idClase\" name = \"nombre\"> \n");
-		textArea.append("      <attributes>\n");
-		textArea.append("         <att name = \"nombreAtributo\" type = \"tipo\" visibility = \" visibilidad\">\n");
-		textArea.append("      </attributes>\n");
-		textArea.append("     <methods>\n");
-		textArea.append("         <method name = \"nombreMétodo\" type = \"tipo\">\n");
-		textArea.append("            <param name = \"nombreParametro\" type = \"tipo\"/>\n");
-		textArea.append("         </method>\n");
-		textArea.append("      </methods>\n");
-		textArea.append("   </class>\n");
-		textArea.append("</ClassDiagram>");*/
+
 		String text = "<ClassDiagram name = \"nombre\"> \n";
 		text = text + "   <class id = \"idClase\" name = \"nombre\"> \n";
 		text = text + "      <attributes>\n";
