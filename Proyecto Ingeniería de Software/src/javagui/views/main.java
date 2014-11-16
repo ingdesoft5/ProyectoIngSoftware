@@ -90,10 +90,12 @@ import java.awt.Choice;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageProducer;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.SwingConstants;
@@ -322,7 +324,7 @@ public class main extends JFrame {
 			setContentPane(contentPane);
 			desktopPane.setFocusable(true);		
 			
-			desktopPane.setVisible(false);
+			desktopPane.setVisible(true);
 			desktopPane.setBackground(Color.white);
 	
 
@@ -429,7 +431,19 @@ public class main extends JFrame {
 			JButton bRelActor = new JButton("");
 			bRelActor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+					agregarNota = false;
+					agregarRelEspecializacion = false;
+					agregarActor = false;
+					agregarRelExtension = false;
+					agregarRelActor = true;
+					agregarCasoDeUso = false;
+					agregarRelAgregacion = false;
+					agregarRelAsociacion = false;
+					agregarRelComposicion = false;
+					agregarRelHerencia = false;
+					agregarRelDependencia = false;
+					agregarClase = false;
+					bRelActor.setFocusPainted(true);
 				}
 			});
 			bRelActor.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/asociacion.png")));
@@ -440,6 +454,19 @@ public class main extends JFrame {
 			JButton bRelEspecializacion = new JButton("");
 			bRelEspecializacion.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					agregarNota = false;
+					agregarRelEspecializacion = true;
+					agregarActor = false;
+					agregarRelExtension = false;
+					agregarRelActor = false;
+					agregarCasoDeUso = false;
+					agregarRelAgregacion = false;
+					agregarRelAsociacion = false;
+					agregarRelComposicion = false;
+					agregarRelHerencia = false;
+					agregarRelDependencia = false;
+					agregarClase = false;
+					bRelEspecializacion.setFocusPainted(true);
 				}
 			});
 			bRelEspecializacion.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/herencia.png")));
@@ -450,6 +477,19 @@ public class main extends JFrame {
 			JButton bRelExtension = new JButton("");
 			bRelExtension.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					agregarNota = false;
+					agregarRelEspecializacion = false;
+					agregarActor = false;
+					agregarRelExtension = true;
+					agregarRelActor = false;
+					agregarCasoDeUso = false;
+					agregarRelAgregacion = false;
+					agregarRelAsociacion = false;
+					agregarRelComposicion = false;
+					agregarRelHerencia = false;
+					agregarRelDependencia = false;
+					agregarClase = false;
+					bRelExtension.setFocusPainted(true);
 					
 				}
 			});
@@ -461,6 +501,19 @@ public class main extends JFrame {
 			JButton bActor = new JButton("");
 			bActor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					agregarNota = false;
+					agregarRelEspecializacion = false;
+					agregarActor = true;
+					agregarRelExtension = false;
+					agregarRelActor = false;
+					agregarCasoDeUso = false;
+					agregarRelAgregacion = false;
+					agregarRelAsociacion = false;
+					agregarRelComposicion = false;
+					agregarRelHerencia = false;
+					agregarRelDependencia = false;
+					agregarClase = false;
+					bActor.setFocusPainted(true);
 				}
 			});
 			bActor.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/Persona.png")));
@@ -471,6 +524,19 @@ public class main extends JFrame {
 			JButton bCasodeUso = new JButton("");
 			bCasodeUso.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					agregarNota = false;
+					agregarRelEspecializacion = false;
+					agregarActor = false;
+					agregarRelExtension = false;
+					agregarRelActor = false;
+					agregarCasoDeUso = true;
+					agregarRelAgregacion = false;
+					agregarRelAsociacion = false;
+					agregarRelComposicion = false;
+					agregarRelHerencia = false;
+					agregarRelDependencia = false;
+					agregarClase = false;
+					bCasodeUso.setFocusPainted(true);
 				}
 			});
 			bCasodeUso.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/oval.png")));
@@ -509,6 +575,19 @@ public class main extends JFrame {
 			JButton bRelAgregacion = new JButton("");
 			bRelAgregacion.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					agregarNota = false;
+					agregarRelEspecializacion = false;
+					agregarActor = false;
+					agregarRelExtension = false;
+					agregarRelActor = false;
+					agregarCasoDeUso = false;
+					agregarRelAgregacion = true;
+					agregarRelAsociacion = false;
+					agregarRelComposicion = false;
+					agregarRelHerencia = false;
+					agregarRelDependencia = false;
+					agregarClase = false;
+					bRelAgregacion.setFocusPainted(true);
 				}
 			});
 			
@@ -520,6 +599,19 @@ public class main extends JFrame {
 			JButton bRelAsociacion = new JButton("");
 			bRelAsociacion.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					agregarNota = false;
+					agregarRelEspecializacion = false;
+					agregarActor = false;
+					agregarRelExtension = false;
+					agregarRelActor = false;
+					agregarCasoDeUso = false;
+					agregarRelAgregacion = false;
+					agregarRelAsociacion = true;
+					agregarRelComposicion = false;
+					agregarRelHerencia = false;
+					agregarRelDependencia = false;
+					agregarClase = false;
+					bRelAsociacion.setFocusPainted(true);
 				}
 			});
 			bRelAsociacion.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/asociacion.png")));
@@ -530,6 +622,19 @@ public class main extends JFrame {
 			JButton bRelComposicion = new JButton("");
 			bRelComposicion.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					agregarNota = false;
+					agregarRelEspecializacion = false;
+					agregarActor = false;
+					agregarRelExtension = false;
+					agregarRelActor = false;
+					agregarCasoDeUso = false;
+					agregarRelAgregacion = false;
+					agregarRelAsociacion = false;
+					agregarRelComposicion = true;
+					agregarRelHerencia = false;
+					agregarRelDependencia = false;
+					agregarClase = false;
+					bRelComposicion.setFocusPainted(true);
 				}
 			});
 			bRelComposicion.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/composicion.png")));
@@ -540,6 +645,19 @@ public class main extends JFrame {
 			JButton bRelHerencia = new JButton("");
 			bRelHerencia.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					agregarNota = false;
+					agregarRelEspecializacion = false;
+					agregarActor = false;
+					agregarRelExtension = false;
+					agregarRelActor = false;
+					agregarCasoDeUso = false;
+					agregarRelAgregacion = false;
+					agregarRelAsociacion = false;
+					agregarRelComposicion = false;
+					agregarRelHerencia = true;
+					agregarRelDependencia = false;
+					agregarClase = false;
+					bRelHerencia.setFocusPainted(true);
 				}
 			});
 			bRelHerencia.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/herencia.png")));
@@ -550,6 +668,19 @@ public class main extends JFrame {
 			JButton bRelDependencia = new JButton("");
 			bRelDependencia.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					agregarNota = false;
+					agregarRelEspecializacion = false;
+					agregarActor = false;
+					agregarRelExtension = false;
+					agregarRelActor = false;
+					agregarCasoDeUso = false;
+					agregarRelAgregacion = false;
+					agregarRelAsociacion = false;
+					agregarRelComposicion = false;
+					agregarRelHerencia = false;
+					agregarRelDependencia = true;
+					agregarClase = false;
+					bRelDependencia.setFocusPainted(true);
 				}
 			});
 			bRelDependencia.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/punteada.png")));
@@ -560,6 +691,19 @@ public class main extends JFrame {
 			JButton bClase = new JButton("");
 			bClase.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					agregarNota = false;
+					agregarRelEspecializacion = false;
+					agregarActor = false;
+					agregarRelExtension = false;
+					agregarRelActor = false;
+					agregarCasoDeUso = false;
+					agregarRelAgregacion = false;
+					agregarRelAsociacion = false;
+					agregarRelComposicion = false;
+					agregarRelHerencia = false;
+					agregarRelDependencia = false;
+					agregarClase = true;
+					bClase.setFocusPainted(true);
 				}
 			});
 			bClase.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/caja.png")));
@@ -569,6 +713,7 @@ public class main extends JFrame {
 			
 			JEditorPane dtrpnNotas = new JEditorPane();
 			dtrpnNotas.setText("  NOTAS");
+			dtrpnNotas.setEditable(false);
 			dtrpnNotas.setForeground(Color.WHITE);
 			dtrpnNotas.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 			dtrpnNotas.setBackground(UIManager.getColor("Desktop.background"));
@@ -577,6 +722,7 @@ public class main extends JFrame {
 			
 			JEditorPane editorPane_6 = new JEditorPane();
 			editorPane_6.setText("___________________");
+			editorPane_6.setEditable(false);
 			editorPane_6.setForeground(Color.WHITE);
 			editorPane_6.setFont(new Font("Lucida Grande", Font.PLAIN, 5));
 			editorPane_6.setBackground(UIManager.getColor("Desktop.background"));
@@ -609,29 +755,64 @@ public class main extends JFrame {
 			scrollBar_1.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if(e.getComponent() != desktopPane){
-						boolean hola = false;
-					}
+
 					if(agregarNota){
-						JInternalFrame jlp = new JInternalFrame();
+						/*JInternalFrame jlp = new JInternalFrame();
 						ImageIcon ic = new ImageIcon("src/javagui/resources/nota2.png");
 						//setSize(ic.getIconWidth(),ic.getIconHeight());
 						Graphics g = desktopPane.getGraphics();
 						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
-						jlp.paint(g);
-						jlp.setFocusable(true);
-						jlp.setVisible(true);
+						JLabel jl = new JLabel("contenido");
+						jl.setForeground(Color.black);
+						jl.setVisible(true);
+						jl.setAlignmentX(e.getX()+30);
+						jl.setAlignmentY(e.getY());
+						desktopPane.add(jl);
+						//g.drawString("contenido", e.getX(), e.getY()+20);
+						//jlp.paint(g);
+						//jlp.setFocusable(true);
+						//jlp.setVisible(true);
 						jlp.addMouseListener(new MouseAdapter(){
 							@Override
 							public void mousePressed(MouseEvent e){
 								textArea.setText("hola");
 							}
 						});
+						
 						desktopPane.add(jlp);
 						agregarNota = false;
 						bNota.setFocusPainted(false);
 						String text = textArea.getText();
 						textArea.setText(text.concat("\n<Nota content =\"\"/>"));
+*/
+						String imgsrc = "";
+						try {
+							imgsrc = new File("src/javagui/resources/nota2.png").toURI().toURL().toExternalForm();
+						} catch (MalformedURLException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}
+						String html = "<img src=\""+imgsrc+"\" width=\"74\" height=\"85\">";
+					    
+						//ImageIcon icon = new ImageIcon("src/javagui/resources/nota2.png");
+						//JLabel jl = new JLabel(icon);
+						JTextPane editorPane = new JTextPane();
+						editorPane.setContentType("text/html");
+						//editorPane = new JEditorPane(html);
+						editorPane.setText(html +"<br> contenido");
+						editorPane.setVisible(true);
+						//jl.setText("contenido");
+						editorPane.setBounds(e.getX(), e.getY(), 70, 150);
+						//jl.setBounds(e.getX(), e.getY(), 200,200);
+						//editorPane.add(jl);
+						
+						desktopPane.add(editorPane);
+						
+						agregarNota = false;
+						bNota.setFocusPainted(false);
+						String text = textArea.getText();
+						textArea.setText(text.concat("\n<Nota content =\"contenido\"/>"));
+						
 
 					}
 
@@ -777,8 +958,10 @@ public class main extends JFrame {
 						
 					}
 					else{
-						boolean hola = desktopPane.isFocusable();
-						//e.getComponent().
+						//int position = onTop.isSelected() ? 0 : 1;
+					    //desktopPane.setLayer(dukeLabel,
+					      //                   layerList.getSelectedIndex(),
+					        //                 position);
 
 					}
 
@@ -840,49 +1023,79 @@ public class main extends JFrame {
 				}
 			});
 			mnNewMenu.add(mntmProgramador);
-/////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 			
+///////////BARRA DE HERRAMIENTAS SUPERIOR/////////////////////////////////////////////////////////////			
 			JButton btnTipografa = new JButton("");
 			toolBar.add(btnTipografa);
 			
 					btnTipografa.setIcon(new ImageIcon(main.class.getResource("/com/sun/javafx/scene/web/skin/Bold_16x16_JFX.png")));
 					
 					JComboBox<Serializable> comboBox_1 = new JComboBox<Serializable>();
-					//comboBox_1.addItem(new ImageIcon(main.class.getResource("/com/sun/javafx/scene/web/skin/FontColor_16x16_JFX.png")));
-					comboBox_1.addItem("Black");
-					comboBox_1.addItem("Red");
-					comboBox_1.addItem("Blue");
-					comboBox_1.addItem("Cyan");
-					comboBox_1.addItem("Magenta");
-					
+					comboBox_1.addItem(new ImageIcon(("src/javagui/resources/black.png")));
+					comboBox_1.addItem(new ImageIcon(("src/javagui/resources/red.png")));
+					comboBox_1.addItem(new ImageIcon(("src/javagui/resources/blue.png")));
+					comboBox_1.addItem(new ImageIcon(("src/javagui/resources/green.png")));
+					comboBox_1.addItem(new ImageIcon(("src/javagui/resources/brown.png")));
+					comboBox_1.addItem(new ImageIcon(("src/javagui/resources/cyan.png")));
+					comboBox_1.addItem(new ImageIcon(("src/javagui/resources/gray.png")));
+					comboBox_1.addItem(new ImageIcon(("src/javagui/resources/magenta.png")));
+					comboBox_1.addItem(new ImageIcon(("src/javagui/resources/purple.png")));
+					comboBox_1.addItem(new ImageIcon(("src/javagui/resources/yellow.png")));
+
 					comboBox_1.addItemListener(new ItemListener() {
 						public void itemStateChanged(ItemEvent e) {
-							if(comboBox_1.getSelectedItem()=="Red"){
+							if(comboBox_1.getSelectedIndex()==0){
+								StyleContext sc = StyleContext.getDefaultStyleContext();
+								AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.black);
+								textPaneDoc.setCharacterAttributes(textArea.getSelectionStart(), textArea.getSelectionEnd()-textArea.getSelectionStart(), aset, true);
+							}
+							if(comboBox_1.getSelectedIndex()==1){
 								//textArea.setForeground(Color.red);
 								StyleContext sc = StyleContext.getDefaultStyleContext();
 								AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.red);
 								textPaneDoc.setCharacterAttributes(textArea.getSelectionStart(), textArea.getSelectionEnd()-textArea.getSelectionStart(), aset, true);
 								
 							}
-							else if(comboBox_1.getSelectedItem()=="Black"){
-								StyleContext sc = StyleContext.getDefaultStyleContext();
-								AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.black);
-								textPaneDoc.setCharacterAttributes(textArea.getSelectionStart(), textArea.getSelectionEnd()-textArea.getSelectionStart(), aset, true);
-															}
-							else if(comboBox_1.getSelectedItem()=="Blue"){
+							else if(comboBox_1.getSelectedIndex()==2){
 								StyleContext sc = StyleContext.getDefaultStyleContext();
 								AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.blue);
 								textPaneDoc.setCharacterAttributes(textArea.getSelectionStart(), textArea.getSelectionEnd()-textArea.getSelectionStart(), aset, true);
+															}
+							else if(comboBox_1.getSelectedIndex()==3){
+								StyleContext sc = StyleContext.getDefaultStyleContext();
+								AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.green);
+								textPaneDoc.setCharacterAttributes(textArea.getSelectionStart(), textArea.getSelectionEnd()-textArea.getSelectionStart(), aset, true);
 								
 							}
-							else if(comboBox_1.getSelectedItem() == "Cyan"){
+							else if(comboBox_1.getSelectedIndex()==4){
+								StyleContext sc = StyleContext.getDefaultStyleContext();
+								AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.orange);
+								textPaneDoc.setCharacterAttributes(textArea.getSelectionStart(), textArea.getSelectionEnd()-textArea.getSelectionStart(), aset, true);
+							}
+							else if(comboBox_1.getSelectedIndex()==5){
 								StyleContext sc = StyleContext.getDefaultStyleContext();
 								AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.cyan);
 								textPaneDoc.setCharacterAttributes(textArea.getSelectionStart(), textArea.getSelectionEnd()-textArea.getSelectionStart(), aset, true);
 							}
-							else if(comboBox_1.getSelectedItem() == "Magenta"){
+							else if(comboBox_1.getSelectedIndex()==6){
+								StyleContext sc = StyleContext.getDefaultStyleContext();
+								AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.gray);
+								textPaneDoc.setCharacterAttributes(textArea.getSelectionStart(), textArea.getSelectionEnd()-textArea.getSelectionStart(), aset, true);
+							}
+							else if(comboBox_1.getSelectedIndex()==7){
 								StyleContext sc = StyleContext.getDefaultStyleContext();
 								AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.magenta);
+								textPaneDoc.setCharacterAttributes(textArea.getSelectionStart(), textArea.getSelectionEnd()-textArea.getSelectionStart(), aset, true);
+							}
+							else if(comboBox_1.getSelectedIndex()==8){
+								StyleContext sc = StyleContext.getDefaultStyleContext();
+								AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.pink);
+								textPaneDoc.setCharacterAttributes(textArea.getSelectionStart(), textArea.getSelectionEnd()-textArea.getSelectionStart(), aset, true);
+							}
+							else if(comboBox_1.getSelectedIndex()==9){
+								StyleContext sc = StyleContext.getDefaultStyleContext();
+								AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.yellow);
 								textPaneDoc.setCharacterAttributes(textArea.getSelectionStart(), textArea.getSelectionEnd()-textArea.getSelectionStart(), aset, true);
 							}
 						}
@@ -939,11 +1152,16 @@ public class main extends JFrame {
 			contentPane.setLayout(gl_contentPane);
 			paintComponents(getGraphics());
 			
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	}
 
 	public String comprobarLectura(Lector l, String xml){
+		if(xml.contains("<Nota content =")){
+			String[] arreglo = xml.split("<Nota ");
+			xml = arreglo[0];
+		}
+
 		File f = new File("temp.xml");
 		FileWriter fw;
 		try {
@@ -954,7 +1172,6 @@ public class main extends JFrame {
 			return l.tipo;
 		}
 		catch(IOException e1) {
-
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			return "error";

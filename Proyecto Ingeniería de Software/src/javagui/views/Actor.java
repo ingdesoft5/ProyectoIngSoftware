@@ -13,17 +13,19 @@ import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JLayer;
 import javax.swing.JLayeredPane;
 
 public class Actor extends GroupLayout{
 
 	public Actor(Container host, int y , int y2, String nombre) {
 		super(host);
-		Graphics g = host.getGraphics();
-		JLayeredPane jlp = new JLayeredPane();
+		//Graphics g = host.getGraphics();
 		ImageIcon ic = new ImageIcon("src/javagui/resources/man.png");
-		g.drawImage(ic.getImage(),y,y2,ic.getIconWidth(),ic.getIconHeight(), null);
-		jlp.paint(g);
+		JLabel jlp = new JLabel(ic);
+		//g.drawImage(ic.getImage(),y,y2,ic.getIconWidth(),ic.getIconHeight(), null);
+		//jlp.paint(g);
+		jlp.setBounds(y,y2,ic.getIconWidth(),ic.getIconHeight());
 		host.add(jlp);
 
 }
