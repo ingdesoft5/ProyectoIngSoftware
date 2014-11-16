@@ -4,7 +4,7 @@
       <actor type = "secondary" id = "a2" name = "Author Credentials Database" />
    </actors> 
    <usecases>
-      <usecase id = "uc1" name = "La jesu es bacan" />
+      <usecase id = "uc1" name = "Create a New Personal Wiki" />
       <usecase id = "uc2" name = "Create a New Blog Account" />
       <usecase id = "uc3" name = "Record Application Failure" />
       <usecase id = "uc4" name = "Check Identity" />
