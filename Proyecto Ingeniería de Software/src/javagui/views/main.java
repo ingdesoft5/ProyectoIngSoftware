@@ -138,6 +138,8 @@ public class main extends JFrame {
 	boolean agregarClase = false;
 	boolean borrarElementos = false;
 	
+	Container c = new Container();
+	
 	private JPanel contentPane;
 	JLayeredPane desktopPane = new JLayeredPane();
 
@@ -285,7 +287,7 @@ public class main extends JFrame {
 					GuardarComo gc = new GuardarComo();
 					//Container c = desktopPane.getRootPane();
 					//Container c1 = jf.getContentPane();
-					gc.GuardarComoImagen(getContentPane());
+					gc.GuardarComoImagen(c);
 				}
 			});
 			mnGuardarComo.add(mntmPng);
@@ -306,7 +308,7 @@ public class main extends JFrame {
 						String comprobar = comprobarLectura(l, texto);
 						if(comprobar != "error"){
 							GuardarComo gc = new GuardarComo(); 
-							gc.GuardarComoCarpeta(texto, getContentPane());
+							gc.GuardarComoCarpeta(texto, c);
 						}
 						else{
 							VentanaAdvertencia(texto,"carpeta");
@@ -336,6 +338,7 @@ public class main extends JFrame {
 					///////////ARREGLAR!!!!
 					desktopPane.removeAll();
 					ImprimirDiagrama(textArea, desktopPane);
+					c = desktopPane;
 				}
 			});
 
@@ -804,7 +807,20 @@ public class main extends JFrame {
 						editorPane.setBounds(e.getX(), e.getY(), 70, 150);
 						//jl.setBounds(e.getX(), e.getY(), 200,200);
 						//editorPane.add(jl);
-						
+						editorPane.addMouseListener(new MouseAdapter(){
+							@Override
+							public void mousePressed(MouseEvent e2){
+								textArea.setText("mousePressed");
+								editorPane.addMouseListener(new MouseAdapter(){									
+									@Override
+									public void mouseReleased(MouseEvent e3){
+										textArea.setText("mouseReleased");
+										//editorPane.
+										editorPane.setBounds(e3.getX(),e3.getY(), 70, 150);
+									}
+								});
+							}
+						});
 						desktopPane.add(editorPane);
 						
 						agregarNota = false;

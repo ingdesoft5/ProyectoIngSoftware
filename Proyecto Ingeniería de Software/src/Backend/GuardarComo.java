@@ -39,8 +39,7 @@ public class GuardarComo {
         }
 	}
 	public void GuardarComoImagen(Container c){
-		BufferedImage im = new BufferedImage(c.getWidth(), c.getHeight(), BufferedImage.TYPE_INT_ARGB);
-		c.paint(im.getGraphics());
+
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PNG Files",".png"));//filtro para ver solo archivos .xml
         int seleccion = fileChooser.showSaveDialog(null);
@@ -48,6 +47,8 @@ public class GuardarComo {
             if (seleccion == JFileChooser.APPROVE_OPTION){//comprueba si ha presionado el boton de aceptar
                 File JFC = fileChooser.getSelectedFile();
                 String PATH = JFC.getAbsolutePath();//obtenemos el path del archivo a guardar
+        		BufferedImage im = new BufferedImage(c.getWidth(), c.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        		c.paint(im.getGraphics());
                 ImageIO.write(im, "PNG", new File(PATH+".png"));
             } 
 		}
