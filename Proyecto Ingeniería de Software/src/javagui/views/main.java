@@ -801,7 +801,6 @@ public class main extends JFrame {
 						//editorPane = new JEditorPane(html);
 						editorPane.setText(html +"<br> contenido");
 						editorPane.setVisible(true);
-						//jl.setText("contenido");
 						editorPane.setBounds(e.getX(), e.getY(), 70, 150);
 						//jl.setBounds(e.getX(), e.getY(), 200,200);
 						//editorPane.add(jl);
@@ -1179,6 +1178,7 @@ public class main extends JFrame {
 	}
 	
 	public void ImprimirDiagrama(JTextPane textArea, JLayeredPane desktopPane){
+		desktopPane.removeAll();
 		Lector l = new Lector();
 		String xml = textArea.getText();
 		String comprobar = comprobarLectura(l, xml);
@@ -1296,10 +1296,10 @@ public class main extends JFrame {
 					gc.GuardarComoXML(texto);
 				}
 				else if(tipo=="carpeta"){
-					gc.GuardarComoCarpeta(texto, getContentPane());
+					gc.GuardarComoCarpeta(texto, desktopPane);
 				}
 				else{
-					gc.GuardarComoImagen(contentPane);
+					gc.GuardarComoImagen(desktopPane);
 				}
 			}
 			
