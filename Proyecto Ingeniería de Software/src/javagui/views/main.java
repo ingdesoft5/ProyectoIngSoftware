@@ -117,12 +117,28 @@ import java.beans.PropertyChangeEvent;
 
 import javax.swing.JComboBox;
 
+import java.awt.event.MouseMotionAdapter;
+
 public class main extends JFrame {
 	boolean ovalo = false;
-	boolean agregarNota = false;
 	boolean bold = false;
+	boolean agregarNota = false;
+	boolean agregarActor = false;
+	boolean agregarRelExtension = false;
+	boolean agregarRelActor = false;
+	boolean agregarRelEspecializacion = false;
+	boolean agregarCasoDeUso = false;
+	boolean agregarRelAgregacion = false;
+	boolean agregarRelAsociacion = false;
+	boolean agregarRelComposicion = false;
+	boolean agregarRelHerencia = false;
+	boolean agregarRelDependencia = false;
+	boolean agregarClase = false;
+	boolean borrarElementos = false;
 	
 	private JPanel contentPane;
+	JLayeredPane desktopPane = new JLayeredPane();
+
 	/**
 	 * Launch the application.
 	 */
@@ -272,6 +288,13 @@ public class main extends JFrame {
 			});
 			mnGuardarComo.add(mntmPng);
 			
+
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+			
+			JDesktopPane desktopPane_1 = new JDesktopPane();
+			scrollPane.setViewportView(desktopPane_1);
+			
 			//GUARDAR COMO: CARPETA
 			JMenuItem mntmCrearCarpetaCon = new JMenuItem("Crear carpeta con ambos archivos");
 			mntmCrearCarpetaCon.addActionListener(new ActionListener() {
@@ -289,44 +312,18 @@ public class main extends JFrame {
 					}
 			});
 			mnGuardarComo.add(mntmCrearCarpetaCon);
+			
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
-			
+			JScrollPane scrollBar_1 = new JScrollPane(desktopPane);
 			contentPane = new JPanel();
 			contentPane.setBackground(new Color(253, 245, 230));
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 			setContentPane(contentPane);
-		
-			JDesktopPane desktopPane = new JDesktopPane();
-			desktopPane.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					if(agregarNota){
-						JLayeredPane jlp = new JLayeredPane();
-						ImageIcon ic = new ImageIcon(getClass().getResource("nota2.png"));
-						setSize(ic.getIconWidth(),ic.getIconHeight());
-						Graphics g = jlp.getGraphics();
-						g.drawImage(ic.getImage(),0,0,ic.getIconWidth(),ic.getIconHeight(), null);
-						jlp.paint(g);
-						desktopPane.add(jlp);
-					}
-				}
-
-				@Override
-				public void mousePressed(MouseEvent e) {
-					if(agregarNota){
-						JLayeredPane jlp = new JLayeredPane();
-						ImageIcon ic = new ImageIcon(getClass().getResource("nota2.png"));
-						setSize(ic.getIconWidth(),ic.getIconHeight());
-						Graphics g = jlp.getGraphics();
-						g.drawImage(ic.getImage(),0,0,ic.getIconWidth(),ic.getIconHeight(), null);
-						jlp.paint(g);
-						desktopPane.add(jlp);
-					}
-				}
-			});
+			desktopPane.setFocusable(true);		
+			
 			desktopPane.setVisible(false);
-			desktopPane.setBackground(Color.WHITE);
+			desktopPane.setBackground(Color.white);
 	
 
 			//CREAR DIAGRAMA
@@ -340,11 +337,7 @@ public class main extends JFrame {
 				}
 			});
 
-			JScrollPane scrollBar_1 = new JScrollPane(desktopPane);
 
-			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			
 			JToolBar toolBar = new JToolBar();
 			//JScrollPane scrollBar_1 = new JScrollPane(mc);
 			
@@ -395,11 +388,11 @@ public class main extends JFrame {
 						.addContainerGap())
 			);
 			
-			JDesktopPane desktopPane_1 = new JDesktopPane();
-			scrollPane.setViewportView(desktopPane_1);
+
 			
 			JEditorPane editorPane = new JEditorPane();
 			editorPane.setText("  DIAGRAMA");
+			editorPane.setEditable(false);
 			editorPane.setForeground(Color.WHITE);
 			editorPane.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 			editorPane.setBackground(UIManager.getColor("Desktop.background"));
@@ -408,6 +401,7 @@ public class main extends JFrame {
 			
 			JEditorPane editorPane_1 = new JEditorPane();
 			editorPane_1.setText("   CASOS DE");
+			editorPane_1.setEditable(false);
 			editorPane_1.setForeground(Color.WHITE);
 			editorPane_1.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 			editorPane_1.setBackground(UIManager.getColor("Desktop.background"));
@@ -416,6 +410,7 @@ public class main extends JFrame {
 			
 			JEditorPane editorPane_2 = new JEditorPane();
 			editorPane_2.setText("       USO");
+			editorPane_2.setEditable(false);
 			editorPane_2.setForeground(Color.WHITE);
 			editorPane_2.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 			editorPane_2.setBackground(UIManager.getColor("Desktop.background"));
@@ -425,43 +420,67 @@ public class main extends JFrame {
 			JEditorPane editorPane_3 = new JEditorPane();
 			editorPane_3.setText("___________________");
 			editorPane_3.setForeground(Color.WHITE);
+			editorPane_3.setEditable(false);
 			editorPane_3.setFont(new Font("Lucida Grande", Font.PLAIN, 5));
 			editorPane_3.setBackground(UIManager.getColor("Desktop.background"));
 			editorPane_3.setBounds(2, 61, 100, 7);
 			desktopPane_1.add(editorPane_3);
 			
-			JButton button_2 = new JButton("");
-			button_2.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/asociacion.png")));
-			button_2.setBounds(32, 72, 30, 32);
-			desktopPane_1.add(button_2);
-			button_2.setToolTipText("Relación con actor");
+			JButton bRelActor = new JButton("");
+			bRelActor.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+			});
+			bRelActor.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/asociacion.png")));
+			bRelActor.setBounds(32, 72, 30, 32);
+			desktopPane_1.add(bRelActor);
+			bRelActor.setToolTipText("Relación con actor");
 			
-			JButton button_4 = new JButton("");
-			button_4.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/herencia.png")));
-			button_4.setBounds(32, 105, 30, 32);
-			desktopPane_1.add(button_4);
-			button_4.setToolTipText("Relación de especialización");
+			JButton bRelEspecializacion = new JButton("");
+			bRelEspecializacion.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			bRelEspecializacion.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/herencia.png")));
+			bRelEspecializacion.setBounds(32, 105, 30, 32);
+			desktopPane_1.add(bRelEspecializacion);
+			bRelEspecializacion.setToolTipText("Relación de especialización");
 			
-			JButton button_5 = new JButton("");
-			button_5.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/punteada.png")));
-			button_5.setBounds(1, 72, 30, 32);
-			desktopPane_1.add(button_5);
-			button_5.setToolTipText("Relación de extensión o inclusión");
+			JButton bRelExtension = new JButton("");
+			bRelExtension.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+			});
+			bRelExtension.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/punteada.png")));
+			bRelExtension.setBounds(1, 72, 30, 32);
+			desktopPane_1.add(bRelExtension);
+			bRelExtension.setToolTipText("Relación de extensión o inclusión");
 			
-			JButton button_6 = new JButton("");
-			button_6.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/Persona.png")));
-			button_6.setBounds(1, 105, 30, 32);
-			desktopPane_1.add(button_6);
-			button_6.setToolTipText("Actor");
+			JButton bActor = new JButton("");
+			bActor.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			bActor.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/Persona.png")));
+			bActor.setBounds(1, 105, 30, 32);
+			desktopPane_1.add(bActor);
+			bActor.setToolTipText("Actor");
 			
-			JButton button_8 = new JButton("");
-			button_8.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/oval.png")));
-			button_8.setBounds(0, 139, 62, 62);
-			desktopPane_1.add(button_8);
-			button_8.setToolTipText("Caso de uso");
+			JButton bCasodeUso = new JButton("");
+			bCasodeUso.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			bCasodeUso.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/oval.png")));
+			bCasodeUso.setBounds(0, 139, 62, 62);
+			desktopPane_1.add(bCasodeUso);
+			bCasodeUso.setToolTipText("Caso de uso");
 			
 			JEditorPane editorPane_4 = new JEditorPane();
 			editorPane_4.setText("  DIAGRAMA");
+			editorPane_4.setEditable(false);
 			editorPane_4.setForeground(Color.WHITE);
 			editorPane_4.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 			editorPane_4.setBackground(UIManager.getColor("Desktop.background"));
@@ -471,6 +490,7 @@ public class main extends JFrame {
 			
 			JEditorPane dtrpnDeClases = new JEditorPane();
 			dtrpnDeClases.setText("  DE CLASES");
+			dtrpnDeClases.setEditable(false);
 			dtrpnDeClases.setForeground(Color.WHITE);
 			dtrpnDeClases.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 			dtrpnDeClases.setBackground(UIManager.getColor("Desktop.background"));
@@ -479,52 +499,73 @@ public class main extends JFrame {
 			
 			JEditorPane editorPane_5 = new JEditorPane();
 			editorPane_5.setText("___________________");
+			editorPane_5.setEditable(false);
 			editorPane_5.setForeground(Color.WHITE);
 			editorPane_5.setFont(new Font("Lucida Grande", Font.PLAIN, 5));
 			editorPane_5.setBackground(UIManager.getColor("Desktop.background"));
 			editorPane_5.setBounds(2, 236, 100, 7);
 			desktopPane_1.add(editorPane_5);
 			
-			JButton button_9 = new JButton("");
-			button_9.addActionListener(new ActionListener() {
+			JButton bRelAgregacion = new JButton("");
+			bRelAgregacion.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				}
 			});
 			
-			button_9.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/agregacion.png")));
-			button_9.setBounds(1, 248, 30, 32);
-			desktopPane_1.add(button_9);
-			button_9.setToolTipText("Relación de agregación");
+			bRelAgregacion.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/agregacion.png")));
+			bRelAgregacion.setBounds(1, 248, 30, 32);
+			desktopPane_1.add(bRelAgregacion);
+			bRelAgregacion.setToolTipText("Relación de agregación");
 			
-			JButton button_10 = new JButton("");
-			button_10.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/asociacion.png")));
-			button_10.setBounds(32, 248, 30, 32);
-			desktopPane_1.add(button_10);
-			button_10.setToolTipText("Relación de asociación");
+			JButton bRelAsociacion = new JButton("");
+			bRelAsociacion.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			bRelAsociacion.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/asociacion.png")));
+			bRelAsociacion.setBounds(32, 248, 30, 32);
+			desktopPane_1.add(bRelAsociacion);
+			bRelAsociacion.setToolTipText("Relación de asociación");
 			
-			JButton button_11 = new JButton("");
-			button_11.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/composicion.png")));
-			button_11.setBounds(1, 282, 30, 32);
-			desktopPane_1.add(button_11);
-			button_11.setToolTipText("Relación de composición");
+			JButton bRelComposicion = new JButton("");
+			bRelComposicion.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			bRelComposicion.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/composicion.png")));
+			bRelComposicion.setBounds(1, 282, 30, 32);
+			desktopPane_1.add(bRelComposicion);
+			bRelComposicion.setToolTipText("Relación de composición");
 			
-			JButton button_12 = new JButton("");
-			button_12.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/herencia.png")));
-			button_12.setBounds(32, 282, 30, 32);
-			desktopPane_1.add(button_12);
-			button_12.setToolTipText("Relación de herencia");
+			JButton bRelHerencia = new JButton("");
+			bRelHerencia.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			bRelHerencia.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/herencia.png")));
+			bRelHerencia.setBounds(32, 282, 30, 32);
+			desktopPane_1.add(bRelHerencia);
+			bRelHerencia.setToolTipText("Relación de herencia");
 			
-			JButton button_13 = new JButton("");
-			button_13.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/punteada.png")));
-			button_13.setBounds(1, 315, 30, 32);
-			desktopPane_1.add(button_13);
-			button_13.setToolTipText("Relación de dependencia");
+			JButton bRelDependencia = new JButton("");
+			bRelDependencia.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			bRelDependencia.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/punteada.png")));
+			bRelDependencia.setBounds(1, 315, 30, 32);
+			desktopPane_1.add(bRelDependencia);
+			bRelDependencia.setToolTipText("Relación de dependencia");
 			
-			JButton button_14 = new JButton("");
-			button_14.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/caja.png")));
-			button_14.setBounds(0, 347, 62, 62);
-			desktopPane_1.add(button_14);
-			button_14.setToolTipText("Clase");
+			JButton bClase = new JButton("");
+			bClase.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			bClase.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/caja.png")));
+			bClase.setBounds(0, 347, 62, 62);
+			desktopPane_1.add(bClase);
+			bClase.setToolTipText("Clase");
 			
 			JEditorPane dtrpnNotas = new JEditorPane();
 			dtrpnNotas.setText("  NOTAS");
@@ -542,17 +583,264 @@ public class main extends JFrame {
 			editorPane_6.setBounds(2, 434, 100, 7);
 			desktopPane_1.add(editorPane_6);
 			
-			JButton button_1 = new JButton("");
-			button_1.addActionListener(new ActionListener() {
+			JButton bNota = new JButton("");
+			bNota.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					agregarNota = true;
+					agregarRelEspecializacion = false;
+					agregarActor = false;
+					agregarRelExtension = false;
+					agregarRelActor = false;
+					agregarCasoDeUso = false;
+					agregarRelAgregacion = false;
+					agregarRelAsociacion = false;
+					agregarRelComposicion = false;
+					agregarRelHerencia = false;
+					agregarRelDependencia = false;
+					agregarClase = false;
+					bNota.setFocusPainted(true);
 				}
 			});
-			button_1.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/nota2.png")));
-			button_1.setToolTipText("Clase");
-			button_1.setBounds(0, 444, 62, 62);
-			desktopPane_1.add(button_1);
-		
+			bNota.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/nota2.png")));
+			bNota.setToolTipText("Nota");
+			bNota.setBounds(0, 444, 62, 62);
+			desktopPane_1.add(bNota);
+			
+			scrollBar_1.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent e) {
+					if(e.getComponent() != desktopPane){
+						boolean hola = false;
+					}
+					if(agregarNota){
+						JInternalFrame jlp = new JInternalFrame();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/nota2.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						jlp.setFocusable(true);
+						jlp.setVisible(true);
+						jlp.addMouseListener(new MouseAdapter(){
+							@Override
+							public void mousePressed(MouseEvent e){
+								textArea.setText("hola");
+							}
+						});
+						desktopPane.add(jlp);
+						agregarNota = false;
+						bNota.setFocusPainted(false);
+						String text = textArea.getText();
+						textArea.setText(text.concat("\n<Nota content =\"\"/>"));
+
+					}
+
+					else if(agregarActor){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/man.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarActor = false;
+						bActor.setFocusPainted(false);
+					}
+					else if(agregarRelExtension){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/punteada.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarRelExtension = false;
+						bRelExtension.setFocusPainted(false);
+
+						
+					}
+					else if(agregarRelActor){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/asociacion.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarRelActor = false;
+						bRelActor.setFocusPainted(false);
+					}
+					else if(agregarRelEspecializacion){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/herencia.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarRelEspecializacion = false;
+						bRelEspecializacion.setFocusPainted(false);
+					}
+					else if(agregarCasoDeUso){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/oval.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarCasoDeUso = false;
+						bCasodeUso.setFocusPainted(false);
+					}
+					else if(agregarRelAgregacion){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/agregacion.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarRelAgregacion = false;
+						bRelAgregacion.setFocusPainted(false);
+					}
+					else if(agregarRelAsociacion){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/asociacion.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarRelAsociacion = false;
+						bRelAsociacion.setFocusPainted(false);
+					}
+					else if(agregarRelComposicion){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/composicion.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarRelComposicion = false;
+						bRelComposicion.setFocusPainted(false);
+					}
+					else if(agregarRelHerencia){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/herencia.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarRelHerencia = false;
+						bRelHerencia.setFocusPainted(false);
+					}
+					else if(agregarRelDependencia){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/punteada.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarRelDependencia = false;
+						bRelDependencia.setFocusPainted(false);
+					}
+					else if(agregarClase){
+						desktopPane.setFocusable(true);
+						JLayeredPane jlp = new JLayeredPane();
+						ImageIcon ic = new ImageIcon("src/javagui/resources/caja2.png");
+						//setSize(ic.getIconWidth(),ic.getIconHeight());
+						Graphics g = desktopPane.getGraphics();
+						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
+						jlp.paint(g);
+						desktopPane.add(jlp);
+						agregarClase = false;
+						bClase.setFocusPainted(false);
+					}
+					else if(borrarElementos){
+						Component[] componentes = desktopPane.getComponents();
+						for(int i = 0; i < componentes.length; i++){
+							//componentes[i].is
+						}
+						
+					}
+					else{
+						boolean hola = desktopPane.isFocusable();
+						//e.getComponent().
+
+					}
+
+				}
+
+			});
+			
+			
+//////////ESTILOS//////////////////////////////////////////////////////////////////////////////////
+			JMenu mnNewMenu = new JMenu("Estilos");
+			menuBar.add(mnNewMenu);
+			
+			JMenuItem mntmNormal = new JMenuItem("Normal");
+			mntmNormal.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					textArea.setBackground(Color.white);
+					textArea.setForeground(Color.black);
+					contentPane.setBackground(new Color(253, 245, 230));
+					desktopPane_1.setBackground(new Color(65,105,170));
+					editorPane.setBackground(UIManager.getColor("Desktop.background"));
+					editorPane_1.setBackground(UIManager.getColor("Desktop.background"));
+					editorPane_2.setBackground(UIManager.getColor("Desktop.background"));
+					editorPane_3.setBackground(UIManager.getColor("Desktop.background"));
+					editorPane_4.setBackground(UIManager.getColor("Desktop.background"));
+					editorPane_5.setBackground(UIManager.getColor("Desktop.background"));
+					editorPane_6.setBackground(UIManager.getColor("Desktop.background"));
+					dtrpnDeClases.setBackground(UIManager.getColor("Desktop.background"));
+					dtrpnNotas.setBackground(UIManager.getColor("Desktop.background"));
+					StyleContext sc = StyleContext.getDefaultStyleContext();
+					AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.black);
+					textPaneDoc.getForeground(aset);
+				}
+			});
+			mnNewMenu.add(mntmNormal);
+			
+			JMenuItem mntmProgramador = new JMenuItem("Programador");
+			mntmProgramador.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String text = textArea.getText();
+					text = text + " ";
+					textArea.setText(text);
+					textArea.setBackground(Color.black);
+					textArea.setForeground(Color.green);
+					contentPane.setBackground(Color.gray);
+					desktopPane_1.setBackground(Color.darkGray);
+					editorPane.setBackground(Color.darkGray);
+					editorPane_1.setBackground(Color.darkGray);
+					editorPane_2.setBackground(Color.darkGray);
+					editorPane_3.setBackground(Color.darkGray);
+					editorPane_4.setBackground(Color.darkGray);
+					editorPane_5.setBackground(Color.darkGray);
+					editorPane_6.setBackground(Color.darkGray);
+					dtrpnDeClases.setBackground(Color.darkGray);
+					dtrpnNotas.setBackground(Color.darkGray);
+					StyleContext sc = StyleContext.getDefaultStyleContext();
+					AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.green);
+					textPaneDoc.getForeground(aset);
+
+				}
+			});
+			mnNewMenu.add(mntmProgramador);
+/////////////////////////////////////////////////////////////////////////////////////////////
 			
 			JButton btnTipografa = new JButton("");
 			toolBar.add(btnTipografa);
@@ -673,7 +961,7 @@ public class main extends JFrame {
 		}
 	}
 	
-	public void ImprimirDiagrama(JTextPane textArea, JDesktopPane desktopPane){
+	public void ImprimirDiagrama(JTextPane textArea, JLayeredPane desktopPane){
 		Lector l = new Lector();
 		String xml = textArea.getText();
 		String comprobar = comprobarLectura(l, xml);
@@ -717,52 +1005,46 @@ public class main extends JFrame {
 		mp.Abrir();
 		if(mp.l.tipo=="UCD"){
 			String text = "<UseCaseDiagram name= \""+mp.l.diagCU.nombre+"\"> \n   <actors> \n";
-			//textArea.setText("<UseCaseDiagram name= \""+mp.l.diagCU.nombre+"\"> \n   <actors> \n");
-			//textArea.append("   <actors> \n");
 			for(int i=0; i<mp.l.diagCU.Actores.size();i++){
-				//textArea.append("      <actor type = \""+ (mp.l.diagCU.Actores.elementAt(i).type).toString()+"\" id = \""+ (mp.l.diagCU.Actores.elementAt(i).id).toString() +"\" name = \"" + (mp.l.diagCU.Actores.elementAt(i).name).toString()+"\" />"+"\n");
 				text = text + "      <actor type = \""+ (mp.l.diagCU.Actores.elementAt(i).type).toString()+"\" id = \""+ (mp.l.diagCU.Actores.elementAt(i).id).toString() +"\" name = \"" + (mp.l.diagCU.Actores.elementAt(i).name).toString()+"\" />"+"\n";
 			}
-			//textArea.append("   </actors> \n"+"   <usecases>\n");
 			text = text + "   </actors> \n"+"   <usecases>\n";
 			for(int i=0; i<mp.l.diagCU.CasosDeUso.size(); i++){
-				//textArea.append("      <usecase id = \""+(mp.l.diagCU.CasosDeUso.elementAt(i).id).toString()+"\" name = \""+(mp.l.diagCU.CasosDeUso.elementAt(i).name).toString() + "\" />\n");
 				text = text + "      <usecase id = \""+(mp.l.diagCU.CasosDeUso.elementAt(i).id).toString()+"\" name = \""+(mp.l.diagCU.CasosDeUso.elementAt(i).name).toString() + "\" />\n";
 			}
-			//textArea.append("   </usecases>\n"+"   <connections> \n");
 			text = text + "   </usecases>\n"+"   <connections> \n";
 			for(int i=0; i<mp.l.diagCU.Conexiones.size();i++){
-			//	textArea.append("      <connection type = \""+ (mp.l.diagCU.Conexiones.elementAt(i).type).toString()+"\" from = \"" + (mp.l.diagCU.Conexiones.elementAt(i).from).toString() + "\" to = \"" + (mp.l.diagCU.Conexiones.elementAt(i).to).toString() + "\"/>\n");
 				text = text + "      <connection type = \""+ (mp.l.diagCU.Conexiones.elementAt(i).type).toString()+"\" from = \"" + (mp.l.diagCU.Conexiones.elementAt(i).from).toString() + "\" to = \"" + (mp.l.diagCU.Conexiones.elementAt(i).to).toString() + "\"/>\n"; 
 			}
-			
-			//textArea.append("   </connections>\n </UseCaseDiagram>");
 			text = text + "   </connections>\n </UseCaseDiagram>";
 			textArea.setText(text);
 		}
 		else{
-			/*textArea.setText("<ClassDiagram name = \"" + mp.l.diagC.nombre+"\"> \n");
+			String text = "<ClassDiagram name = \"" + mp.l.diagC.nombre+"\"> \n";
+			
 			for(int i = 0; i<mp.l.diagC.Clases.size(); i++){
-				textArea.append("   <class id = \""+(mp.l.diagC.Clases.elementAt(i).id).toString()+"\" name = \""+ (mp.l.diagC.Clases.elementAt(i).nombreClase).toString()+"\"> \n");
-				textArea.append("      <attributes>\n");
+				text = text + "   <class id = \""+(mp.l.diagC.Clases.elementAt(i).id).toString()+"\" name = \""+ (mp.l.diagC.Clases.elementAt(i).nombreClase).toString()+"\"> \n";
+				text = text + "      <attributes>\n";
+				
 				for(int j = 0; j<mp.l.diagC.Clases.elementAt(i).atributos.size(); j++){
-					textArea.append("         <att name = \""+(mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).nombre).toString()+"\" type = \"" + (mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).tipo).toString() + " visibility = \"" + (mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).visibilidad).toString() + "\">\n");
+					text = text + "         <att name = \""+(mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).nombre).toString()+"\" type = \"" + (mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).tipo).toString() + " visibility = \"" + (mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).visibilidad).toString() + "\">\n";
 				}
-				textArea.append("      </attributes>\n");
-				textArea.append("     <methods>\n");
+				
+				text = text + "      </attributes>\n";
+				text = text + "     <methods>\n";				
+				
 				for(int j = 0; j<mp.l.diagC.Clases.elementAt(i).metodos.size(); j++){
-					textArea.append("         <method name = \""+(mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).nombre).toString()+"\" type = \"" + (mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).tipo).toString()+"\">\n");
+					text = text + "         <method name = \""+(mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).nombre).toString()+"\" type = \"" + (mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).tipo).toString()+"\">\n";
 					for(int k = 0; k<mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).parametros.size();k++){
-						textArea.append("            <param name = \""+(mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).parametros.elementAt(k).nombre).toString()+"\" type = \""+(mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).parametros.elementAt(k).tipo).toString()+"\"/>\n");
+						text = text + "            <param name = \""+(mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).parametros.elementAt(k).nombre).toString()+"\" type = \""+(mp.l.diagC.Clases.elementAt(i).metodos.elementAt(j).parametros.elementAt(k).tipo).toString()+"\"/>\n";
 					}
-					textArea.append("         </method>\n");
+					text = text + "         </method>\n";	
 				}
-				textArea.append("      </methods>\n");
-				textArea.append("   </class>\n");
+				text = text + "      </methods>\n";
+				text = text + "   </class>\n";
 			}
-			textArea.append("</ClassDiagram\n");
-		
-		*/
+			text = text + "</ClassDiagram\n";
+			textArea.setText(text);
 		}
 	}
 	
@@ -808,28 +1090,12 @@ public class main extends JFrame {
 	}
 	
 	public void NuevoUML(JTextPane textArea){
-		/*textArea.setText("<UseCaseDiagram name= \"nombre \"> \n");
-		textArea.append("   <actors> \n");
-		textArea.append("   </actors> \n"+"   <usecases>\n");
-		textArea.append("   </usecases>\n"+"   <connections> \n");
-		textArea.append("   </connections>\n </UseCaseDiagram>");*/
 		String text = "<UseCaseDiagram name= \"nombre \"> \n   <actors> \n   </actors> \n"+"   <usecases>\n   </usecases>\n"+"   <connections> \n   </connections>\n </UseCaseDiagram>";
 		textArea.setText(text);
 	}
 	
 	public void NuevoDiagramaClases(JTextPane textArea){
-	/*	textArea.setText("<ClassDiagram name = \"nombre\"> \n");
-		textArea.append("   <class id = \"idClase\" name = \"nombre\"> \n");
-		textArea.append("      <attributes>\n");
-		textArea.append("         <att name = \"nombreAtributo\" type = \"tipo\" visibility = \" visibilidad\">\n");
-		textArea.append("      </attributes>\n");
-		textArea.append("     <methods>\n");
-		textArea.append("         <method name = \"nombreMétodo\" type = \"tipo\">\n");
-		textArea.append("            <param name = \"nombreParametro\" type = \"tipo\"/>\n");
-		textArea.append("         </method>\n");
-		textArea.append("      </methods>\n");
-		textArea.append("   </class>\n");
-		textArea.append("</ClassDiagram>");*/
+
 		String text = "<ClassDiagram name = \"nombre\"> \n";
 		text = text + "   <class id = \"idClase\" name = \"nombre\"> \n";
 		text = text + "      <attributes>\n";

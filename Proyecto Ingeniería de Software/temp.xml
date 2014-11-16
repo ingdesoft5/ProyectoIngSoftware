@@ -2,6 +2,15 @@
    <actors> 
    </actors> 
    <usecases>
+<<<<<<< HEAD
+=======
+      <usecase id = "uc1" name = "La jesu es bacan" />
+      <usecase id = "uc2" name = "Create a New Blog Account" />
+      <usecase id = "uc3" name = "Record Application Failure" />
+      <usecase id = "uc4" name = "Check Identity" />
+      <usecase id = "uc5" name = "Create a New Regular Blog Account" />
+      <usecase id = "uc6" name = "Create a New Editorial Blog Account" />
+>>>>>>> master
    </usecases>
    <connections> 
    </connections>
