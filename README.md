@@ -1,4 +1,4 @@
-Proyecto Ingeniria de Software Grupo 5
+Proyecto Ingenieria de Software Grupo 5
 =======================================
 
 Historia de Uso:
