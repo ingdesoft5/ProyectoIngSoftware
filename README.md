@@ -3,7 +3,7 @@ Proyecto Ingenieria de Software Grupo 5
 
 Historia de Uso:
 
-1. ELEGIR DOCUMENTO PARA TRABAJAR Y GUARDAR 50% - Pedro Pablo Miquel
+1. ELEGIR DOCUMENTO PARA TRABAJAR Y GUARDAR 50% - Pedro Pablo Miquel 
   • Se puede elegir la opción apenas se inicia el 
     software
   • Explorar carpetas para abrir un documento
@@ -25,7 +25,7 @@ Historia de Uso:
   • Que el proceso de transformación sea rápido 
     (que sea posible generar 10 clases y 10 
     conexiones en no más de 10 segundos)
-6. ARRASTRAR ELEMENTOS/ICONOS AL ÁREA DE TRABAJO Y CON ELLO CREAR XML
+6. ARRASTRAR ELEMENTOS/ICONOS AL ÁREA DE TRABAJO Y CON ELLO CREAR XML - María Constanza Halabi
   • Que exista una “caja de herramientas” con 
     todos los elementos que pueden utilizarse en 
     un diagrama
@@ -38,7 +38,7 @@ Historia de Uso:
   • Que el software sea capaz de leer XML 
     anteriormente guardados, se cargue en el área 
     de trabajo y que se pueda continuar editando
-9. AGREGAR NOTAS SOBRE EL DIAGRAMA
+9. AGREGAR NOTAS SOBRE EL DIAGRAMA - María Jesús Rivera
   • Que se puedan arrastrar de la barra de 
     herramientas o crear mediante texto en XML
 10. EDITOR DE COLOR Y TIPOGRAFÍA DEL DIAGRAMA - María Constanza Halabi
@@ -46,10 +46,10 @@ Historia de Uso:
     paleta de colores disponibles
   • Que exista y sea utilizable una lista de 
     tipografías
-11. ARRASTAR ELEMENTOS DEL DIAGRAMA DENTRO DEL ÁREA DE TRABAJO
+11. ARRASTAR ELEMENTOS DEL DIAGRAMA DENTRO DEL ÁREA DE TRABAJO - María Constanza Halabi
   • Poder seleccionar el elemento en cuestión y 
     poder posicionarlo donde desee
-12. ELIMINAR OBJETOS DEL DIAGRAMA
+12. ELIMINAR OBJETOS DEL DIAGRAMA - Pedro Pablo Miquel
   • Poder eliminar los elementos seleccionados 
     intuitivamente, es decir sin recurrir al XML, 
     generando el cambio correspondiente en este 
