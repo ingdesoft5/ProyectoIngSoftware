@@ -65,14 +65,17 @@ import javax.swing.JScrollBar;
 import java.awt.BasicStroke;
 import java.awt.Button;
 import java.awt.Container;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Panel;
+import java.awt.Point;
 import java.awt.Scrollbar;
 import java.awt.ScrollPane;
 import java.awt.TextArea;
+import java.awt.Toolkit;
 
 import javax.swing.JLabel;
 
@@ -466,6 +469,10 @@ public class main extends JFrame {
 					agregarRelDependencia = false;
 					agregarClase = false;
 					bRelActor.setFocusPainted(true);
+					Toolkit toolkit = Toolkit.getDefaultToolkit();
+		        	Image image = toolkit.getImage("src/javagui/resources/asociacion.png");
+		        	Cursor c = toolkit.createCustomCursor(image , new Point(desktopPane.getX(),desktopPane.getY()), "img");
+					desktopPane.setCursor(c);
 				}
 			});
 			bRelActor.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/asociacion.png")));
@@ -489,6 +496,10 @@ public class main extends JFrame {
 					agregarRelDependencia = false;
 					agregarClase = false;
 					bRelEspecializacion.setFocusPainted(true);
+					Toolkit toolkit = Toolkit.getDefaultToolkit();
+		        	Image image = toolkit.getImage("src/javagui/resources/herencia.png");
+		        	Cursor c = toolkit.createCustomCursor(image , new Point(desktopPane.getX(),desktopPane.getY()), "img");
+					desktopPane.setCursor(c);
 				}
 			});
 			bRelEspecializacion.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/herencia.png")));
@@ -512,6 +523,10 @@ public class main extends JFrame {
 					agregarRelDependencia = false;
 					agregarClase = false;
 					bRelExtension.setFocusPainted(true);
+					Toolkit toolkit = Toolkit.getDefaultToolkit();
+		        	Image image = toolkit.getImage("src/javagui/resources/punteada.png");
+		        	Cursor c = toolkit.createCustomCursor(image , new Point(desktopPane.getX(),desktopPane.getY()), "img");
+					desktopPane.setCursor(c);
 					
 				}
 			});
@@ -536,6 +551,10 @@ public class main extends JFrame {
 					agregarRelDependencia = false;
 					agregarClase = false;
 					bActor.setFocusPainted(true);
+					Toolkit toolkit = Toolkit.getDefaultToolkit();
+		        	Image image = toolkit.getImage("src/javagui/resources/Persona.png");
+		        	Cursor c = toolkit.createCustomCursor(image , new Point(desktopPane.getX(),desktopPane.getY()), "img");
+					desktopPane.setCursor(c);
 				}
 			});
 			bActor.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/Persona.png")));
@@ -559,6 +578,10 @@ public class main extends JFrame {
 					agregarRelDependencia = false;
 					agregarClase = false;
 					bCasodeUso.setFocusPainted(true);
+					Toolkit toolkit = Toolkit.getDefaultToolkit();
+		        	Image image = toolkit.getImage("src/javagui/resources/oval.png");
+		        	Cursor c = toolkit.createCustomCursor(image , new Point(desktopPane.getX(),desktopPane.getY()), "img");
+					desktopPane.setCursor(c);
 				}
 			});
 			bCasodeUso.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/oval.png")));
@@ -610,6 +633,10 @@ public class main extends JFrame {
 					agregarRelDependencia = false;
 					agregarClase = false;
 					bRelAgregacion.setFocusPainted(true);
+					Toolkit toolkit = Toolkit.getDefaultToolkit();
+		        	Image image = toolkit.getImage("src/javagui/resources/agregacion.png");
+		        	Cursor c = toolkit.createCustomCursor(image , new Point(desktopPane.getX(),desktopPane.getY()), "img");
+					desktopPane.setCursor(c);
 				}
 			});
 			
@@ -634,6 +661,10 @@ public class main extends JFrame {
 					agregarRelDependencia = false;
 					agregarClase = false;
 					bRelAsociacion.setFocusPainted(true);
+					Toolkit toolkit = Toolkit.getDefaultToolkit();
+		        	Image image = toolkit.getImage("src/javagui/resources/asociacion.png");
+		        	Cursor c = toolkit.createCustomCursor(image , new Point(desktopPane.getX(),desktopPane.getY()), "img");
+					desktopPane.setCursor(c);
 				}
 			});
 			bRelAsociacion.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/asociacion.png")));
@@ -657,6 +688,10 @@ public class main extends JFrame {
 					agregarRelDependencia = false;
 					agregarClase = false;
 					bRelComposicion.setFocusPainted(true);
+					Toolkit toolkit = Toolkit.getDefaultToolkit();
+		        	Image image = toolkit.getImage("src/javagui/resources/composicion.png");
+		        	Cursor c = toolkit.createCustomCursor(image , new Point(desktopPane.getX(),desktopPane.getY()), "img");
+					desktopPane.setCursor(c);
 				}
 			});
 			bRelComposicion.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/composicion.png")));
@@ -680,6 +715,10 @@ public class main extends JFrame {
 					agregarRelDependencia = false;
 					agregarClase = false;
 					bRelHerencia.setFocusPainted(true);
+					Toolkit toolkit = Toolkit.getDefaultToolkit();
+		        	Image image = toolkit.getImage("src/javagui/resources/herencia.png");
+		        	Cursor c = toolkit.createCustomCursor(image , new Point(desktopPane.getX(),desktopPane.getY()), "img");
+					desktopPane.setCursor(c);
 				}
 			});
 			bRelHerencia.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/herencia.png")));
@@ -703,6 +742,10 @@ public class main extends JFrame {
 					agregarRelDependencia = true;
 					agregarClase = false;
 					bRelDependencia.setFocusPainted(true);
+					Toolkit toolkit = Toolkit.getDefaultToolkit();
+		        	Image image = toolkit.getImage("src/javagui/resources/punteada.png");
+		        	Cursor c = toolkit.createCustomCursor(image , new Point(desktopPane.getX(),desktopPane.getY()), "img");
+					desktopPane.setCursor(c);
 				}
 			});
 			bRelDependencia.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/punteada.png")));
@@ -726,6 +769,10 @@ public class main extends JFrame {
 					agregarRelDependencia = false;
 					agregarClase = true;
 					bClase.setFocusPainted(true);
+					Toolkit toolkit = Toolkit.getDefaultToolkit();
+		        	Image image = toolkit.getImage("src/javagui/resources/caja.png");
+		        	Cursor c = toolkit.createCustomCursor(image , new Point(desktopPane.getX(),desktopPane.getY()), "img");
+					desktopPane.setCursor(c);
 				}
 			});
 			bClase.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/caja.png")));
@@ -767,6 +814,10 @@ public class main extends JFrame {
 					agregarRelDependencia = false;
 					agregarClase = false;
 					bNota.setFocusPainted(true);
+					Toolkit toolkit = Toolkit.getDefaultToolkit();
+		        	Image image = toolkit.getImage("src/javagui/resources/nota2.png");
+		        	Cursor c = toolkit.createCustomCursor(image , new Point(desktopPane.getX(),desktopPane.getY()), "img");
+					desktopPane.setCursor(c);
 				}
 			});
 			bNota.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/nota2.png")));
@@ -797,14 +848,15 @@ public class main extends JFrame {
 						editorPane.addMouseListener(new MouseAdapter(){
 							@Override
 							public void mousePressed(MouseEvent e2){
-								textArea.setText("mousePressed");
-								editorPane.addMouseListener(new MouseAdapter(){									
-									@Override
-									public void mouseReleased(MouseEvent e3){
-										textArea.setText("mouseReleased");
-										editorPane.setBounds(e3.getX(),e3.getY(), 70, 150);
-									}
-								});
+								//textArea.setText("mousePressed");
+								if(borrarElementos){
+									//textArea.setText("borrarElemento");
+									desktopPane.remove(editorPane);
+									borrarElementos = false;
+									desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+									desktopPane.updateUI();
+
+								}
 							}
 						});
 						desktopPane.add(editorPane);
@@ -812,8 +864,8 @@ public class main extends JFrame {
 						agregarNota = false;
 						bNota.setFocusPainted(false);
 						String text = textArea.getText();
-						textArea.setText(text.concat("\n<Nota id = n"+contadorNotas + " content =\"contenido\"/>"));
-						
+						textArea.setText(text.concat("\n<Nota id = \"n"+contadorNotas + "\" content =\"contenido\"/>"));
+						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 						int[] pos ={e.getX(), e.getY(), 70, 150};
 						diccionario.put("n"+contadorNotas, pos);
 						contadorNotas++;
@@ -821,14 +873,6 @@ public class main extends JFrame {
 					}
 
 					else if(agregarActor){
-						/*desktopPane.setFocusable(true);
-						JLayeredPane jlp = new JLayeredPane();
-						ImageIcon ic = new ImageIcon("src/javagui/resources/man.png");
-						//setSize(ic.getIconWidth(),ic.getIconHeight());
-						Graphics g = desktopPane.getGraphics();
-						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
-						jlp.paint(g);
-						desktopPane.add(jlp);*/
 						String imgsrc = "";
 						try {
 							imgsrc = new File("src/javagui/resources/man.png").toURI().toURL().toExternalForm();
@@ -848,6 +892,14 @@ public class main extends JFrame {
 							@Override
 							public void mousePressed(MouseEvent e2){
 								textArea.setText("mousePressed");
+								if(borrarElementos){
+									textArea.setText("borrarElemento");
+									desktopPane.remove(editorPane);
+									borrarElementos = false;
+									desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+								}
+							/*	else{
 								editorPane.addMouseListener(new MouseAdapter(){									
 									@Override
 									public void mouseReleased(MouseEvent e3){
@@ -855,12 +907,15 @@ public class main extends JFrame {
 										editorPane.setBounds(e3.getX(),e3.getY(), 70, 150);
 									}
 								});
+								}*/
 							}
 						});
 						desktopPane.add(editorPane);
 						
 						agregarActor = false;
 						bActor.setFocusPainted(false);
+						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
 					}
 					else if(agregarRelExtension){
 						desktopPane.setFocusable(true);
@@ -870,9 +925,33 @@ public class main extends JFrame {
 						Graphics g = desktopPane.getGraphics();
 						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
 						jlp.paint(g);
+						
+						jlp.addMouseListener(new MouseAdapter(){
+							@Override
+							public void mousePressed(MouseEvent e){
+								//textArea.setText("mousePressed");
+								if(borrarElementos){
+									//textArea.setText("borrarElemento");
+									desktopPane.remove(e.getComponent());
+									borrarElementos = false;
+									desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+								}
+							/*	else{
+								editorPane.addMouseListener(new MouseAdapter(){									
+									@Override
+									public void mouseReleased(MouseEvent e3){
+										textArea.setText("mouseReleased");
+										editorPane.setBounds(e3.getX(),e3.getY(), 70, 150);
+									}
+								});
+								}*/
+							}
+						});
 						desktopPane.add(jlp);
 						agregarRelExtension = false;
 						bRelExtension.setFocusPainted(false);
+						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 
 						
 					}
@@ -887,6 +966,8 @@ public class main extends JFrame {
 						desktopPane.add(jlp);
 						agregarRelActor = false;
 						bRelActor.setFocusPainted(false);
+						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
 					}
 					else if(agregarRelEspecializacion){
 						desktopPane.setFocusable(true);
@@ -899,6 +980,8 @@ public class main extends JFrame {
 						desktopPane.add(jlp);
 						agregarRelEspecializacion = false;
 						bRelEspecializacion.setFocusPainted(false);
+						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
 					}
 					else if(agregarCasoDeUso){
 						desktopPane.setFocusable(true);
@@ -911,6 +994,8 @@ public class main extends JFrame {
 						desktopPane.add(jlp);
 						agregarCasoDeUso = false;
 						bCasodeUso.setFocusPainted(false);
+						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
 					}
 					else if(agregarRelAgregacion){
 						desktopPane.setFocusable(true);
@@ -923,6 +1008,8 @@ public class main extends JFrame {
 						desktopPane.add(jlp);
 						agregarRelAgregacion = false;
 						bRelAgregacion.setFocusPainted(false);
+						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
 					}
 					else if(agregarRelAsociacion){
 						desktopPane.setFocusable(true);
@@ -935,6 +1022,8 @@ public class main extends JFrame {
 						desktopPane.add(jlp);
 						agregarRelAsociacion = false;
 						bRelAsociacion.setFocusPainted(false);
+						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
 					}
 					else if(agregarRelComposicion){
 						desktopPane.setFocusable(true);
@@ -947,6 +1036,8 @@ public class main extends JFrame {
 						desktopPane.add(jlp);
 						agregarRelComposicion = false;
 						bRelComposicion.setFocusPainted(false);
+						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
 					}
 					else if(agregarRelHerencia){
 						desktopPane.setFocusable(true);
@@ -959,6 +1050,8 @@ public class main extends JFrame {
 						desktopPane.add(jlp);
 						agregarRelHerencia = false;
 						bRelHerencia.setFocusPainted(false);
+						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
 					}
 					else if(agregarRelDependencia){
 						desktopPane.setFocusable(true);
@@ -971,6 +1064,8 @@ public class main extends JFrame {
 						desktopPane.add(jlp);
 						agregarRelDependencia = false;
 						bRelDependencia.setFocusPainted(false);
+						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
 					}
 					else if(agregarClase){
 						desktopPane.setFocusable(true);
@@ -983,14 +1078,18 @@ public class main extends JFrame {
 						desktopPane.add(jlp);
 						agregarClase = false;
 						bClase.setFocusPainted(false);
+						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
 					}
-					else if(borrarElementos){
+					/*else if(borrarElementos){
 						Component[] componentes = desktopPane.getComponents();
 						for(int i = 0; i < componentes.length; i++){
 							//componentes[i].is
 						}
 						
-					}
+						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+						
+					}*/
 					else{
 						//int position = onTop.isSelected() ? 0 : 1;
 					    //desktopPane.setLayer(dukeLabel,
@@ -1137,6 +1236,18 @@ public class main extends JFrame {
 					toolBar.add(comboBox_1);
 					
 					JButton button_7 = new JButton("");
+					button_7.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							borrarElementos = true;
+							Toolkit toolkit = Toolkit.getDefaultToolkit();
+				        	Image image = toolkit.getImage("src/javagui/resources/basurero.png");
+				        	Cursor c = toolkit.createCustomCursor(image , new Point(desktopPane.getX(),desktopPane.getY()), "img");
+							desktopPane.setCursor(c);
+							for(int i = 0; i<desktopPane.getComponentCount();i++){
+								desktopPane.getComponent(i).setCursor(c);
+							}
+						}
+					});
 					toolBar.add(button_7);
 					button_7.setIcon(new ImageIcon(main.class.getResource("/javagui/resources/basurero.png")));
 					button_7.setToolTipText("Borrar todo");
