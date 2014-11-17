@@ -9,6 +9,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.TextArea;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.MalformedURLException;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Group;
@@ -17,6 +19,7 @@ import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
@@ -29,8 +32,18 @@ public class Oval extends GroupLayout{
 		canvas.paint(g, y);
 		canvas.escribir(nombre, g , y2);
 		host.add(canvas);*/
-		ImageIcon ic = new ImageIcon("src/javagui/resources/oval.png");
-		JEditorPane jl = new JEditorPane();
+		BufferedImage bi = new BufferedImage(280, 100, BufferedImage.TYPE_INT_RGB);
+		Graphics g = bi.getGraphics();
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setStroke(new BasicStroke(2));
+		g2.setColor(Color.white);
+		g2.fillRect(150, y, 280, 100);
+		g2.setColor(Color.black);
+		g2.drawOval(150, y, 280, 100);
+
+		ImageIcon ic = new ImageIcon(bi);
+		
+		JLabel jl = new JLabel(ic);
 		jl.setBounds(y,y2,ic.getIconWidth(),ic.getIconHeight());
 		jl.setName("oval");
 		host.add(jl);

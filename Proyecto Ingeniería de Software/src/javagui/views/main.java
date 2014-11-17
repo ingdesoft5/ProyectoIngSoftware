@@ -1221,6 +1221,7 @@ public class main extends JFrame {
 			for(int i = 0; i<l.diagCU.CasosDeUso.size();i++){
 				desktopPane.setSize(600, i*100+200);
 				desktopPane.setPreferredSize(new Dimension(600,i*100+200));
+				
 				Oval o = new Oval(desktopPane, 100*(i+1), 100*(i+1)+50, l.diagCU.CasosDeUso.elementAt(i).name);
 				int[] pos ={150, 100*(i+1)+50, 280, 100};
 				diccionario.put(l.diagCU.CasosDeUso.elementAt(i).id, pos);
