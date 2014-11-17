@@ -32,6 +32,7 @@ public class Oval extends GroupLayout{
 		ImageIcon ic = new ImageIcon("src/javagui/resources/oval.png");
 		JEditorPane jl = new JEditorPane();
 		jl.setBounds(y,y2,ic.getIconWidth(),ic.getIconHeight());
+		jl.setName("oval");
 		host.add(jl);
 
 		// TODO Auto-generated constructor stub

@@ -26,6 +26,7 @@ public class Actor extends GroupLayout{
 		//g.drawImage(ic.getImage(),y,y2,ic.getIconWidth(),ic.getIconHeight(), null);
 		//jlp.paint(g);
 		jlp.setBounds(y,y2,ic.getIconWidth(),ic.getIconHeight());
+		jlp.setName("actor");
 		host.add(jlp);
 
 }
