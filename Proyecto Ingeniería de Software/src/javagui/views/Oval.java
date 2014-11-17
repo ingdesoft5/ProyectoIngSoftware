@@ -33,6 +33,7 @@ public class Oval extends GroupLayout{
 		canvas.escribir(nombre, g , y2);
 		host.add(canvas);*/
 
+<<<<<<< HEAD
 		//http://www.stupidjavatricks.com/2005/10/turning-your-graphicsgraphics2d-drawings-into-an-imageicon/
 		BufferedImage img = new BufferedImage( 280, 100, BufferedImage.TYPE_INT_RGB );
 		Graphics g = img.getGraphics();
@@ -49,6 +50,12 @@ public class Oval extends GroupLayout{
 		jl.setForeground(Color.black);
 		//jl.setText("jasdjsadjajdjas");
 		jl.setBounds(y,y2,icon.getIconWidth(),icon.getIconHeight());
+=======
+		ImageIcon ic = new ImageIcon();
+		JLabel jl = new JLabel(ic);
+		ic.paintIcon(jl, g, y, y2);
+		jl.setBounds(y,y2,ic.getIconWidth(),ic.getIconHeight());
+>>>>>>> master
 		jl.setName("oval");
 		host.add(jl);
 	}
