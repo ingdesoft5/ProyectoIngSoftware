@@ -43,7 +43,8 @@ public class Oval extends GroupLayout{
 		g.fillOval( 2, 2, 276, 96 );
 		g.setColor( Color.WHITE );
 		g.fillOval( 3, 3, 274, 94 );
-		g.setColor(Color.black);
+		g.setColor(Color.BLACK);
+		g.drawString(nombre,50,50);
 		
 		ImageIcon icon = new ImageIcon( img );
 		JLabel jl = new JLabel(icon);
