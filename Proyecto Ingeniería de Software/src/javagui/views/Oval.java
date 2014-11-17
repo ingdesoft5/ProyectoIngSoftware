@@ -41,9 +41,9 @@ public class Oval extends GroupLayout{
 		g2.setColor(Color.black);
 		g2.drawOval(150, y, 280, 100);
 
-		ImageIcon ic = new ImageIcon(bi);
-		
+		ImageIcon ic = new ImageIcon();
 		JLabel jl = new JLabel(ic);
+		ic.paintIcon(jl, g, y, y2);
 		jl.setBounds(y,y2,ic.getIconWidth(),ic.getIconHeight());
 		jl.setName("oval");
 		host.add(jl);
