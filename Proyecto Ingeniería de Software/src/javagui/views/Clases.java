@@ -26,16 +26,14 @@ public class Clases  extends GroupLayout {
 		for(int i = 0 ; i<atributos2.size() ; i++){
 			atributos[atributos.length-i-1] = atributos2.pop().nombre;
 		}
-		BufferedImage img = new BufferedImage(10+10*metodos.length+10*atributos.length, 200, BufferedImage.TYPE_INT_RGB );
+		BufferedImage img = new BufferedImage(200,2*(y+10+10*metodos.length)+atributos.length + 3, BufferedImage.TYPE_INT_RGB );
 		Graphics g = img.getGraphics();
-		g.setColor(Color.black);
-		g.drawRect(0, 0, x+50, y+10);
-		g.drawRect(0, y+10, x+50, y+10+10*metodos.length);
-		g.drawRect(0, y+10+10*metodos.length, x+50, y+10+10*metodos.length+atributos.length);
-		g.setColor(Color.white);
-		g.drawRect(2, y-2, x+50, y+10);
-		g.drawRect(2, y+8, x+50, y+10+10*metodos.length);
-		g.drawRect(2, y+8+10*metodos.length, x+50, y+10+10*metodos.length+atributos.length);
+		g.setColor(Color.WHITE);
+		g.fillRect(0,0, 200, 2*(y+10+10*metodos.length)+atributos.length + 3);
+		g.setColor(Color.BLACK);
+		g.drawRect(0, y, x+50, 25);
+		g.drawRect(0, y+25, x+50, 25+25*metodos.length);
+	//	g.drawRect(0, y+10+10*metodos.length, x+50, y+10+10*metodos.length+atributos.length);
 		String text = nombreClase + "\n";
 		for(int i = 0; i<metodos.length;i++){
 			text = text + metodos[i] + "\n";
@@ -43,18 +41,11 @@ public class Clases  extends GroupLayout {
 		for(int i = 0; i<atributos.length;i++){
 			text = text + atributos[i] + "\n";
 		}
-		g.drawString(text, 0, 0);
+		g.drawString(text, 10, 10);
 		ImageIcon icon = new ImageIcon(img);
 		JLabel jl = new JLabel(icon);
-		jl.setForeground(Color.black);
-		
-	
-			/*Graphics g = host.getGraphics();		
-			MiCanvas canvas = new MiCanvas();
-			canvas.paint(g, y);
-			canvas.escribir(nombre, g , y2);
-			host.add(canvas);*/
-
+		jl.setBounds(x,y,icon.getIconWidth(),icon.getIconHeight());
+		host.add(jl);
 
 			// TODO Auto-generated constructor stub
 		}

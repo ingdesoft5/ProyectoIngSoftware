@@ -1403,7 +1403,7 @@ public class main extends JFrame {
 				text = text + "      <attributes>\n";
 				
 				for(int j = 0; j<mp.l.diagC.Clases.elementAt(i).atributos.size(); j++){
-					text = text + "         <att name = \""+(mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).nombre).toString()+"\" type = \"" + (mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).tipo).toString() + " visibility = \"" + (mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).visibilidad).toString() + "\">\n";
+					text = text + "         <att name = \""+(mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).nombre).toString()+"\" type = \"" + (mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).tipo).toString() + "\" visibility = \"" + (mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).visibilidad).toString() + "\"/>\n";
 				}
 				
 				text = text + "      </attributes>\n";
@@ -1419,7 +1419,7 @@ public class main extends JFrame {
 				text = text + "      </methods>\n";
 				text = text + "   </class>\n";
 			}
-			text = text + "</ClassDiagram\n";
+			text = text + "</ClassDiagram>\n";
 			textArea.setText(text);
 		}
 	}
