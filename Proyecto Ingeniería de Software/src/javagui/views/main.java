@@ -97,6 +97,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.SwingConstants;
 
@@ -137,9 +139,11 @@ public class main extends JFrame {
 	boolean agregarRelDependencia = false;
 	boolean agregarClase = false;
 	boolean borrarElementos = false;
+	int contadorNotas = 0;
 	
 	Container c = new Container();
-	
+	Map<String,int[]> diccionario = new HashMap<String,int[]>();
+
 	private JPanel contentPane;
 	JLayeredPane desktopPane = new JLayeredPane();
 
@@ -285,8 +289,23 @@ public class main extends JFrame {
 			mntmPng.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					GuardarComo gc = new GuardarComo();
-					//Container c = desktopPane.getRootPane();
-					//Container c1 = jf.getContentPane();
+					JLayeredPane auxD = new JLayeredPane();
+					c.removeAll();
+					c.setSize(desktopPane.getSize());
+					auxD.setSize(desktopPane.getSize());
+					auxD.setVisible(true);
+					auxD.setBackground(Color.white);
+					c.setVisible(true);
+					c.setBackground(Color.white);
+					auxD = desktopPane;
+					auxD.setBackground(Color.white);
+
+					for(int i = auxD.getComponentCount()-1;i>=0;i--){
+						if(auxD.getComponent(i).getName().contains("editorPaneN")){
+							auxD.remove(i);
+						}
+					}
+					c = auxD;
 					gc.GuardarComoImagen(c);
 				}
 			});
@@ -335,10 +354,10 @@ public class main extends JFrame {
 			btnConvertir.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
-					///////////ARREGLAR!!!!
 					desktopPane.removeAll();
 					ImprimirDiagrama(textArea, desktopPane);
-					c = desktopPane;
+					//c = desktopPane;
+					
 				}
 			});
 
@@ -755,39 +774,11 @@ public class main extends JFrame {
 			bNota.setBounds(0, 444, 62, 62);
 			desktopPane_1.add(bNota);
 			
-			scrollBar_1.addMouseListener(new MouseAdapter() {
+			desktopPane.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
 
 					if(agregarNota){
-						/*JInternalFrame jlp = new JInternalFrame();
-						ImageIcon ic = new ImageIcon("src/javagui/resources/nota2.png");
-						//setSize(ic.getIconWidth(),ic.getIconHeight());
-						Graphics g = desktopPane.getGraphics();
-						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
-						JLabel jl = new JLabel("contenido");
-						jl.setForeground(Color.black);
-						jl.setVisible(true);
-						jl.setAlignmentX(e.getX()+30);
-						jl.setAlignmentY(e.getY());
-						desktopPane.add(jl);
-						//g.drawString("contenido", e.getX(), e.getY()+20);
-						//jlp.paint(g);
-						//jlp.setFocusable(true);
-						//jlp.setVisible(true);
-						jlp.addMouseListener(new MouseAdapter(){
-							@Override
-							public void mousePressed(MouseEvent e){
-								textArea.setText("hola");
-							}
-						});
-						
-						desktopPane.add(jlp);
-						agregarNota = false;
-						bNota.setFocusPainted(false);
-						String text = textArea.getText();
-						textArea.setText(text.concat("\n<Nota content =\"\"/>"));
-*/
 						String imgsrc = "";
 						try {
 							imgsrc = new File("src/javagui/resources/nota2.png").toURI().toURL().toExternalForm();
@@ -796,17 +787,13 @@ public class main extends JFrame {
 							e2.printStackTrace();
 						}
 						String html = "<img src=\""+imgsrc+"\" width=\"74\" height=\"85\">";
-					    
-						//ImageIcon icon = new ImageIcon("src/javagui/resources/nota2.png");
-						//JLabel jl = new JLabel(icon);
+						String nombre = "editorPaneN"+String.valueOf(contadorNotas);
 						JTextPane editorPane = new JTextPane();
+						editorPane.setName(nombre);
 						editorPane.setContentType("text/html");
-						//editorPane = new JEditorPane(html);
 						editorPane.setText(html +"<br> contenido");
 						editorPane.setVisible(true);
 						editorPane.setBounds(e.getX(), e.getY(), 70, 150);
-						//jl.setBounds(e.getX(), e.getY(), 200,200);
-						//editorPane.add(jl);
 						editorPane.addMouseListener(new MouseAdapter(){
 							@Override
 							public void mousePressed(MouseEvent e2){
@@ -815,7 +802,6 @@ public class main extends JFrame {
 									@Override
 									public void mouseReleased(MouseEvent e3){
 										textArea.setText("mouseReleased");
-										//editorPane.
 										editorPane.setBounds(e3.getX(),e3.getY(), 70, 150);
 									}
 								});
@@ -826,20 +812,53 @@ public class main extends JFrame {
 						agregarNota = false;
 						bNota.setFocusPainted(false);
 						String text = textArea.getText();
-						textArea.setText(text.concat("\n<Nota content =\"contenido\"/>"));
+						textArea.setText(text.concat("\n<Nota id = n"+contadorNotas + " content =\"contenido\"/>"));
 						
+						int[] pos ={e.getX(), e.getY(), 70, 150};
+						diccionario.put("n"+contadorNotas, pos);
+						contadorNotas++;
 
 					}
 
 					else if(agregarActor){
-						desktopPane.setFocusable(true);
+						/*desktopPane.setFocusable(true);
 						JLayeredPane jlp = new JLayeredPane();
 						ImageIcon ic = new ImageIcon("src/javagui/resources/man.png");
 						//setSize(ic.getIconWidth(),ic.getIconHeight());
 						Graphics g = desktopPane.getGraphics();
 						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
 						jlp.paint(g);
-						desktopPane.add(jlp);
+						desktopPane.add(jlp);*/
+						String imgsrc = "";
+						try {
+							imgsrc = new File("src/javagui/resources/man.png").toURI().toURL().toExternalForm();
+						} catch (MalformedURLException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}
+						String html = "<img src=\""+imgsrc+"\" width=\"74\" height=\"85\">";
+						String nombre = "actor"+String.valueOf(contadorNotas);
+						JTextPane editorPane = new JTextPane();
+						editorPane.setName(nombre);
+						editorPane.setContentType("text/html");
+						editorPane.setText(html +"<br> nombre");
+						editorPane.setVisible(true);
+						editorPane.setBounds(e.getX(), e.getY(), 70, 150);
+						editorPane.addMouseListener(new MouseAdapter(){
+							@Override
+							public void mousePressed(MouseEvent e2){
+								textArea.setText("mousePressed");
+								editorPane.addMouseListener(new MouseAdapter(){									
+									@Override
+									public void mouseReleased(MouseEvent e3){
+										textArea.setText("mouseReleased");
+										editorPane.setBounds(e3.getX(),e3.getY(), 70, 150);
+									}
+								});
+							}
+						});
+						desktopPane.add(editorPane);
+						
 						agregarActor = false;
 						bActor.setFocusPainted(false);
 					}
@@ -1202,6 +1221,8 @@ public class main extends JFrame {
 			for(int i = 0; i<l.diagCU.CasosDeUso.size();i++){
 				desktopPane.setSize(600, i*100+200);
 				Oval o = new Oval(desktopPane, 100*(i+1), 100*(i+1)+50, l.diagCU.CasosDeUso.elementAt(i).name);
+				int[] pos ={150, 100*(i+1)+50, 280, 100};
+				diccionario.put(l.diagCU.CasosDeUso.elementAt(i).id, pos);
 			}
 			int contadorp = 0, contadors = 0;
 			for(int i = 0; i<l.diagCU.Actores.size();i++){
@@ -1211,10 +1232,14 @@ public class main extends JFrame {
 					Actor a = new Actor(desktopPane, 0, contadorp + 20, l.diagCU.Actores.elementAt(i).name );
 					contadorp++;
 					desktopPane.updateUI();
+					int[] pos ={50, contadorp+20, 0, 0};
+					diccionario.put(l.diagCU.Actores.elementAt(i).id, pos);
 				}
 				else{
 					Actor b = new Actor(desktopPane, 550, contadors + 20, l.diagCU.Actores.elementAt(i).name );
 					contadors++;
+					int[] pos ={550, contadorp+20, 0, 0};
+					diccionario.put(l.diagCU.Actores.elementAt(i).id, pos);
 				}				
 			}
 		}
