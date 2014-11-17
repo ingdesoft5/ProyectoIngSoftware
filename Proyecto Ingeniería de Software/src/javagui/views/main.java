@@ -1357,7 +1357,12 @@ public class main extends JFrame {
 			}
 		}
 		else if(comprobar == "CD"){
-			
+			for(int i = 0 ; i<l.diagC.Clases.size() ; i++){
+				Clases c = new Clases(desktopPane, 100*(i+1), 100*(i+1)+50,l.diagC.Clases.elementAt(i).nombreClase,l.diagC.Clases.elementAt(i).metodos, l.diagC.Clases.elementAt(i).atributos );
+				int[] pos ={100*(i+1), 100*(i+1)+50, 0, 0};
+				diccionario.put(l.diagC.Clases.elementAt(i).id, pos);
+			}
+		
 		}
 		else if(comprobar == "error"){
 			JFrame error = new JFrame();
