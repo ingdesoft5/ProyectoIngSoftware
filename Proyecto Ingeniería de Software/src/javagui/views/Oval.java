@@ -32,23 +32,25 @@ public class Oval extends GroupLayout{
 		canvas.paint(g, y);
 		canvas.escribir(nombre, g , y2);
 		host.add(canvas);*/
-		BufferedImage bi = new BufferedImage(280, 100, BufferedImage.TYPE_INT_RGB);
-		Graphics g = bi.getGraphics();
-		Graphics2D g2 = (Graphics2D) g;
-		g2.setStroke(new BasicStroke(2));
-		g2.setColor(Color.white);
-		g2.fillRect(150, y, 280, 100);
-		g2.setColor(Color.black);
-		g2.drawOval(150, y, 280, 100);
 
-		ImageIcon ic = new ImageIcon(bi);
+		//http://www.stupidjavatricks.com/2005/10/turning-your-graphicsgraphics2d-drawings-into-an-imageicon/
+		BufferedImage img = new BufferedImage( 280, 100, BufferedImage.TYPE_INT_RGB );
+		Graphics g = img.getGraphics();
+		g.setColor( Color.WHITE );
+		g.fillRect( 0, 0, 280, 100 );
+		g.setColor( Color.BLACK );
+		g.fillOval( 2, 2, 276, 96 );
+		g.setColor( Color.WHITE );
+		g.fillOval( 3, 3, 274, 94 );
+		g.setColor(Color.black);
 		
-		JLabel jl = new JLabel(ic);
-		jl.setBounds(y,y2,ic.getIconWidth(),ic.getIconHeight());
+		ImageIcon icon = new ImageIcon( img );
+		JLabel jl = new JLabel(icon);
+		jl.setForeground(Color.black);
+		//jl.setText("jasdjsadjajdjas");
+		jl.setBounds(y,y2,icon.getIconWidth(),icon.getIconHeight());
 		jl.setName("oval");
 		host.add(jl);
-
-		// TODO Auto-generated constructor stub
 	}
 
 	
