@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -45,6 +46,28 @@ public class Oval extends GroupLayout{
 		g.fillOval( 3, 3, 274, 94 );
 		g.setColor(Color.BLACK);
 		g.drawString(nombre,50,50);
+		
+		//773 × 587
+		if(280+y>773){
+			if(y2+100>587){
+				host.setSize(280+y, y2+100);
+				host.setPreferredSize(new Dimension(280 + y,100 + y2));
+			}
+			else{
+				host.setSize(280 + y, 587);
+				host.setPreferredSize(new Dimension(280 + y,587));
+			}
+		}
+		else{
+			if(280+y>587){
+				host.setSize(773, 280 + y);
+				host.setPreferredSize(new Dimension(773,280 + y));
+			}
+			else{
+				host.setSize(773, 587);
+				host.setPreferredSize(new Dimension(773,587));
+			}
+		}
 		
 		ImageIcon icon = new ImageIcon( img );
 		JLabel jl = new JLabel(icon);

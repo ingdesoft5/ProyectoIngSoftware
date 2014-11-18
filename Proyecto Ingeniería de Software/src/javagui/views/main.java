@@ -1330,9 +1330,6 @@ public class main extends JFrame {
 		String comprobar = comprobarLectura(l, xml);
 		if(comprobar == "UCD"){
 			for(int i = 0; i<l.diagCU.CasosDeUso.size();i++){
-				desktopPane.setSize(1000, i*100+280);
-				desktopPane.setPreferredSize(new Dimension(1000,i*100+280));
-				
 				Oval o = new Oval(desktopPane, 100*(i+1), 100*(i+1)+50, l.diagCU.CasosDeUso.elementAt(i).name);
 				int[] pos ={150, 100*(i+1)+50, 280, 100};
 				diccionario.put(l.diagCU.CasosDeUso.elementAt(i).id, pos);
