@@ -20,11 +20,13 @@ public class TestColorTipografia {
 		assertNotEquals("Test Cambiar Color Tipografia",inicio,fin);
 	}
 	
-	/*@Test
+	@Test
 	public void TestCambiarTipografia(){
 		JTextPane textArea = new JTextPane();
 		Font inicio = textArea.getFont();
-		textArea.setFont(Font.ITALIC);
-	}*/
+		textArea.setFont(new Font("Calibri",Font.ITALIC,10));
+		Font fin = textArea.getFont();
+		assertNotEquals("Test Cambiar Tipografia",inicio,fin);
+	}
 
 }
