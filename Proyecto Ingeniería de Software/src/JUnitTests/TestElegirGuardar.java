@@ -34,14 +34,6 @@ public class TestElegirGuardar {
 		assertNotEquals("Se eligio archivo", archivoElegido, null);
 	}
 	
-	
-	@Test
-	public void GuardarArchivo() throws InterruptedException, AWTException{
-		javagui.views.main.main(null);
-		
-		
-		File archivo = new File("../bin/archivoguardado.xml");
-		assertNotEquals("Se eligio archivo", archivo, null);
 	}
 
-}
+
