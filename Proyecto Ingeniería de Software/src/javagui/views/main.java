@@ -24,6 +24,12 @@ import javax.swing.JDesktopPane;
 import java.awt.FlowLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+<<<<<<< HEAD
+=======
+
+import Backend.CasoDeUso;
+import Backend.DiagramaCasosDeUso;
+>>>>>>> panel
 import Backend.GuardarComo;
 import Backend.Lector;
 import Backend.MenuPrincipal;
@@ -49,6 +55,16 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
+<<<<<<< HEAD
+=======
+import java.util.Stack;
+
+import javax.swing.SwingConstants;
+
+import java.awt.Rectangle;
+import java.awt.GridLayout;
+
+>>>>>>> panel
 import javax.swing.UIManager;
 import java.awt.Font;
 import javax.swing.ScrollPaneConstants;
@@ -150,11 +166,14 @@ public class main extends JFrame {
 ////////////NUEVO ARCHIVO/////////////////////////////////////////////////////////////////////////////////////////
 			JMenu mnNuevo = new JMenu("Nuevo");
 			mnArchivo.add(mnNuevo);
-			
+
 			JMenuItem mntmUml = new JMenuItem("UML");
 			mntmUml.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					NuevoUML(textArea);
+					desktopPane.removeAll();
+					desktopPane.updateUI();
+					desktopPane.setSize(773, 587);
 				}
 			});
 			mnNuevo.add(mntmUml);
@@ -163,6 +182,9 @@ public class main extends JFrame {
 			mntmDiagramaDeClases.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					NuevoDiagramaClases(textArea);
+					desktopPane.removeAll();
+					desktopPane.updateUI();
+					desktopPane.setSize(773, 587);
 				}
 			});
 			mnNuevo.add(mntmDiagramaDeClases);
@@ -783,6 +805,7 @@ public class main extends JFrame {
 								}
 							}
 						});
+						aumentarPanel(desktopPane, e.getX(), e.getY(), 70,150);
 						desktopPane.add(editorPane);
 						
 						agregarNota = false;
@@ -1190,12 +1213,12 @@ public class main extends JFrame {
 		Lector l = new Lector();
 		String xml = textArea.getText();
 		String comprobar = comprobarLectura(l, xml);
+		
 		if(comprobar == "UCD"){
-			for(int i = 0; i<l.diagCU.CasosDeUso.size();i++){
-				Oval o = new Oval(desktopPane, 100*(i+1), 100*(i+1)+50, l.diagCU.CasosDeUso.elementAt(i).name);
-				int[] pos ={150, 100*(i+1)+50, 280, 100};
-				diccionario.put(l.diagCU.CasosDeUso.elementAt(i).id, pos);
-			}
+			dibujados.add(l.diagCU.CasosDeUso.elementAt(0));
+			Oval o = new Oval(desktopPane, 246, 20, l.diagCU.CasosDeUso.elementAt(0).name);
+			dibujarDC(l.diagCU, l.diagCU.CasosDeUso.elementAt(0),150);
+				
 			int contadorp = 0, contadors = 0;
 			for(int i = 0; i<l.diagCU.Actores.size();i++){
 				
@@ -1216,8 +1239,22 @@ public class main extends JFrame {
 			}
 		}
 		else if(comprobar == "CD"){
+			boolean arriba = true;
+			int xArriba = 100;
+			int xAbajo = 100;
+			int yAbajo = 0;
 			for(int i = 0 ; i<l.diagC.Clases.size() ; i++){
-				Clases c = new Clases(desktopPane, 100*(i+1), 100*(i+1)+50,l.diagC.Clases.elementAt(i).nombreClase,l.diagC.Clases.elementAt(i).metodos, l.diagC.Clases.elementAt(i).atributos );
+				if(arriba){
+					Clases c = new Clases(desktopPane, xArriba, 130,l.diagC.Clases.elementAt(i).nombreClase,l.diagC.Clases.elementAt(i).metodos, l.diagC.Clases.elementAt(i).atributos );
+					yAbajo = c.altoClase() + 270;
+					xArriba = xArriba + c.anchoClase() + 130;
+					arriba = false;
+				}
+				else{
+					Clases c = new Clases(desktopPane,xAbajo , yAbajo,l.diagC.Clases.elementAt(i).nombreClase,l.diagC.Clases.elementAt(i).metodos, l.diagC.Clases.elementAt(i).atributos );
+					xAbajo = xAbajo + c.anchoClase() + 130;
+					arriba = true;
+				}
 				int[] pos ={100*(i+1), 100*(i+1)+50, 0, 0};
 				diccionario.put(l.diagC.Clases.elementAt(i).id, pos);
 			}
@@ -1236,6 +1273,9 @@ public class main extends JFrame {
 	}
 
 	public void AbrirArchivo(JTextPane textArea){
+		desktopPane.removeAll();
+		desktopPane.updateUI();
+		desktopPane.setSize(773, 587);		
 		MenuPrincipal mp = new MenuPrincipal();
 		mp.Abrir();
 		if(mp.l.tipo=="UCD"){
@@ -1346,7 +1386,81 @@ public class main extends JFrame {
 		textArea.setText(text);
 		
 	}
+
+	public void aumentarPanel(JLayeredPane host, int posX, int posY, int ancho, int alto){
+		//773 × 587
+		if(Math.max(posX + ancho,host.getSize().width)>773){
+			if(alto>587){
+				host.setSize(Math.max(posX + ancho,host.getSize().width),Math.max(posY + alto,host.getSize().height));
+				host.setPreferredSize(new Dimension(Math.max(posX + ancho,host.getSize().width),Math.max(posY + alto,host.getSize().height)));
+			}
+			else{
+				host.setSize(Math.max(posX + ancho,host.getSize().width), 587);
+				host.setPreferredSize(new Dimension(Math.max(posX + ancho,host.getSize().width),587));
+			}
+		}
+		else{
+			if(Math.max(posY + alto,host.getSize().height)>587){
+				host.setSize(773, Math.max(posY + alto,host.getSize().height));
+				host.setPreferredSize(new Dimension(773,Math.max(posY + alto,host.getSize().height)));
+			}
+			else{
+				host.setSize(773, 587);
+				host.setPreferredSize(new Dimension(773,587));
+			}
+		}
+	}
 	
+	int i = 0;
+	Stack<CasoDeUso> dibujados = new Stack<CasoDeUso>();
+	public void dibujarDC(DiagramaCasosDeUso casos, CasoDeUso casoDeUso, int distY){
+
+		Stack<CasoDeUso> conectado = new Stack<CasoDeUso>();
+			int conexiones = 0;
+			for(int j = 0; j<casos.Conexiones.size() ; j++){
+				if((casos.Conexiones.get(j).from.trim()).equals(casoDeUso.id.trim())){
+					for(int k = 0; k<casos.CasosDeUso.size(); k++){
+						if((casos.CasosDeUso.elementAt(k).id.trim()).equals(casos.Conexiones.get(j).to.trim())){
+							if(dibujados.indexOf(casos.CasosDeUso.elementAt(k)) == -1){
+								conectado.add(casos.CasosDeUso.elementAt(k));
+								dibujados.add(casos.CasosDeUso.elementAt(k));
+								conexiones++;
+							}
+						}
+					}
+				}
+				if((casos.Conexiones.get(j).to.trim()).equals(casoDeUso.id.trim())){
+					for(int k = 0; k<casos.CasosDeUso.size(); k++){
+						if((casos.CasosDeUso.elementAt(k).id.trim()).equals(casos.Conexiones.get(j).from.trim())){
+							if(dibujados.indexOf(casos.CasosDeUso.elementAt(k)) == -1){
+							conectado.add(casos.CasosDeUso.elementAt(k));
+							dibujados.add(casos.CasosDeUso.elementAt(k));
+							conexiones++;
+							}
+						}
+					}
+				}
+				
+			}
+			int auxY = 50;
+			for(int m = 0; m< conectado.size(); m++){
+				if(conexiones == 1){
+					DiagramaCasosDeUso auxC = casos;
+					Oval o = new Oval(desktopPane, 246, distY, conectado.elementAt(m).name);
+					dibujarDC(casos, conectado.elementAt(m),distY+150);
+				}
+				else{
+					Oval o = new Oval(desktopPane, auxY, distY, conectado.elementAt(m).name);
+					auxY = auxY +350;
+					dibujarDC(casos, conectado.elementAt(m),distY+150);
+				}
+			}
+			
+		//	int[] pos ={150, 100*(i+1)+50, 280, 100};
+			//diccionario.put(l.diagCU.CasosDeUso.elementAt(i).id, pos);
+		
+		
+	}
 	public void CloseFrame(){
 		super.dispose();		
 	}
