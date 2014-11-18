@@ -1,16 +1,10 @@
 package JUnitTests;
 
 import static org.junit.Assert.*;
-
 import java.util.Stack;
-
-import javagui.views.Actor;
 import javagui.views.Clases;
-import javagui.views.Oval;
 import Backend.*;
-
 import javax.swing.JLayeredPane;
-
 import org.junit.Test;
 
 public class TestClases {

@@ -1,9 +1,6 @@
 package javagui.views;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,118 +10,52 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
-
 import java.awt.Color;
-
-import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-
 import java.awt.Component;
-
 import javax.swing.Box;
-
-import java.awt.Canvas;
-
 import javax.swing.JEditorPane;
-
-import java.awt.TextField;
-
-import javax.swing.JTextField;
-
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-
-import javax.swing.JSplitPane;
-import javax.swing.JInternalFrame;
 import javax.swing.JDesktopPane;
-import javax.swing.BoxLayout;
-
 import java.awt.FlowLayout;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-
 import Backend.GuardarComo;
 import Backend.Lector;
 import Backend.MenuPrincipal;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.RowSpec;
-
 import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextArea;
-import javax.swing.JScrollBar;
-
-import java.awt.BasicStroke;
-import java.awt.Button;
 import java.awt.Container;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Panel;
 import java.awt.Point;
-import java.awt.Scrollbar;
-import java.awt.ScrollPane;
-import java.awt.TextArea;
 import java.awt.Toolkit;
-
 import javax.swing.JLabel;
-
 import com.jgoodies.forms.factories.DefaultComponentFactory;
-
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
 import javax.swing.ImageIcon;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Choice;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageProducer;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.swing.SwingConstants;
-
-import java.awt.Rectangle;
-import java.awt.GridLayout;
-
 import javax.swing.UIManager;
-
 import java.awt.Font;
-
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JLayeredPane;
-
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
-
 import javax.swing.JComboBox;
-
-import java.awt.event.MouseMotionAdapter;
 
 public class main extends JFrame {
 	boolean ovalo = false;
@@ -173,7 +104,6 @@ public class main extends JFrame {
 	 * Create the frame.
 	 */
 	public main() {
-			//JTextArea textArea = new JTextArea();
 			JTextPane textArea = new JTextPane();
 			StyledDocument textPaneDoc = textArea.getStyledDocument();
 			textArea.getDocument().putProperty(DefaultEditorKit.EndOfLineStringProperty, "\n");
@@ -240,7 +170,6 @@ public class main extends JFrame {
 
 			JLabel lblEditorXml = DefaultComponentFactory.getInstance().createLabel("Editor XML:");
 			lblEditorXml.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-			//JTextArea textArea = new JTextArea();
 			JScrollPane scrollBar = new JScrollPane(textArea);
 			
 			JMenuItem mntmAbrirArchivo = new JMenuItem("Abrir archivo...");
@@ -358,14 +287,12 @@ public class main extends JFrame {
 				public void mousePressed(MouseEvent e) {
 					desktopPane.removeAll();
 					ImprimirDiagrama(textArea, desktopPane);
-					//c = desktopPane;
 					
 				}
 			});
 
 
 			JToolBar toolBar = new JToolBar();
-			//JScrollPane scrollBar_1 = new JScrollPane(mc);
 			
 			GroupLayout gl_contentPane = new GroupLayout(contentPane);
 			gl_contentPane.setHorizontalGroup(
@@ -847,9 +774,7 @@ public class main extends JFrame {
 						editorPane.addMouseListener(new MouseAdapter(){
 							@Override
 							public void mousePressed(MouseEvent e2){
-								//textArea.setText("mousePressed");
 								if(borrarElementos){
-									//textArea.setText("borrarElemento");
 									desktopPane.remove(editorPane);
 									borrarElementos = false;
 									desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -898,15 +823,6 @@ public class main extends JFrame {
 									desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 
 								}
-							/*	else{
-								editorPane.addMouseListener(new MouseAdapter(){									
-									@Override
-									public void mouseReleased(MouseEvent e3){
-										textArea.setText("mouseReleased");
-										editorPane.setBounds(e3.getX(),e3.getY(), 70, 150);
-									}
-								});
-								}*/
 							}
 						});
 						desktopPane.add(editorPane);
@@ -920,7 +836,6 @@ public class main extends JFrame {
 						desktopPane.setFocusable(true);
 						JLayeredPane jlp = new JLayeredPane();
 						ImageIcon ic = new ImageIcon("src/javagui/resources/punteada.png");
-						//setSize(ic.getIconWidth(),ic.getIconHeight());
 						Graphics g = desktopPane.getGraphics();
 						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
 						jlp.paint(g);
@@ -928,37 +843,23 @@ public class main extends JFrame {
 						jlp.addMouseListener(new MouseAdapter(){
 							@Override
 							public void mousePressed(MouseEvent e){
-								//textArea.setText("mousePressed");
 								if(borrarElementos){
-									//textArea.setText("borrarElemento");
 									desktopPane.remove(e.getComponent());
 									borrarElementos = false;
 									desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 
 								}
-							/*	else{
-								editorPane.addMouseListener(new MouseAdapter(){									
-									@Override
-									public void mouseReleased(MouseEvent e3){
-										textArea.setText("mouseReleased");
-										editorPane.setBounds(e3.getX(),e3.getY(), 70, 150);
-									}
-								});
-								}*/
 							}
 						});
 						desktopPane.add(jlp);
 						agregarRelExtension = false;
 						bRelExtension.setFocusPainted(false);
-						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
-						
+						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));	
 					}
 					else if(agregarRelActor){
 						desktopPane.setFocusable(true);
 						JLayeredPane jlp = new JLayeredPane();
 						ImageIcon ic = new ImageIcon("src/javagui/resources/asociacion.png");
-						//setSize(ic.getIconWidth(),ic.getIconHeight());
 						Graphics g = desktopPane.getGraphics();
 						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
 						jlp.paint(g);
@@ -966,13 +867,11 @@ public class main extends JFrame {
 						agregarRelActor = false;
 						bRelActor.setFocusPainted(false);
 						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
 					}
 					else if(agregarRelEspecializacion){
 						desktopPane.setFocusable(true);
 						JLayeredPane jlp = new JLayeredPane();
 						ImageIcon ic = new ImageIcon("src/javagui/resources/herencia.png");
-						//setSize(ic.getIconWidth(),ic.getIconHeight());
 						Graphics g = desktopPane.getGraphics();
 						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
 						jlp.paint(g);
@@ -980,13 +879,11 @@ public class main extends JFrame {
 						agregarRelEspecializacion = false;
 						bRelEspecializacion.setFocusPainted(false);
 						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
 					}
 					else if(agregarCasoDeUso){
 						desktopPane.setFocusable(true);
 						JLayeredPane jlp = new JLayeredPane();
 						ImageIcon ic = new ImageIcon("src/javagui/resources/oval.png");
-						//setSize(ic.getIconWidth(),ic.getIconHeight());
 						Graphics g = desktopPane.getGraphics();
 						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
 						jlp.paint(g);
@@ -994,13 +891,11 @@ public class main extends JFrame {
 						agregarCasoDeUso = false;
 						bCasodeUso.setFocusPainted(false);
 						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
 					}
 					else if(agregarRelAgregacion){
 						desktopPane.setFocusable(true);
 						JLayeredPane jlp = new JLayeredPane();
 						ImageIcon ic = new ImageIcon("src/javagui/resources/agregacion.png");
-						//setSize(ic.getIconWidth(),ic.getIconHeight());
 						Graphics g = desktopPane.getGraphics();
 						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
 						jlp.paint(g);
@@ -1008,13 +903,11 @@ public class main extends JFrame {
 						agregarRelAgregacion = false;
 						bRelAgregacion.setFocusPainted(false);
 						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
 					}
 					else if(agregarRelAsociacion){
 						desktopPane.setFocusable(true);
 						JLayeredPane jlp = new JLayeredPane();
 						ImageIcon ic = new ImageIcon("src/javagui/resources/asociacion.png");
-						//setSize(ic.getIconWidth(),ic.getIconHeight());
 						Graphics g = desktopPane.getGraphics();
 						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
 						jlp.paint(g);
@@ -1022,13 +915,11 @@ public class main extends JFrame {
 						agregarRelAsociacion = false;
 						bRelAsociacion.setFocusPainted(false);
 						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
 					}
 					else if(agregarRelComposicion){
 						desktopPane.setFocusable(true);
 						JLayeredPane jlp = new JLayeredPane();
 						ImageIcon ic = new ImageIcon("src/javagui/resources/composicion.png");
-						//setSize(ic.getIconWidth(),ic.getIconHeight());
 						Graphics g = desktopPane.getGraphics();
 						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
 						jlp.paint(g);
@@ -1036,13 +927,11 @@ public class main extends JFrame {
 						agregarRelComposicion = false;
 						bRelComposicion.setFocusPainted(false);
 						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
 					}
 					else if(agregarRelHerencia){
 						desktopPane.setFocusable(true);
 						JLayeredPane jlp = new JLayeredPane();
 						ImageIcon ic = new ImageIcon("src/javagui/resources/herencia.png");
-						//setSize(ic.getIconWidth(),ic.getIconHeight());
 						Graphics g = desktopPane.getGraphics();
 						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
 						jlp.paint(g);
@@ -1050,13 +939,11 @@ public class main extends JFrame {
 						agregarRelHerencia = false;
 						bRelHerencia.setFocusPainted(false);
 						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
 					}
 					else if(agregarRelDependencia){
 						desktopPane.setFocusable(true);
 						JLayeredPane jlp = new JLayeredPane();
 						ImageIcon ic = new ImageIcon("src/javagui/resources/punteada.png");
-						//setSize(ic.getIconWidth(),ic.getIconHeight());
 						Graphics g = desktopPane.getGraphics();
 						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
 						jlp.paint(g);
@@ -1064,13 +951,11 @@ public class main extends JFrame {
 						agregarRelDependencia = false;
 						bRelDependencia.setFocusPainted(false);
 						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
 					}
 					else if(agregarClase){
 						desktopPane.setFocusable(true);
 						JLayeredPane jlp = new JLayeredPane();
 						ImageIcon ic = new ImageIcon("src/javagui/resources/caja2.png");
-						//setSize(ic.getIconWidth(),ic.getIconHeight());
 						Graphics g = desktopPane.getGraphics();
 						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
 						jlp.paint(g);
@@ -1078,27 +963,8 @@ public class main extends JFrame {
 						agregarClase = false;
 						bClase.setFocusPainted(false);
 						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
 					}
-					/*else if(borrarElementos){
-						Component[] componentes = desktopPane.getComponents();
-						for(int i = 0; i < componentes.length; i++){
-							//componentes[i].is
-						}
-						
-						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-						
-					}*/
-					else{
-						//int position = onTop.isSelected() ? 0 : 1;
-					    //desktopPane.setLayer(dukeLabel,
-					      //                   layerList.getSelectedIndex(),
-					        //                 position);
-
-					}
-
 				}
-
 			});
 			
 			
@@ -1183,7 +1049,6 @@ public class main extends JFrame {
 								textPaneDoc.setCharacterAttributes(textArea.getSelectionStart(), textArea.getSelectionEnd()-textArea.getSelectionStart(), aset, true);
 							}
 							if(comboBox_1.getSelectedIndex()==1){
-								//textArea.setForeground(Color.red);
 								StyleContext sc = StyleContext.getDefaultStyleContext();
 								AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.red);
 								textPaneDoc.setCharacterAttributes(textArea.getSelectionStart(), textArea.getSelectionEnd()-textArea.getSelectionStart(), aset, true);
@@ -1257,8 +1122,6 @@ public class main extends JFrame {
 					flowLayout.setAlignment(FlowLayout.LEFT);
 					flowLayout.setHgap(0);
 					flowLayout.setVgap(0);
-			
-
 			
 			JComboBox<String> comboBox = new JComboBox<String>();
 			comboBox.addItemListener(new ItemListener() {

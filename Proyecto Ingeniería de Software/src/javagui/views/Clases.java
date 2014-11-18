@@ -6,10 +6,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Stack;
-
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 
 import Backend.Atributo;

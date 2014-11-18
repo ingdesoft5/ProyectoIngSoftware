@@ -1,17 +1,11 @@
 package javagui.views;
 
 import java.awt.*;
-import java.awt.geom.*;
-import java.awt.image.BufferedImage;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.IOException;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
 
@@ -40,12 +34,8 @@ public void escribir(String text, Graphics g, int y){
 }
 
 public void imagen(Container host, Graphics g, int x, int y){
-//Graphics2D g2 = (Graphics2D)g;
-//g2.drawImage(im, x, y, null);
 JLayeredPane jlp = new JLayeredPane();
 ImageIcon ic = new ImageIcon("\\src\\javagui\\resources\\man.png");
-//setSize(ic.getIconWidth(),ic.getIconHeight());
-//g = jlp.getGraphics();
 g.drawImage(ic.getImage(),x,y,40,50, null);
 jlp.paint(g);
 host.add(jlp);

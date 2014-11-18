@@ -4,9 +4,7 @@ import static org.junit.Assert.*;
 import javagui.views.Actor;
 import javagui.views.Conexion;
 import javagui.views.Oval;
-
 import javax.swing.JLayeredPane;
-
 import org.junit.Test;
 
 public class TestCU {

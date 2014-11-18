@@ -5,21 +5,9 @@ import static org.junit.Assert.*;
 import java.io.File;
 
 import javax.swing.JFileChooser;
-import javax.swing.JTextPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import javagui.views.*;
-
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-
 import org.junit.Test;
 
-import Backend.GuardarComo;
-import Backend.Lector;
-import javagui.views.main;
 
 public class TestElegirArchivo {
 
