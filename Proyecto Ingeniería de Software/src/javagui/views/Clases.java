@@ -16,7 +16,8 @@ import Backend.Atributo;
 import Backend.Metodo;
 
 public class Clases  extends GroupLayout {
-
+	private int Alto = 0;
+	private int Ancho = 0;
 	public Clases(Container host,int x,int y, String nombreClase, Stack<Metodo> metodos2, Stack<Atributo> atributos2){
 		super(host);
 		int ancho = 0;
@@ -45,7 +46,8 @@ public class Clases  extends GroupLayout {
 			atributos[atributos.length-i-1] = textAtributo;
 			ancho = Math.max(ancho, textAtributo.length());
 		}
-		
+		Alto = 25+25*atributos.length+25*metodos.length+1;
+		Ancho = ancho*7 + 5; 
 		BufferedImage img = new BufferedImage(ancho*7+5,25+25*atributos.length+25*metodos.length+1, BufferedImage.TYPE_INT_RGB );
 		Graphics g = img.getGraphics();
 		g.setColor(Color.WHITE);
@@ -95,5 +97,13 @@ public class Clases  extends GroupLayout {
 
 			// TODO Auto-generated constructor stub
 		}
+
+	public int altoClase(){
+		return Alto;
 	}
+	public int anchoClase(){
+		return Ancho;
+	}
+}
+	
 
