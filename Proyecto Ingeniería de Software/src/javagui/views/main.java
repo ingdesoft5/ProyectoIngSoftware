@@ -163,133 +163,17 @@ public class main extends JFrame {
 			JMenu mnArchivo = new JMenu("Archivo");
 			menuBar.add(mnArchivo);
 			
-////////////NUEVO ARCHIVO/////////////////////////////////////////////////////////////////////////////////////////
-			JMenu mnNuevo = new JMenu("Nuevo");
-			mnArchivo.add(mnNuevo);
-
-			JMenuItem mntmUml = new JMenuItem("UML");
-			mntmUml.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					NuevoUML(textArea);
-					desktopPane.removeAll();
-					desktopPane.updateUI();
-					desktopPane.setSize(773, 587);
-				}
-			});
-			mnNuevo.add(mntmUml);
-			
-			JMenuItem mntmDiagramaDeClases = new JMenuItem("Diagrama de Clases");
-			mntmDiagramaDeClases.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					NuevoDiagramaClases(textArea);
-					desktopPane.removeAll();
-					desktopPane.updateUI();
-					desktopPane.setSize(773, 587);
-				}
-			});
-			mnNuevo.add(mntmDiagramaDeClases);
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 			JLabel lblEditorXml = DefaultComponentFactory.getInstance().createLabel("Editor XML:");
 			lblEditorXml.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 			JScrollPane scrollBar = new JScrollPane(textArea);
-			
-			JMenuItem mntmAbrirArchivo = new JMenuItem("Abrir archivo...");
-			mntmAbrirArchivo.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					AbrirArchivo(textArea);
-
-				}
-			});
-
-			mnArchivo.add(mntmAbrirArchivo);
-			
-			Component verticalStrut = Box.createVerticalStrut(7);
-			mnArchivo.add(verticalStrut);
-			
-			JMenuItem mntmCerrar = new JMenuItem("Cerrar");
-			mnArchivo.add(mntmCerrar);
-			
-			Component verticalStrut_1 = Box.createVerticalStrut(7);
-			mnArchivo.add(verticalStrut_1);
-			
-			JMenuItem mntmGuardar = new JMenuItem("Guardar");
-			mnArchivo.add(mntmGuardar);
-			
-///////GUARDAR COMO//////////////////////////////////////////////////////////////////////////////////////////////////
-			JMenu mnGuardarComo = new JMenu("Guardar Como...");
-			mnArchivo.add(mnGuardarComo);
-			
-			//GUARDAR COMO: XML
-			JMenuItem mntmXml = new JMenuItem("XML");
-			mntmXml.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					Lector l = new Lector();
-					String texto = textArea.getText();
-					String comprobar = comprobarLectura(l, texto);
-					if(comprobar != "error"){
-						GuardarComo gc = new GuardarComo(); 
-						gc.GuardarComoXML(texto);
-					}
-					else{
-						VentanaAdvertencia(texto,"XML");
-					}
-				}
-			});
-			mnGuardarComo.add(mntmXml);
-			
-			//GUARDAR COMO: PNG
-			JMenuItem mntmPng = new JMenuItem("Diagrama como imágen");
-			mntmPng.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					GuardarComo gc = new GuardarComo();
-					JLayeredPane auxD = new JLayeredPane();
-					c.setSize(desktopPane.getSize());
-					auxD.setSize(desktopPane.getSize());
-					auxD.setVisible(true);
-					auxD.setBackground(Color.white);
-					c.setVisible(true);
-					c.setBackground(Color.white);
-					auxD = desktopPane;
-					auxD.setBackground(Color.white);
-
-					for(int i = auxD.getComponentCount()-1;i>=0;i--){
-						if(auxD.getComponent(i).getName().contains("editorPaneN")){
-							auxD.remove(i);
-						}
-					}
-					c = auxD;
-					gc.GuardarComoImagen(c);
-				}
-			});
-			mnGuardarComo.add(mntmPng);
-			
+	
 
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			
 			JDesktopPane desktopPane_1 = new JDesktopPane();
 			scrollPane.setViewportView(desktopPane_1);
-			
-			//GUARDAR COMO: CARPETA
-			JMenuItem mntmCrearCarpetaCon = new JMenuItem("Crear carpeta con ambos archivos");
-			mntmCrearCarpetaCon.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-						String texto = textArea.getText();
-						Lector l = new Lector();
-						String comprobar = comprobarLectura(l, texto);
-						if(comprobar != "error"){
-							GuardarComo gc = new GuardarComo(); 
-							gc.GuardarComoCarpeta(texto, c);
-						}
-						else{
-							VentanaAdvertencia(texto,"carpeta");
-					}
-					}
-			});
-			mnGuardarComo.add(mntmCrearCarpetaCon);
-			
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
 			JScrollPane scrollBar_1 = new JScrollPane(desktopPane);
 			contentPane = new JPanel();
@@ -772,6 +656,174 @@ public class main extends JFrame {
 			bNota.setToolTipText("Nota");
 			bNota.setBounds(0, 444, 62, 62);
 			desktopPane_1.add(bNota);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			
+////////////NUEVO ARCHIVO/////////////////////////////////////////////////////////////////////////////////////////
+			JMenu mnNuevo = new JMenu("Nuevo");
+			mnArchivo.add(mnNuevo);
+			
+						JMenuItem mntmUml = new JMenuItem("UML");
+						mntmUml.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								NuevoUML(textArea);
+								desktopPane.removeAll();
+								desktopPane.updateUI();
+								desktopPane.setSize(773, 587);
+								bRelExtension.setEnabled(true);
+								bRelActor.setEnabled(true);
+								bActor.setEnabled(true);
+								bRelEspecializacion.setEnabled(true);
+								bCasodeUso.setEnabled(true);
+								bRelAgregacion.setEnabled(false);
+								bRelAsociacion.setEnabled(false);
+								bRelComposicion.setEnabled(false);
+								bRelHerencia.setEnabled(false);
+								bRelDependencia.setEnabled(false);
+								bClase.setEnabled(false);
+								
+							}
+						});
+						mnNuevo.add(mntmUml);
+						
+						JMenuItem mntmDiagramaDeClases = new JMenuItem("Diagrama de Clases");
+						mntmDiagramaDeClases.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								NuevoDiagramaClases(textArea);
+								desktopPane.removeAll();
+								desktopPane.updateUI();
+								desktopPane.setSize(773, 587);
+								bRelExtension.setEnabled(false);
+								bRelActor.setEnabled(false);
+								bActor.setEnabled(false);
+								bRelEspecializacion.setEnabled(false);
+								bCasodeUso.setEnabled(false);
+								bRelAgregacion.setEnabled(true);
+								bRelAsociacion.setEnabled(true);
+								bRelComposicion.setEnabled(true);
+								bRelHerencia.setEnabled(true);
+								bRelDependencia.setEnabled(true);
+								bClase.setEnabled(true);
+							}
+						});
+						mnNuevo.add(mntmDiagramaDeClases);
+			
+			
+			
+			Component verticalStrut = Box.createVerticalStrut(7);
+			mnArchivo.add(verticalStrut);
+			
+			JMenuItem mntmAbrirArchivo = new JMenuItem("Abrir archivo...");
+			mntmAbrirArchivo.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String tipoArchivo = AbrirArchivo(textArea);
+					if(tipoArchivo=="UCD"){
+						bRelExtension.setEnabled(true);
+						bRelActor.setEnabled(true);
+						bActor.setEnabled(true);
+						bRelEspecializacion.setEnabled(true);
+						bCasodeUso.setEnabled(true);
+						bRelAgregacion.setEnabled(false);
+						bRelAsociacion.setEnabled(false);
+						bRelComposicion.setEnabled(false);
+						bRelHerencia.setEnabled(false);
+						bRelDependencia.setEnabled(false);
+						bClase.setEnabled(false);	
+					}
+					else{
+						bRelExtension.setEnabled(false);
+						bRelActor.setEnabled(false);
+						bActor.setEnabled(false);
+						bRelEspecializacion.setEnabled(false);
+						bCasodeUso.setEnabled(false);
+						bRelAgregacion.setEnabled(true);
+						bRelAsociacion.setEnabled(true);
+						bRelComposicion.setEnabled(true);
+						bRelHerencia.setEnabled(true);
+						bRelDependencia.setEnabled(true);
+						bClase.setEnabled(true);
+					}
+
+				}
+			});
+			
+						mnArchivo.add(mntmAbrirArchivo);
+			
+			Component verticalStrut_1 = Box.createVerticalStrut(7);
+			mnArchivo.add(verticalStrut_1);
+			
+			JMenuItem mntmGuardar = new JMenuItem("Guardar");
+			mnArchivo.add(mntmGuardar);
+			
+///////GUARDAR COMO//////////////////////////////////////////////////////////////////////////////////////////////////
+			JMenu mnGuardarComo = new JMenu("Guardar Como...");
+			mnArchivo.add(mnGuardarComo);
+			
+			//GUARDAR COMO: XML
+			JMenuItem mntmXml = new JMenuItem("XML");
+			mntmXml.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Lector l = new Lector();
+					String texto = textArea.getText();
+					String comprobar = comprobarLectura(l, texto);
+					if(comprobar != "error"){
+						GuardarComo gc = new GuardarComo(); 
+						gc.GuardarComoXML(texto);
+					}
+					else{
+						VentanaAdvertencia(texto,"XML");
+					}
+				}
+			});
+			mnGuardarComo.add(mntmXml);
+			
+			//GUARDAR COMO: PNG
+			JMenuItem mntmPng = new JMenuItem("Diagrama como imágen");
+			mntmPng.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GuardarComo gc = new GuardarComo();
+					JLayeredPane auxD = new JLayeredPane();
+					c.setSize(desktopPane.getSize());
+					auxD.setSize(desktopPane.getSize());
+					auxD.setVisible(true);
+					auxD.setBackground(Color.white);
+					c.setVisible(true);
+					c.setBackground(Color.white);
+					auxD = desktopPane;
+					auxD.setBackground(Color.white);
+
+					for(int i = auxD.getComponentCount()-1;i>=0;i--){
+						if(auxD.getComponent(i).getName().contains("editorPaneN")){
+							auxD.remove(i);
+						}
+					}
+					c = auxD;
+					gc.GuardarComoImagen(c);
+				}
+			});
+			mnGuardarComo.add(mntmPng);
+			
+			
+			//GUARDAR COMO: CARPETA
+			JMenuItem mntmCrearCarpetaCon = new JMenuItem("Crear carpeta con ambos archivos");
+			mntmCrearCarpetaCon.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+						String texto = textArea.getText();
+						Lector l = new Lector();
+						String comprobar = comprobarLectura(l, texto);
+						if(comprobar != "error"){
+							GuardarComo gc = new GuardarComo(); 
+							gc.GuardarComoCarpeta(texto, c);
+						}
+						else{
+							VentanaAdvertencia(texto,"carpeta");
+					}
+					}
+			});
+			mnGuardarComo.add(mntmCrearCarpetaCon);
+			
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 			
 			desktopPane.addMouseListener(new MouseAdapter() {
 				@Override
@@ -1207,7 +1259,7 @@ public class main extends JFrame {
 			return "error";
 		}
 	}
-	
+	int x = 0;
 	public void ImprimirDiagrama(JTextPane textArea, JLayeredPane desktopPane){
 		desktopPane.removeAll();
 		Lector l = new Lector();
@@ -1224,14 +1276,16 @@ public class main extends JFrame {
 				
 				if(l.diagCU.Actores.elementAt(i).type.equals("primary")){
 					
-					Actor a = new Actor(desktopPane, 0, contadorp + 20, l.diagCU.Actores.elementAt(i).name );
+					Actor a = new Actor(desktopPane, 0, contadorp*100, l.diagCU.Actores.elementAt(i).name );
+					aumentarPanel(desktopPane,0,contadorp+20,50,50);
 					contadorp++;
 					desktopPane.updateUI();
 					int[] pos ={50, contadorp+20, 0, 0};
 					diccionario.put(l.diagCU.Actores.elementAt(i).id, pos);
 				}
 				else{
-					Actor b = new Actor(desktopPane, 550, contadors + 20, l.diagCU.Actores.elementAt(i).name );
+					Actor b = new Actor(desktopPane, x + 100, contadors*100, l.diagCU.Actores.elementAt(i).name );
+					aumentarPanel(desktopPane,x+100,contadors+20,50,50);
 					contadors++;
 					int[] pos ={550, contadorp+20, 0, 0};
 					diccionario.put(l.diagCU.Actores.elementAt(i).id, pos);
@@ -1272,7 +1326,7 @@ public class main extends JFrame {
 		}
 	}
 
-	public void AbrirArchivo(JTextPane textArea){
+	public String AbrirArchivo(JTextPane textArea){
 		desktopPane.removeAll();
 		desktopPane.updateUI();
 		desktopPane.setSize(773, 587);		
@@ -1293,6 +1347,7 @@ public class main extends JFrame {
 			}
 			text = text + "   </connections>\n </UseCaseDiagram>";
 			textArea.setText(text);
+			return "UCD";
 		}
 		else{
 			String text = "<ClassDiagram name = \"" + mp.l.diagC.nombre+"\"> \n";
@@ -1320,6 +1375,7 @@ public class main extends JFrame {
 			}
 			text = text + "</ClassDiagram>\n";
 			textArea.setText(text);
+			return "CD";
 		}
 	}
 	
@@ -1442,15 +1498,19 @@ public class main extends JFrame {
 				}
 				
 			}
-			int auxY = 50;
+			int auxY = 100;
 			for(int m = 0; m< conectado.size(); m++){
 				if(conexiones == 1){
 					DiagramaCasosDeUso auxC = casos;
 					Oval o = new Oval(desktopPane, 246, distY, conectado.elementAt(m).name);
+					aumentarPanel(desktopPane,246,distY,280,100);
+					x = Math.max(x, 246+280);
 					dibujarDC(casos, conectado.elementAt(m),distY+150);
 				}
 				else{
 					Oval o = new Oval(desktopPane, auxY, distY, conectado.elementAt(m).name);
+					aumentarPanel(desktopPane,auxY ,distY ,280 ,100);
+					x = Math.max(x, auxY + 280);
 					auxY = auxY +350;
 					dibujarDC(casos, conectado.elementAt(m),distY+150);
 				}

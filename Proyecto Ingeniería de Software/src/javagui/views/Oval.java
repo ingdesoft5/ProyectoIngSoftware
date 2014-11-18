@@ -10,9 +10,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Oval extends GroupLayout{
-
 	public Oval(Container host, int y , int y2, String nombre) {
 		super(host);
+<<<<<<< HEAD
+=======
+		/*Graphics g = host.getGraphics();		
+		MiCanvas canvas = new MiCanvas();
+		canvas.paint(g, y);
+		canvas.escribir(nombre, g , y2);
+		host.add(canvas);*/
+
+>>>>>>> panel
 		//http://www.stupidjavatricks.com/2005/10/turning-your-graphicsgraphics2d-drawings-into-an-imageicon/
 		BufferedImage img = new BufferedImage( 280, 100, BufferedImage.TYPE_INT_RGB );
 		Graphics g = img.getGraphics();
@@ -25,27 +33,6 @@ public class Oval extends GroupLayout{
 		g.setColor(Color.BLACK);
 		g.drawString(nombre,50,50);
 		
-		//773 × 587
-		if(280+y>773){
-			if(y2+100>587){
-				host.setSize(280+y, y2+100);
-				host.setPreferredSize(new Dimension(280 + y,100 + y2));
-			}
-			else{
-				host.setSize(280 + y, 587);
-				host.setPreferredSize(new Dimension(280 + y,587));
-			}
-		}
-		else{
-			if(280+y>587){
-				host.setSize(773, 280 + y);
-				host.setPreferredSize(new Dimension(773,280 + y));
-			}
-			else{
-				host.setSize(773, 587);
-				host.setPreferredSize(new Dimension(773,587));
-			}
-		}
 		
 		ImageIcon icon = new ImageIcon( img );
 		JLabel jl = new JLabel(icon);
@@ -55,6 +42,5 @@ public class Oval extends GroupLayout{
 		host.add(jl);
 	}
 
-	
 
 }
