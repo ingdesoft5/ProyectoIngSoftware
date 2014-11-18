@@ -293,7 +293,6 @@ public class main extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					GuardarComo gc = new GuardarComo();
 					JLayeredPane auxD = new JLayeredPane();
-					c.removeAll();
 					c.setSize(desktopPane.getSize());
 					auxD.setSize(desktopPane.getSize());
 					auxD.setVisible(true);
