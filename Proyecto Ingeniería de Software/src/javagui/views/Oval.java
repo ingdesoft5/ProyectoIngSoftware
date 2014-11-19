@@ -34,10 +34,10 @@ public class Oval extends GroupLayout{
 		host.add(canvas);*/
 
 		//http://www.stupidjavatricks.com/2005/10/turning-your-graphicsgraphics2d-drawings-into-an-imageicon/
-		BufferedImage img = new BufferedImage( 280, 100, BufferedImage.TYPE_INT_RGB );
+		BufferedImage img = new BufferedImage( 280, 100, BufferedImage.TYPE_INT_ARGB );
 		Graphics g = img.getGraphics();
-		g.setColor( Color.WHITE );
-		g.fillRect( 0, 0, 280, 100 );
+		//g.setColor( Color.WHITE );
+		//g.fillRect( 0, 0, 280, 100 );
 		g.setColor( Color.BLACK );
 		g.fillOval( 2, 2, 276, 96 );
 		g.setColor( Color.WHITE );
