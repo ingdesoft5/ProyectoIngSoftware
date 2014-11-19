@@ -872,31 +872,9 @@ public class main extends JFrame {
 					}
 
 					else if(agregarActor){
-						String imgsrc = "";
-						try {
-							imgsrc = new File("src/javagui/resources/man.png").toURI().toURL().toExternalForm();
-						} catch (MalformedURLException e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
-						}
-						String html = "<img src=\""+imgsrc+"\" width=\"74\" height=\"85\">";
-						String nombre = "actor"+String.valueOf(contadorNotas);
-						JTextPane editorPane = new JTextPane();
-						editorPane.setName(nombre);
-						editorPane.setContentType("text/html");
-						editorPane.setText(html +"<br> nombre");
-						editorPane.setVisible(true);
-						editorPane.setBounds(e.getX(), e.getY(), 70, 150);
-						editorPane.addMouseListener(new MouseAdapter(){
-							@Override
-							public void mousePressed(MouseEvent e2){
-								textArea.setText("mousePressed");
-								if(borrarElementos){
-									textArea.setText("borrarElemento");
-									desktopPane.remove(editorPane);
-									borrarElementos = false;
-									desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+						addActor("Actor", "type", "id", "name",e.getX(), e.getY());
 
+<<<<<<< HEAD
 								}
 							}
 						});
@@ -905,8 +883,16 @@ public class main extends JFrame {
 						agregarActor = false;
 						bActor.setFocusPainted(false);
 						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+=======
+							
+							agregarActor = false;
+							bActor.setFocusPainted(false);
+							desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+>>>>>>> panel
 
-					}
+						}
+
+					
 					else if(agregarRelExtension){
 						desktopPane.setFocusable(true);
 						JLayeredPane jlp = new JLayeredPane();
@@ -1260,6 +1246,7 @@ public class main extends JFrame {
 		}
 	}
 	int x = 0;
+	
 	public void ImprimirDiagrama(JTextPane textArea, JLayeredPane desktopPane){
 		desktopPane.removeAll();
 		Lector l = new Lector();
@@ -1269,27 +1256,45 @@ public class main extends JFrame {
 		if(comprobar == "UCD"){
 			dibujados.add(l.diagCU.CasosDeUso.elementAt(0));
 			Oval o = new Oval(desktopPane, 246, 20, l.diagCU.CasosDeUso.elementAt(0).name);
+			int[] pos1 ={246, 20, 280, 100};
+			diccionario.put(l.diagCU.CasosDeUso.elementAt(0).id.trim(), pos1);
 			dibujarDC(l.diagCU, l.diagCU.CasosDeUso.elementAt(0),150);
-				
+			
 			int contadorp = 0, contadors = 0;
 			for(int i = 0; i<l.diagCU.Actores.size();i++){
 				
 				if(l.diagCU.Actores.elementAt(i).type.equals("primary")){
-					
 					Actor a = new Actor(desktopPane, 0, contadorp*100, l.diagCU.Actores.elementAt(i).name );
 					aumentarPanel(desktopPane,0,contadorp+20,50,50);
 					contadorp++;
 					desktopPane.updateUI();
-					int[] pos ={50, contadorp+20, 0, 0};
-					diccionario.put(l.diagCU.Actores.elementAt(i).id, pos);
+					int[] pos ={0, contadorp+20, 50, 50};
+					diccionario.put(l.diagCU.Actores.elementAt(i).id.trim(), pos);
+					for(int j = 0; j<l.diagCU.Conexiones.size();j++){
+						if(l.diagCU.Actores.elementAt(i).id.trim().equals(l.diagCU.Conexiones.elementAt(j).from.trim())){
+							Conexion c = new Conexion(desktopPane, "basic", 20,(contadorp-1)*100+15,diccionario.get(l.diagCU.Conexiones.elementAt(j).to.trim())[0],50+diccionario.get(l.diagCU.Conexiones.elementAt(j).to.trim())[1]);
+						}
+					}
 				}
 				else{
 					Actor b = new Actor(desktopPane, x + 100, contadors*100, l.diagCU.Actores.elementAt(i).name );
 					aumentarPanel(desktopPane,x+100,contadors+20,50,50);
 					contadors++;
-					int[] pos ={550, contadorp+20, 0, 0};
-					diccionario.put(l.diagCU.Actores.elementAt(i).id, pos);
+					int[] pos ={x+100, contadors*100, 50, 50};
+					diccionario.put(l.diagCU.Actores.elementAt(i).id.trim(), pos);
+					for(int j = 0; j<l.diagCU.Conexiones.size();j++){
+						if(l.diagCU.Actores.elementAt(i).id.trim().equals(l.diagCU.Conexiones.elementAt(j).from.trim())){
+							Conexion c = new Conexion(desktopPane, "basic",x+100-25,(contadors-1)*100+15, diccionario.get(l.diagCU.Conexiones.elementAt(j).to.trim())[0],50+diccionario.get(l.diagCU.Conexiones.elementAt(j).to.trim())[1]);
+						}
+					}
 				}				
+			}
+			for(int i = 0; i<l.diagCU.CasosDeUso.size();i++){
+				for(int j = 0 ; j<l.diagCU.Conexiones.size(); j++){
+					if(l.diagCU.CasosDeUso.elementAt(i).id.trim().equals(l.diagCU.Conexiones.elementAt(j).from.trim())){
+						Conexion c = new Conexion(desktopPane, l.diagCU.Conexiones.elementAt(j).type.trim(), diccionario.get(l.diagCU.CasosDeUso.elementAt(i).id.trim())[0], diccionario.get(l.diagCU.CasosDeUso.elementAt(i).id.trim())[1], diccionario.get(l.diagCU.Conexiones.elementAt(j).to.trim())[0],diccionario.get(l.diagCU.Conexiones.elementAt(j).to.trim())[1]);
+				}
+				}
 			}
 		}
 		else if(comprobar == "CD"){
@@ -1310,7 +1315,7 @@ public class main extends JFrame {
 					arriba = true;
 				}
 				int[] pos ={100*(i+1), 100*(i+1)+50, 0, 0};
-				diccionario.put(l.diagC.Clases.elementAt(i).id, pos);
+				diccionario.put(l.diagC.Clases.elementAt(i).id.trim(), pos);
 			}
 		
 		}
@@ -1505,21 +1510,184 @@ public class main extends JFrame {
 					Oval o = new Oval(desktopPane, 246, distY, conectado.elementAt(m).name);
 					aumentarPanel(desktopPane,246,distY,280,100);
 					x = Math.max(x, 246+280);
+					int[] pos ={246, distY, 280, 100};
+					diccionario.put(conectado.elementAt(m).id.trim(), pos);
 					dibujarDC(casos, conectado.elementAt(m),distY+150);
 				}
 				else{
 					Oval o = new Oval(desktopPane, auxY, distY, conectado.elementAt(m).name);
 					aumentarPanel(desktopPane,auxY ,distY ,280 ,100);
 					x = Math.max(x, auxY + 280);
+					int[] pos ={auxY, distY, 280, 100};
+					diccionario.put(conectado.elementAt(m).id.trim(), pos);
 					auxY = auxY +350;
 					dibujarDC(casos, conectado.elementAt(m),distY+150);
 				}
 			}
 			
-		//	int[] pos ={150, 100*(i+1)+50, 280, 100};
-			//diccionario.put(l.diagCU.CasosDeUso.elementAt(i).id, pos);
+			
 		
 		
+	}
+	boolean agregado = false;
+	String auxNombre = "";
+	public boolean addActor( String elemento, String s1, String s2, String s3, int x, int y){
+		JFrame agregarE = new JFrame();
+		JPanel jp = new JPanel();
+		Box b = Box.createVerticalBox();
+		
+		JLabel ep = new JLabel();
+		ep.setText("Agregar " + elemento + ":");
+		b.add(ep);
+		
+		JTextField textField = new JTextField(s1);
+		textField.setSize(200,120);
+		b.add(textField);
+
+		JTextField textField2 = new JTextField(s2);
+		textField2.setSize(200,120);
+		b.add(textField2);
+
+		JTextField textField3 = new JTextField(s3);
+		textField3.setSize(200,120);
+		b.add(textField3);
+
+		JButton bCancelar = new JButton("Cancelar");
+		bCancelar.setSize(90, 29);
+		JButton bCrear = new JButton("Crear Elemento");
+		bCrear.setSize(90, 29);
+		agregarE.setSize(300, 200);
+		JPanel pAux = new JPanel();
+		pAux.add(bCancelar);
+		pAux.add(bCrear);
+		b.add(pAux);
+		jp.add(b);
+		
+		agregarE.getContentPane().add(jp);
+		agregarE.setVisible(true);
+		bCancelar.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				agregado = false;
+				agregarE.dispose();
+			}
+			
+		});
+		bCrear.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				agregarE.dispose();
+				Backend.Actor a = new Backend.Actor(textField.getText(), textField2.getText(), textField3.getText());
+				ImageIcon ic = new ImageIcon("src/javagui/resources/man.png");
+				JLabel jl = new JLabel(textField3.getText(),ic,JLabel.CENTER);
+				jl.setVerticalTextPosition(JLabel.BOTTOM);
+				jl.setHorizontalTextPosition(JLabel.CENTER);
+				jl.setForeground(Color.black);
+				jl.setBounds(x,y,ic.getIconWidth()+100,ic.getIconHeight()+50);
+				desktopPane.add(jl);
+					/*String imgsrc = "";
+					try {
+						imgsrc = new File("src/javagui/resources/man.png").toURI().toURL().toExternalForm();
+					} catch (MalformedURLException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+					String html = "<img src=\""+imgsrc+"\" width=\"74\" height=\"85\">";
+					String nombre = "actor"+String.valueOf(contadorNotas);
+					JTextPane editorPane = new JTextPane();
+					editorPane.setName(nombre);
+					editorPane.setContentType("text/html");
+					editorPane.setText(html +"<br>" + textField3.getText() );
+					editorPane.setVisible(true);
+					editorPane.setBounds(e.getX(),e.getY(), 70, 150);*/
+				
+					/*editorPane.addMouseListener(new MouseAdapter(){
+						@Override
+						public void mousePressed(MouseEvent e2){
+							textArea.setText("mousePressed");
+							if(borrarElementos){
+								textArea.setText("borrarElemento");
+								desktopPane.remove(editorPane);
+								borrarElementos = false;
+								desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+							}
+							else{
+							editorPane.addMouseListener(new MouseAdapter(){									
+								@Override
+								public void mouseReleased(MouseEvent e3){
+									textArea.setText("mouseReleased");
+									editorPane.setBounds(e3.getX(),e3.getY(), 70, 150);
+								}
+							});
+							}
+						}
+					});*/
+					//desktopPane.add(jlp);
+			}
+			
+			
+		});
+		return agregado;
+	}
+	public void addClase( String elemento, String s1, String s2, String s3, int x, int y){
+		JFrame agregarE = new JFrame();
+		JPanel jp = new JPanel();
+		Box b = Box.createVerticalBox();
+		
+		JLabel ep = new JLabel();
+		ep.setText("Agregar " + elemento + ":");
+		b.add(ep);
+		
+		JTextField textField = new JTextField(s1);
+		textField.setSize(200,120);
+		b.add(textField);
+
+		JTextField textField2 = new JTextField(s2);
+		textField2.setSize(200,120);
+		b.add(textField2);
+
+		JTextField textField3 = new JTextField(s3);
+		textField3.setSize(200,120);
+		b.add(textField3);
+
+		JButton bCancelar = new JButton("Cancelar");
+		bCancelar.setSize(90, 29);
+		JButton bCrear = new JButton("Crear Elemento");
+		bCrear.setSize(90, 29);
+		agregarE.setSize(300, 200);
+		JPanel pAux = new JPanel();
+		pAux.add(bCancelar);
+		pAux.add(bCrear);
+		b.add(pAux);
+		jp.add(b);
+		
+		agregarE.getContentPane().add(jp);
+		agregarE.setVisible(true);
+		bCancelar.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				agregado = false;
+				agregarE.dispose();
+			}
+			
+		});
+		bCrear.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				agregarE.dispose();
+				Backend.Actor a = new Backend.Actor(textField.getText(), textField2.getText(), textField3.getText());
+				ImageIcon ic = new ImageIcon("src/javagui/resources/man.png");
+				JLabel jl = new JLabel(textField3.getText(),ic,JLabel.CENTER);
+				jl.setVerticalTextPosition(JLabel.BOTTOM);
+				jl.setHorizontalTextPosition(JLabel.CENTER);
+				jl.setForeground(Color.black);
+				jl.setBounds(x,y,ic.getIconWidth()+100,ic.getIconHeight()+50);
+				desktopPane.add(jl);
+			}
+			
+			
+		});
 	}
 	public void CloseFrame(){
 		super.dispose();		

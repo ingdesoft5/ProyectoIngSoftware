@@ -46,7 +46,7 @@ public class Clases  extends GroupLayout {
 		}
 		Alto = 25+25*atributos.length+25*metodos.length+1;
 		Ancho = ancho*7 + 5; 
-		BufferedImage img = new BufferedImage(ancho*7+5,25+25*atributos.length+25*metodos.length+1, BufferedImage.TYPE_INT_RGB );
+		BufferedImage img = new BufferedImage(ancho*7+5,25+25*atributos.length+25*metodos.length+1, BufferedImage.TYPE_INT_ARGB );
 		Graphics g = img.getGraphics();
 		g.setColor(Color.WHITE);
 		g.fillRect(0,0, ancho*7+4, 25+25*atributos.length+25*metodos.length);
