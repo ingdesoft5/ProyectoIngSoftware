@@ -108,6 +108,9 @@ public class main extends JFrame {
 	boolean agregarClase = false;
 	boolean borrar = false;
 	int contadorNotas = 0;
+	int xRel = 0;
+	int yRel = 0;
+	int contRel = 0;
 	
 	Container c = new Container();
 	Map<String,int[]> diccionario = new HashMap<String,int[]>();
@@ -842,7 +845,7 @@ public class main extends JFrame {
 			
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-			
+
 			desktopPane.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
@@ -900,40 +903,55 @@ public class main extends JFrame {
 					
 					else if(agregarRelExtension){
 						desktopPane.setFocusable(true);
-						JLayeredPane jlp = new JLayeredPane();
-						ImageIcon ic = new ImageIcon("src/javagui/resources/punteada.png");
-						Graphics g = desktopPane.getGraphics();
-						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
-						jlp.paint(g);
+
+						if(contRel == 0){
+							xRel = e.getX();
+							yRel = e.getY();
+						}
 						
-						desktopPane.add(jlp);
-						agregarRelExtension = false;
-						bRelExtension.setFocusPainted(false);
-						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));	
+						contRel++;
+						if(contRel == 2){
+							Conexion c = new Conexion(desktopPane, "extend", xRel, yRel, e.getX(), e.getY());
+							contRel = 0;
+							agregarRelExtension = false;
+							bRelExtension.setFocusPainted(false);
+							desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+						}
+							
 					}
 					else if(agregarRelActor){
 						desktopPane.setFocusable(true);
-						JLayeredPane jlp = new JLayeredPane();
-						ImageIcon ic = new ImageIcon("src/javagui/resources/asociacion.png");
-						Graphics g = desktopPane.getGraphics();
-						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
-						jlp.paint(g);
-						desktopPane.add(jlp);
-						agregarRelActor = false;
-						bRelActor.setFocusPainted(false);
-						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+						if(contRel == 0){
+							xRel = e.getX();
+							yRel = e.getY();
+						}
+						
+						contRel++;
+						if(contRel ==2){
+							Conexion c = new Conexion(desktopPane, "basic", xRel, yRel, e.getX(), e.getY());
+							contRel = 0;
+							agregarRelActor = false;
+							bRelActor.setFocusPainted(false);
+							desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+						}
 					}
 					else if(agregarRelEspecializacion){
 						desktopPane.setFocusable(true);
-						JLayeredPane jlp = new JLayeredPane();
-						ImageIcon ic = new ImageIcon("src/javagui/resources/herencia.png");
-						Graphics g = desktopPane.getGraphics();
-						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
-						jlp.paint(g);
-						desktopPane.add(jlp);
-						agregarRelEspecializacion = false;
-						bRelEspecializacion.setFocusPainted(false);
-						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+						if(contRel == 0){
+							xRel = e.getX();
+							yRel = e.getY();
+						}
+						
+						contRel++;
+						if(contRel ==2){
+							Conexion c = new Conexion(desktopPane, "isa", xRel, yRel, e.getX(), e.getY());
+							contRel = 0;
+							agregarRelEspecializacion = false;
+							bRelEspecializacion.setFocusPainted(false);
+							desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+						}
 					}
 					else if(agregarCasoDeUso){
 						addCasodeUso(desktopPane,textArea,"Caso de Uso", "id", "name", e.getX(), e.getY());
@@ -943,63 +961,88 @@ public class main extends JFrame {
 					}
 					else if(agregarRelAgregacion){
 						desktopPane.setFocusable(true);
-						JLayeredPane jlp = new JLayeredPane();
-						ImageIcon ic = new ImageIcon("src/javagui/resources/agregacion.png");
-						Graphics g = desktopPane.getGraphics();
-						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
-						jlp.paint(g);
-						desktopPane.add(jlp);
-						agregarRelAgregacion = false;
-						bRelAgregacion.setFocusPainted(false);
-						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+						if(contRel == 0){
+							xRel = e.getX();
+							yRel = e.getY();
+						}
+						
+						contRel++;
+						if(contRel ==2){
+							Conexion c = new Conexion(desktopPane, "aggregation", xRel, yRel, e.getX(), e.getY());
+							contRel = 0;
+							agregarRelAgregacion = false;
+							bRelAgregacion.setFocusPainted(false);
+							desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+						}
 					}
 					else if(agregarRelAsociacion){
 						desktopPane.setFocusable(true);
-						JLayeredPane jlp = new JLayeredPane();
-						ImageIcon ic = new ImageIcon("src/javagui/resources/asociacion.png");
-						Graphics g = desktopPane.getGraphics();
-						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
-						jlp.paint(g);
-						desktopPane.add(jlp);
-						agregarRelAsociacion = false;
-						bRelAsociacion.setFocusPainted(false);
-						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+						if(contRel == 0){
+							xRel = e.getX();
+							yRel = e.getY();
+						}
+						
+						contRel++;
+						if(contRel ==2){
+							Conexion c = new Conexion(desktopPane, "association", xRel, yRel, e.getX(), e.getY());
+							contRel = 0;
+							agregarRelAsociacion = false;
+							bRelAsociacion.setFocusPainted(false);
+							desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+						}
 					}
 					else if(agregarRelComposicion){
 						desktopPane.setFocusable(true);
-						JLayeredPane jlp = new JLayeredPane();
-						ImageIcon ic = new ImageIcon("src/javagui/resources/composicion.png");
-						Graphics g = desktopPane.getGraphics();
-						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
-						jlp.paint(g);
-						desktopPane.add(jlp);
-						agregarRelComposicion = false;
-						bRelComposicion.setFocusPainted(false);
-						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+						if(contRel == 0){
+							xRel = e.getX();
+							yRel = e.getY();
+						}
+						
+						contRel++;
+						if(contRel ==2){
+							Conexion c = new Conexion(desktopPane, "composition", xRel, yRel, e.getX(), e.getY());
+							contRel = 0;
+							agregarRelComposicion = false;
+							bRelComposicion.setFocusPainted(false);
+							desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+						}
 					}
 					else if(agregarRelHerencia){
 						desktopPane.setFocusable(true);
-						JLayeredPane jlp = new JLayeredPane();
-						ImageIcon ic = new ImageIcon("src/javagui/resources/herencia.png");
-						Graphics g = desktopPane.getGraphics();
-						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
-						jlp.paint(g);
-						desktopPane.add(jlp);
-						agregarRelHerencia = false;
-						bRelHerencia.setFocusPainted(false);
-						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+						if(contRel == 0){
+							xRel = e.getX();
+							yRel = e.getY();
+						}
+						
+						contRel++;
+						if(contRel ==2){
+							Conexion c = new Conexion(desktopPane, "inheritance", xRel, yRel, e.getX(), e.getY());
+							contRel = 0;
+							agregarRelHerencia = false;
+							bRelHerencia.setFocusPainted(false);
+							desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+						}
 					}
 					else if(agregarRelDependencia){
 						desktopPane.setFocusable(true);
-						JLayeredPane jlp = new JLayeredPane();
-						ImageIcon ic = new ImageIcon("src/javagui/resources/punteada.png");
-						Graphics g = desktopPane.getGraphics();
-						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
-						jlp.paint(g);
-						desktopPane.add(jlp);
-						agregarRelDependencia = false;
-						bRelDependencia.setFocusPainted(false);
-						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+						if(contRel == 0){
+							xRel = e.getX();
+							yRel = e.getY();
+						}
+						
+						contRel++;
+						if(contRel ==2){
+							Conexion c = new Conexion(desktopPane, "dependency", xRel, yRel, e.getX(), e.getY());
+							contRel = 0;
+							agregarRelDependencia = false;
+							bRelDependencia.setFocusPainted(false);
+							desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+						}
 					}
 					else if(agregarClase){
 						addClase(textArea, "Clase", "id", e.getX(), e.getY());
