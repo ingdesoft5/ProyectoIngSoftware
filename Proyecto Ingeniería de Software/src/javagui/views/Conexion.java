@@ -13,26 +13,13 @@ public class Conexion extends GroupLayout{
 	
 	public Conexion(Container host, String tipo, int InicioX, int InicioY, int FinX, int FinY){
 		super(host);
-<<<<<<< HEAD
-		Graphics g = host.getGraphics();
-		int LargoX = (FinX - InicioX);
-		int LargoY = (FinY - InicioY);
-		BufferedImage img = new BufferedImage(LargoX, LargoY, BufferedImage.TYPE_INT_RGB);
-		g.setColor(Color.white);
-		g.fillRect(0, 0, LargoX, LargoY);
-		g = img.getGraphics();
-=======
-		//Graphics g = host.getGraphics();
-		//JLayeredPane jlp = new JLayeredPane();
+
 		int LargoX = Math.abs(FinX - InicioX);
 		int LargoY = Math.abs(FinY - InicioY);
 		BufferedImage img = new BufferedImage(LargoX, LargoY, BufferedImage.TYPE_INT_ARGB);
 		Graphics g = img.getGraphics();
 		g.setColor(Color.black);
-		//g.setColor(Color.white);
-		//g.fillRect(0, 0, LargoX, LargoY);
->>>>>>> panel
-		
+
 		if(tipo=="extend"){
 			int x = (FinX - InicioX)/10;
 			int y = (FinY - InicioY)/10;

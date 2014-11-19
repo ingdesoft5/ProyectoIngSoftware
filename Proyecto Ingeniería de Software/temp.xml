@@ -17,7 +17,7 @@
       <connection type = "basic" from = "a2" to = " uc4"/>
       <connection type = "extend" from = "uc3" to = " uc2"/>
       <connection type = "extend" from = "uc3" to = " uc1"/>
-      <connection type = "include" from = "uc1" to = " uc2"/>
+      <connection type = "include" from = "uc1" to = " uc4"/>
       <connection type = "include" from = "uc2" to = " uc4"/>
       <connection type = "isa" from = "uc5" to = " uc2"/>
       <connection type = "isa" from = "uc6" to = " uc2"/>

@@ -1,6 +1,7 @@
 package javagui.views;
 
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,40 +11,51 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
+
 import java.awt.Color;
+
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
 import java.awt.Component;
+
 import javax.swing.Box;
 import javax.swing.JEditorPane;
 import javax.swing.JDesktopPane;
+
 import java.awt.FlowLayout;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-<<<<<<< HEAD
-=======
 
 import Backend.CasoDeUso;
 import Backend.DiagramaCasosDeUso;
->>>>>>> panel
 import Backend.GuardarComo;
 import Backend.Lector;
 import Backend.MenuPrincipal;
+
 import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.Container;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+
 import javax.swing.JLabel;
+
 import com.jgoodies.forms.factories.DefaultComponentFactory;
+
 import javax.swing.ImageIcon;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -55,8 +67,6 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
-<<<<<<< HEAD
-=======
 import java.util.Stack;
 
 import javax.swing.SwingConstants;
@@ -64,13 +74,16 @@ import javax.swing.SwingConstants;
 import java.awt.Rectangle;
 import java.awt.GridLayout;
 
->>>>>>> panel
 import javax.swing.UIManager;
+
 import java.awt.Font;
+
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JLayeredPane;
+
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+
 import javax.swing.JComboBox;
 
 public class main extends JFrame {
@@ -873,22 +886,10 @@ public class main extends JFrame {
 
 					else if(agregarActor){
 						addActor("Actor", "type", "id", "name",e.getX(), e.getY());
-
-<<<<<<< HEAD
-								}
-							}
-						});
-						desktopPane.add(editorPane);
-						
-						agregarActor = false;
-						bActor.setFocusPainted(false);
-						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-=======
-							
+	
 							agregarActor = false;
 							bActor.setFocusPainted(false);
 							desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
->>>>>>> panel
 
 						}
 
