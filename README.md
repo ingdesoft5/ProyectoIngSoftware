@@ -28,7 +28,7 @@ Historia de Uso:
 10. EDITOR DE COLOR Y TIPOGRAFÍA DEL DIAGRAMA 100% - María Constanza Halabi
   • Tener disponible y que se pueda utilizar una paleta de colores disponibles
   • Que exista y sea utilizable una lista de tipografías
-11. ARRASTAR ELEMENTOS DEL DIAGRAMA DENTRO DEL ÁREA DE TRABAJO 100% - María Constanza Halabi
+11. ARRASTAR ELEMENTOS DEL DIAGRAMA DENTRO DEL ÁREA DE TRABAJO 80% - María Constanza Halabi
   • Poder seleccionar el elemento en cuestión y poder posicionarlo donde desee
 12. ELIMINAR OBJETOS DEL DIAGRAMA 50% - Pedro Pablo Miquel
   • Poder eliminar los elementos seleccionados intuitivamente, es decir sin recurrir al XML, generando el cambio correspondiente en este último
