@@ -16,6 +16,12 @@ public class Conexion extends GroupLayout{
 
 		int LargoX = Math.abs(FinX - InicioX);
 		int LargoY = Math.abs(FinY - InicioY);
+		if(LargoX == 0){
+			LargoX = 3;
+		}
+		if(LargoY == 0){
+			LargoY = 3;
+		}
 		BufferedImage img = new BufferedImage(LargoX, LargoY, BufferedImage.TYPE_INT_ARGB);
 		Graphics g = img.getGraphics();
 		g.setColor(Color.black);

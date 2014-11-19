@@ -15,6 +15,7 @@ import javax.swing.text.StyledDocument;
 import java.awt.Color;
 
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.JButton;
@@ -33,11 +34,14 @@ import java.awt.FlowLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
+import Backend.Atributo;
 import Backend.CasoDeUso;
+import Backend.Clase;
 import Backend.DiagramaCasosDeUso;
 import Backend.GuardarComo;
 import Backend.Lector;
 import Backend.MenuPrincipal;
+import Backend.Metodo;
 
 import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -83,6 +87,7 @@ import javax.swing.JLayeredPane;
 
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JComboBox;
 
@@ -101,7 +106,7 @@ public class main extends JFrame {
 	boolean agregarRelHerencia = false;
 	boolean agregarRelDependencia = false;
 	boolean agregarClase = false;
-	boolean borrarElementos = false;
+	boolean borrar = false;
 	int contadorNotas = 0;
 	
 	Container c = new Container();
@@ -858,18 +863,7 @@ public class main extends JFrame {
 						editorPane.setText(html +"<br> contenido");
 						editorPane.setVisible(true);
 						editorPane.setBounds(e.getX(), e.getY(), 70, 150);
-						editorPane.addMouseListener(new MouseAdapter(){
-							@Override
-							public void mousePressed(MouseEvent e2){
-								if(borrarElementos){
-									desktopPane.remove(editorPane);
-									borrarElementos = false;
-									desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-									desktopPane.updateUI();
-
-								}
-							}
-						});
+						
 						aumentarPanel(desktopPane, e.getX(), e.getY(), 70,150);
 						desktopPane.add(editorPane);
 						
@@ -883,9 +877,19 @@ public class main extends JFrame {
 						contadorNotas++;
 
 					}
+					else if(borrar){
+						desktopPane.removeAll();
+						desktopPane.setSize(773,587);
+						desktopPane.setPreferredSize(new Dimension(773,587));
+						desktopPane.updateUI();
+						textArea.setText("");
+						borrar = false;
+						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+						desktopPane.updateUI();
 
+					}
 					else if(agregarActor){
-						addActor("Actor", "type", "id", "name",e.getX(), e.getY());
+						addActor("Actor", textArea, "type", "id", "name",e.getX(), e.getY());
 	
 							agregarActor = false;
 							bActor.setFocusPainted(false);
@@ -902,17 +906,6 @@ public class main extends JFrame {
 						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
 						jlp.paint(g);
 						
-						jlp.addMouseListener(new MouseAdapter(){
-							@Override
-							public void mousePressed(MouseEvent e){
-								if(borrarElementos){
-									desktopPane.remove(e.getComponent());
-									borrarElementos = false;
-									desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
-								}
-							}
-						});
 						desktopPane.add(jlp);
 						agregarRelExtension = false;
 						bRelExtension.setFocusPainted(false);
@@ -943,13 +936,7 @@ public class main extends JFrame {
 						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 					}
 					else if(agregarCasoDeUso){
-						desktopPane.setFocusable(true);
-						JLayeredPane jlp = new JLayeredPane();
-						ImageIcon ic = new ImageIcon("src/javagui/resources/oval.png");
-						Graphics g = desktopPane.getGraphics();
-						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
-						jlp.paint(g);
-						desktopPane.add(jlp);
+						addCasodeUso(desktopPane,textArea,"Caso de Uso", "id", "name", e.getX(), e.getY());
 						agregarCasoDeUso = false;
 						bCasodeUso.setFocusPainted(false);
 						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -1015,13 +1002,9 @@ public class main extends JFrame {
 						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 					}
 					else if(agregarClase){
+						addClase(textArea, "Clase", "id", e.getX(), e.getY());
 						desktopPane.setFocusable(true);
-						JLayeredPane jlp = new JLayeredPane();
-						ImageIcon ic = new ImageIcon("src/javagui/resources/caja2.png");
-						Graphics g = desktopPane.getGraphics();
-						g.drawImage(ic.getImage(),e.getX(),e.getY(),ic.getIconWidth(),ic.getIconHeight(), null);
-						jlp.paint(g);
-						desktopPane.add(jlp);
+						
 						agregarClase = false;
 						bClase.setFocusPainted(false);
 						desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -1164,7 +1147,7 @@ public class main extends JFrame {
 					JButton button_7 = new JButton("");
 					button_7.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							borrarElementos = true;
+							borrar = true;
 							Toolkit toolkit = Toolkit.getDefaultToolkit();
 				        	Image image = toolkit.getImage("src/javagui/resources/basurero.png");
 				        	Cursor c = toolkit.createCustomCursor(image , new Point(desktopPane.getX(),desktopPane.getY()), "img");
@@ -1226,7 +1209,7 @@ public class main extends JFrame {
 	}
 
 	public String comprobarLectura(Lector l, String xml){
-		if(xml.contains("<Nota content =")){
+		if(xml.contains("<Nota id =")){
 			String[] arreglo = xml.split("<Nota ");
 			xml = arreglo[0];
 		}
@@ -1256,8 +1239,8 @@ public class main extends JFrame {
 		
 		if(comprobar == "UCD"){
 			dibujados.add(l.diagCU.CasosDeUso.elementAt(0));
-			Oval o = new Oval(desktopPane, 246, 20, l.diagCU.CasosDeUso.elementAt(0).name);
-			int[] pos1 ={246, 20, 280, 100};
+			Oval o = new Oval(desktopPane, 350, 20, l.diagCU.CasosDeUso.elementAt(0).name);
+			int[] pos1 ={350, 20, 280, 100};
 			diccionario.put(l.diagCU.CasosDeUso.elementAt(0).id.trim(), pos1);
 			dibujarDC(l.diagCU, l.diagCU.CasosDeUso.elementAt(0),150);
 			
@@ -1279,9 +1262,9 @@ public class main extends JFrame {
 				}
 				else{
 					Actor b = new Actor(desktopPane, x + 100, contadors*100, l.diagCU.Actores.elementAt(i).name );
-					aumentarPanel(desktopPane,x+100,contadors+20,50,50);
+					aumentarPanel(desktopPane,x+100,contadors*100,150,100);
 					contadors++;
-					int[] pos ={x+100, contadors*100, 50, 50};
+					int[] pos ={x+100, contadors*100, 150, 100};
 					diccionario.put(l.diagCU.Actores.elementAt(i).id.trim(), pos);
 					for(int j = 0; j<l.diagCU.Conexiones.size();j++){
 						if(l.diagCU.Actores.elementAt(i).id.trim().equals(l.diagCU.Conexiones.elementAt(j).from.trim())){
@@ -1317,6 +1300,11 @@ public class main extends JFrame {
 				}
 				int[] pos ={100*(i+1), 100*(i+1)+50, 0, 0};
 				diccionario.put(l.diagC.Clases.elementAt(i).id.trim(), pos);
+				for(int j = 0 ; j<l.diagC.Clases.size(); j++){
+					for(int k = 0; k<l.diagC.Clases.size();k++){
+						//if(l.diagC.Conexiones.elementAt(j).)
+					}
+				}
 			}
 		
 		}
@@ -1363,7 +1351,7 @@ public class main extends JFrame {
 				text = text + "      <attributes>\n";
 				
 				for(int j = 0; j<mp.l.diagC.Clases.elementAt(i).atributos.size(); j++){
-					text = text + "         <att name = \""+(mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).nombre).toString()+"\" type = \"" + (mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).tipo).toString() + "\" visibility = \"" + (mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).visibilidad).toString() + "\"/>\n";
+					text = text + "         <att name = \""+(mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).nombre).toString()+"\" type = \"" + (mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).tipo).toString() + "\" visibility = \"" + (mp.l.diagC.Clases.elementAt(i).atributos.elementAt(j).visibilidad).toString() + "\" />\n";
 				}
 				
 				text = text + "      </attributes>\n";
@@ -1436,7 +1424,7 @@ public class main extends JFrame {
 		String text = "<ClassDiagram name = \"nombre\"> \n";
 		text = text + "   <class id = \"idClase\" name = \"nombre\"> \n";
 		text = text + "      <attributes>\n";
-		text = text + "         <att name = \"nombreAtributo\" type = \"tipo\" visibility = \" visibilidad\">\n";
+		text = text + "         <att name = \"nombreAtributo\" type = \"tipo\" visibility = \" visibilidad\"/>\n";
 		text = text + "      </attributes>\n";
 		text = text + "     <methods>\n";
 		text = text + "         <method name = \"nombreMétodo\" type = \"tipo\">\n";
@@ -1504,14 +1492,14 @@ public class main extends JFrame {
 				}
 				
 			}
-			int auxY = 100;
+			int auxY = 200;
 			for(int m = 0; m< conectado.size(); m++){
 				if(conexiones == 1){
 					DiagramaCasosDeUso auxC = casos;
-					Oval o = new Oval(desktopPane, 246, distY, conectado.elementAt(m).name);
-					aumentarPanel(desktopPane,246,distY,280,100);
-					x = Math.max(x, 246+280);
-					int[] pos ={246, distY, 280, 100};
+					Oval o = new Oval(desktopPane, 350, distY, conectado.elementAt(m).name);
+					aumentarPanel(desktopPane,350,distY,280,100);
+					x = Math.max(x, 350+280);
+					int[] pos ={350, distY, 280, 100};
 					diccionario.put(conectado.elementAt(m).id.trim(), pos);
 					dibujarDC(casos, conectado.elementAt(m),distY+150);
 				}
@@ -1532,7 +1520,7 @@ public class main extends JFrame {
 	}
 	boolean agregado = false;
 	String auxNombre = "";
-	public boolean addActor( String elemento, String s1, String s2, String s3, int x, int y){
+	public boolean addActor( String elemento, JTextPane textArea, String s1, String s2, String s3, int x, int y){
 		JFrame agregarE = new JFrame();
 		JPanel jp = new JPanel();
 		Box b = Box.createVerticalBox();
@@ -1584,54 +1572,133 @@ public class main extends JFrame {
 				jl.setVerticalTextPosition(JLabel.BOTTOM);
 				jl.setHorizontalTextPosition(JLabel.CENTER);
 				jl.setForeground(Color.black);
+				jl.setName("actor");
 				jl.setBounds(x,y,ic.getIconWidth()+100,ic.getIconHeight()+50);
 				desktopPane.add(jl);
-					/*String imgsrc = "";
-					try {
-						imgsrc = new File("src/javagui/resources/man.png").toURI().toURL().toExternalForm();
-					} catch (MalformedURLException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					}
-					String html = "<img src=\""+imgsrc+"\" width=\"74\" height=\"85\">";
-					String nombre = "actor"+String.valueOf(contadorNotas);
-					JTextPane editorPane = new JTextPane();
-					editorPane.setName(nombre);
-					editorPane.setContentType("text/html");
-					editorPane.setText(html +"<br>" + textField3.getText() );
-					editorPane.setVisible(true);
-					editorPane.setBounds(e.getX(),e.getY(), 70, 150);*/
-				
-					/*editorPane.addMouseListener(new MouseAdapter(){
-						@Override
-						public void mousePressed(MouseEvent e2){
-							textArea.setText("mousePressed");
-							if(borrarElementos){
-								textArea.setText("borrarElemento");
-								desktopPane.remove(editorPane);
-								borrarElementos = false;
-								desktopPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
-							}
-							else{
-							editorPane.addMouseListener(new MouseAdapter(){									
-								@Override
-								public void mouseReleased(MouseEvent e3){
-									textArea.setText("mouseReleased");
-									editorPane.setBounds(e3.getX(),e3.getY(), 70, 150);
-								}
-							});
-							}
-						}
-					});*/
-					//desktopPane.add(jlp);
+				String text = textArea.getText();
+				if(text != "" && text.contains("<actors>")){
+					String[] textAuxiliar = text.split("<actors>");
+					text = textAuxiliar[0] + "<actors> <actor type = \"" + textField.getText() + "\" id = \"" + textField2.getText() + "\" name = \"" + textField3.getText() +"\" />"+textAuxiliar[1];
+				}
+				else{
+					text ="<actors> <actor type = \"" + textField.getText() + "\" id = \"" + textField2.getText() + "\" name = \"" + textField3.getText() +"\" /> </actors>";
+						
+				}
+				textArea.setText(text);
 			}
 			
 			
 		});
 		return agregado;
 	}
-	public void addClase( String elemento, String s1, String s2, String s3, int x, int y){
+	public void addClase( JTextPane textArea, String elemento, String s1,  int x, int y){
+		JFrame agregarE = new JFrame();
+		JPanel jp = new JPanel();
+		Box b = Box.createVerticalBox();
+		
+		JLabel ep = new JLabel();
+		ep.setText("Agregar " + elemento + ":");
+		b.add(ep);
+		
+		JTextField textField = new JTextField(s1);
+		textField.setSize(200,120);
+		b.add(textField);
+		JTextField textField8 = new JTextField("nombre");
+		b.add(textField8);
+
+		JTextField textField2 = new JTextField("nombre");
+		textField2.setSize(200,120);
+		b.add(textField2);
+		JTextField textField3 = new JTextField("tipo");
+		textField3.setSize(200,120);
+		b.add(textField3);
+		JTextField textField4 = new JTextField("visibilidad(+/-)");
+		textField4.setSize(200,120);
+		b.add(textField4);
+		JButton bAtributos = new JButton("Agregar atributo");
+		bAtributos.setSize(90,29);
+		bAtributos.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JLabel jA = new JLabel("<att name = \""+ textField2.getText() + "\" type = \"" + textField3.getText() + "\" visibility = \"" + textField4.getText()+"\"/>");
+				b.add(jA);
+				textField2.setText("nombre");
+				textField3.setText("tipo");
+				textField4.setText("visibilidad(+/-)");
+			}
+			
+		});
+		b.add(bAtributos);
+		
+		JTextField textField5 = new JTextField("nombre");
+		textField5.setSize(200,120);
+		b.add(textField5);
+		JTextField textField6 = new JTextField("tipo");
+		textField6.setSize(200,120);
+		b.add(textField6);
+
+		JButton bMetodos = new JButton("Agregar método");
+		bMetodos.setSize(90,29);
+		
+		bMetodos.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JLabel jM = new JLabel("<method name = \""+ textField5.getText() + "\" type = \"" + textField6.getText() + "\">");
+				b.add(jM);
+				textField5.setText("nombre");
+				textField6.setText("tipo");
+			}
+			
+		});
+		b.add(bMetodos);
+		
+		JButton bCancelar = new JButton("Cancelar");
+		bCancelar.setSize(90, 29);
+		JButton bCrear = new JButton("Crear Elemento");
+		bCrear.setSize(90, 29);
+		agregarE.setSize(500, 400);
+		JPanel pAux = new JPanel();
+		pAux.add(bCancelar);
+		pAux.add(bCrear);
+		b.add(pAux);
+		jp.add(b);
+		
+		agregarE.getContentPane().add(jp);
+		agregarE.setVisible(true);
+		bCancelar.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				agregado = false;
+				agregarE.dispose();
+			}
+			
+		});
+		bCrear.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				agregarE.dispose();
+				Clase c = new Clase(textField2.getText(), textField.getText());
+				Stack<Backend.Metodo> m = new Stack<Backend.Metodo>();
+				m.push(new Backend.Metodo(textField5.getText(), textField6.getText()));
+				Stack<Backend.Atributo> a = new Stack<Backend.Atributo>();
+				 a.push(new Backend.Atributo(textField2.getText(), textField3.getText(), textField4.getText()));
+				Clases clase = new Clases(desktopPane, x, y, textField2.getText(), m,a);
+				String text = textArea.getText();
+				if(text != "" && text.contains("</ClassDiagram>")){
+					String[] textAuxiliar = text.split("</ClassDiagram>");
+					text = textAuxiliar[0] + "<class id = \""+ textField.getText() + "\" name = \"" + textField8.getText()+ "\">" + "<attributes>" + "<att name = \""+ textField2.getText() + "\" type = \"" + textField3.getText() + "\" visibility = \"" + textField4.getText()+"\"/>" + "</attributes> <methods>" + "<method name = \""+ textField5.getText() + "\" type = \"" + textField6.getText() + "\">"+ "</methods> </class> </ClassDiagram>";
+				}
+				else{
+					text = "<ClassDiagram> <class id = \""+ textField.getText() + "\" name = \"" + textField8.getText()+ "\">" + "<attributes>" + "<att name = \""+ textField2.getText() + "\" type = \"" + textField3.getText() + "\" visibility = \"" + textField4.getText()+"\"/>" + "</attributes> <methods>" + "<method name = \""+ textField5.getText() + "\" type = \"" + textField6.getText() + "\">"+ "</methods> </class> </ClassDiagram>";
+					
+				}
+				textArea.setText(text);
+			}
+			
+			
+		});
+	}
+	public void addCasodeUso(JLayeredPane desktopoPane, JTextPane textArea,  String elemento, String s1, String s2, int x, int y){
 		JFrame agregarE = new JFrame();
 		JPanel jp = new JPanel();
 		Box b = Box.createVerticalBox();
@@ -1647,10 +1714,6 @@ public class main extends JFrame {
 		JTextField textField2 = new JTextField(s2);
 		textField2.setSize(200,120);
 		b.add(textField2);
-
-		JTextField textField3 = new JTextField(s3);
-		textField3.setSize(200,120);
-		b.add(textField3);
 
 		JButton bCancelar = new JButton("Cancelar");
 		bCancelar.setSize(90, 29);
@@ -1677,14 +1740,34 @@ public class main extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				agregarE.dispose();
-				Backend.Actor a = new Backend.Actor(textField.getText(), textField2.getText(), textField3.getText());
-				ImageIcon ic = new ImageIcon("src/javagui/resources/man.png");
-				JLabel jl = new JLabel(textField3.getText(),ic,JLabel.CENTER);
-				jl.setVerticalTextPosition(JLabel.BOTTOM);
-				jl.setHorizontalTextPosition(JLabel.CENTER);
+				BufferedImage img = new BufferedImage( 280, 100, BufferedImage.TYPE_INT_ARGB );
+				Graphics g = img.getGraphics();
+
+				g.setColor( Color.BLACK );
+				g.fillOval( 2, 2, 276, 96 );
+				g.setColor( Color.WHITE );
+				g.fillOval( 3, 3, 274, 94 );
+				g.setColor(Color.BLACK);
+				g.drawString(textField2.getText(),50,50);
+				
+				ImageIcon icon = new ImageIcon( img );
+				JLabel jl = new JLabel(icon);
 				jl.setForeground(Color.black);
-				jl.setBounds(x,y,ic.getIconWidth()+100,ic.getIconHeight()+50);
+				jl.setBounds(x,y,icon.getIconWidth(),icon.getIconHeight());
+				jl.setName("oval");
+
+				jl.setBounds(x,y,icon.getIconWidth()+100,icon.getIconHeight()+50);
 				desktopPane.add(jl);
+				String text = textArea.getText();
+				if(text != "" && text.contains("<usecases>")){
+					String[] textAuxiliar = text.split("<usecases>");
+					text = textAuxiliar[0] + "<usecases> <usecase id = \"" + textField.getText() + "\" name = \"" + textField2.getText() + "\" />"+textAuxiliar[1];
+				}
+				else{
+					text = "<usecases> <usecase id = \"" + textField.getText() + "\" name = \"" + textField2.getText() + "\" /></usecases> ";
+	
+				}
+				textArea.setText(text);
 			}
 			
 			
