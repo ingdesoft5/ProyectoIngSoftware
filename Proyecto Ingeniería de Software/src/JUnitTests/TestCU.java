@@ -15,7 +15,7 @@ public class TestCU {
 		int inicio = desktop.getComponentCount();
 		Oval oval = new Oval(desktop, 0, 0, "Caso de Uso Prueba");
 		Actor actor = new Actor(desktop, 0, 0, "Actor Prueba");
-		//Conexion conexion = new Conexion(desktop, "isa", 0, 0, 10, 10);
+		javagui.views.Conexion conexion = new javagui.views.Conexion(desktop, "isa", 0, 0, 10, 10);
 		int fin = desktop.getComponentCount();
 		assertNotEquals("Test de prueba Casos de Uso", inicio, fin);
 	}

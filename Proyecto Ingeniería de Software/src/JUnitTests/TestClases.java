@@ -20,7 +20,7 @@ public class TestClases {
 		m.push(metodo);
 		a.push(atributo);
 		Clases clase = new Clases(desktop,0,0,"Clase Prueba",m,a);
-		//Conexion conexion = new Conexion(desktop, "isa", 0, 0, 10, 10);
+		javagui.views.Conexion conexion = new javagui.views.Conexion(desktop, "isa", 0, 0, 10, 10);
 		int fin = desktop.getComponentCount();
 		assertNotEquals("Test de prueba Diagrama de Clases", inicio, fin);
 	}

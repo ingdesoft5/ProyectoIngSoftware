@@ -54,6 +54,8 @@ public class Lector {
 				tipo = "CD";
 				diagC = new DiagramaDeClases(rootNode.getAttributeValue("name"));
 				List<Element> list = rootNode.getChildren("class");
+				Element nodeR = (Element) rootNode.getChildren("connections").get(0);
+				List<Element> listR = nodeR.getChildren("connection");
 				for (int i = 0; i < list.size(); i++) {
 					Element node = (Element) list.get(i);
 					Clase c = new Clase(node.getAttributeValue("name"), node.getAttributeValue("id"));
@@ -84,8 +86,16 @@ public class Lector {
 						}
 					}
 					
+					
 					diagC.AgregarClases(c);
 				}
+				for (int i = 0; i < listR.size(); i++) {
+					Element node = (Element) listR.get(i);
+					Relacion r = new Relacion(node.getAttributeValue("type"), node.getAttributeValue("from"), node.getAttributeValue("to"));
+					diagC.AgregarConexiones(r);
+			 
+				}
+
 
 			}
 	 
