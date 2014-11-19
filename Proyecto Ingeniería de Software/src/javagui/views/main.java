@@ -1300,9 +1300,68 @@ public class main extends JFrame {
 				}
 				int[] pos ={100*(i+1), 100*(i+1)+50, 0, 0};
 				diccionario.put(l.diagC.Clases.elementAt(i).id.trim(), pos);
-				for(int j = 0 ; j<l.diagC.Clases.size(); j++){
-					for(int k = 0; k<l.diagC.Clases.size();k++){
-						//if(l.diagC.Conexiones.elementAt(j).)
+
+			}
+			for(int j = 0 ; j<l.diagC.Clases.size(); j++){
+				for(int k = 0; k<l.diagC.Clases.size();k++){
+					if(l.diagC.Conexiones.elementAt(j).to.trim().equals(l.diagC.Clases.elementAt(k).id.trim())){
+						if(k>j){
+							if(j%2 == 0){ //j par
+								if(k%2 == 0){ //k par
+									Conexion c = new Conexion(desktopPane, l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1],diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+60);
+									Conexion c2 = new Conexion(desktopPane, l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+60,diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+60);
+									Conexion c3 = new Conexion(desktopPane,l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1],diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+60);
+								}
+								else{ //k impar
+									Conexion c = new Conexion(desktopPane, l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1],diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]-40);
+									Conexion c2 = new Conexion(desktopPane, l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]-40,diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]-40);
+									Conexion c3 = new Conexion(desktopPane,l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1],diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+60);
+								
+								}
+							}
+							else{ //j impar
+								if(k%2 != 0){ //k impar
+									Conexion c = new Conexion(desktopPane, l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1],diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]-60);
+									Conexion c2 = new Conexion(desktopPane, l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]-60,diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]-60);
+									Conexion c3 = new Conexion(desktopPane,l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1],diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]-60);
+								}
+								else{ //k par
+									Conexion c = new Conexion(desktopPane, l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1],diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+40);
+									Conexion c2 = new Conexion(desktopPane, l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+40,diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+40);
+									Conexion c3 = new Conexion(desktopPane,l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1],diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+60);
+								
+								}
+							}
+						}
+						else{ //k<=j
+							if(j%2 == 0){ //j par
+								if(k%2 == 0){ //k par
+									Conexion c = new Conexion(desktopPane, l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1],diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+60);
+									Conexion c2 = new Conexion(desktopPane, l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+60,diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+60);
+									Conexion c3 = new Conexion(desktopPane,l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1],diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+60);
+								}
+								else{ //k impar
+									Conexion c = new Conexion(desktopPane, l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1],diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]-40);
+									Conexion c2 = new Conexion(desktopPane, l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]-40,diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]-40);
+									Conexion c3 = new Conexion(desktopPane,l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1],diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+60);
+								
+								}
+							}
+							else{ //j impar
+								if(k%2 != 0){ //k impar
+									Conexion c = new Conexion(desktopPane, l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1],diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]-60);
+									Conexion c2 = new Conexion(desktopPane, l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]-60,diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]-60);
+									Conexion c3 = new Conexion(desktopPane,l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1],diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]-60);
+								}
+								else{ //k par
+									Conexion c = new Conexion(desktopPane, l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1],diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+40);
+									Conexion c2 = new Conexion(desktopPane, l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+40,diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+40);
+									Conexion c3 = new Conexion(desktopPane,l.diagC.Conexiones.elementAt(j).tipo,diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1],diccionario.get(l.diagC.Conexiones.elementAt(j).to.trim())[0]+20,diccionario.get(l.diagC.Conexiones.elementAt(j).from.trim())[1]+60);
+								
+								}
+							}
+						}
+						
 					}
 				}
 			}
